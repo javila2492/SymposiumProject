@@ -35,5 +35,11 @@ public abstract class Character
         return healthIndicator[0];
     }
 
+    public static void takeDamage(int dmg)
+    {
+        int a = dmg;
+
+    }
+
     public abstract void useAbility();
 }
