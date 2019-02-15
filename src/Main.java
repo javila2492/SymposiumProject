@@ -8,9 +8,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/GUI.fxml"));
+        primaryStage.setTitle("The Return of The Flayer");
+        primaryStage.setScene(new Scene(root, 800, 550));
         primaryStage.show();
     }
 

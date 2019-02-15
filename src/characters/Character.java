@@ -1,16 +1,17 @@
 package characters;
 
-import java.awt.*;
+import javafx.scene.image.Image;
 
 public abstract class Character
 {
-    private int hp = 100;
+    private static int hp = 100;
     private int atk;
     private int def;
     private int spd;
     private int vis;
     private String characterDesc;
-    private Image[] healthIndicator = new Image[5];
+    private String abilityDesc;
+    private static Image[] healthIndicator = new Image[5];
     private Image mainImg;
 
     public int getAtk() { return atk; }
@@ -19,8 +20,9 @@ public abstract class Character
     public int getVis() { return vis; }
     public Image getMainImg() { return mainImg;}
     public String getCharacterDesc() { return characterDesc; }
+    public String getAbilityDesc() { return abilityDesc; }
 
-    public Image getCurrentHealthIndicator()
+    public static Image getCurrentHealthIndicator()
     {
         if(hp < 20)
             return healthIndicator[4];
@@ -32,4 +34,6 @@ public abstract class Character
             return healthIndicator[1];
         return healthIndicator[0];
     }
+
+    public abstract void useAbility();
 }
