@@ -30,6 +30,5 @@ public class Room
     public String itemTaken(int idx)
     {
         return items.remove(idx);
-
     }
 }
