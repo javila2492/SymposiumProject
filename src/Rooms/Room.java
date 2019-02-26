@@ -14,7 +14,7 @@ public class Room
     ArrayList<String> items;
     boolean hasPlants;
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;
@@ -23,7 +23,8 @@ public class Room
         this.canGoWest = canGoWest;
         this.lit = lit;
         this.image = image;
-        items.addAll(newItems);
+        if(newItems != null)
+            items.addAll(newItems);
         this.hasPlants = hasPlants;
     }
 
