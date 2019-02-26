@@ -1,5 +1,6 @@
 package scenes;
 
+import Rooms.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -16,7 +17,6 @@ public class GUIController
 
 
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
-    private String[] commandExecute = {"moveTo", "search",}
 
     public void updateIcon()
     {
@@ -30,12 +30,8 @@ public class GUIController
         String currCmd = commandSplit[0];
         String sec = commandSplit[1];
 
-        for(int i = 0; i < commandList.length; i++)
-        {
-            if(currCmd.contains(commandList[i]))
-                stringToMethod(commandExecute[i], sec);
-
-        }
+        if(currCmd.contains("move"))
+            moveTo(sec);
     }
 
     public void stringToMethod(String func, String param)
@@ -53,6 +49,9 @@ public class GUIController
     }
     public void moveTo(String direction)
     {
-
+        if(direction.contains("north"))
+        {
+            if(Map.areaMap[])
+        }
     }
 }

@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Room
 {
-    String roomName;
-    boolean canGoNorth;
-    boolean canGoEast;
-    boolean canGoSouth;
-    boolean canGoWest;
-    boolean lit;
-    String image;
-    ArrayList<String> items;
-    boolean hasPlants;
+    public String roomName;
+    public boolean canGoNorth;
+    public boolean canGoEast;
+    public boolean canGoSouth;
+    public boolean canGoWest;
+    public boolean lit;
+    public String image;
+    public ArrayList<String> items;
+    public boolean hasPlants;
 
     public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y)
     {

@@ -1,5 +1,7 @@
 package characters;
 
+import Rooms.Map;
+
 public class Vin extends Character
 {
     private int atk = 10;
@@ -12,6 +14,7 @@ public class Vin extends Character
 
     public void useAbility()
     {
+        if(!Map.areaMap[xPos][yPos].hasPlants)
 
     }
 }

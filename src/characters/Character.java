@@ -13,6 +13,8 @@ public abstract class Character
     private String abilityDesc;
     private static Image[] healthIndicator = new Image[5];
     private Image mainImg;
+    public int xPos;
+    public int yPos;
 
     public int getAtk() { return atk; }
     public int getDef() { return def; }
@@ -39,6 +41,12 @@ public abstract class Character
     {
         int a = dmg;
 
+    }
+
+    public void changePos(int x, int y)
+    {
+        xPos = x;
+        yPos = y;
     }
 
     public abstract void useAbility();
