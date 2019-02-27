@@ -29,9 +29,10 @@ public class GUIController
         String[] commandSplit = command.split(" ");
         String currCmd = commandSplit[0];
         String sec = commandSplit[1];
-
+        /*
         if(currCmd.contains("move"))
             moveTo(sec);
+            */
     }
 
     public void stringToMethod(String func, String param)
@@ -47,6 +48,7 @@ public class GUIController
             e.printStackTrace();
         }
     }
+    /*
     public void moveTo(String direction)
     {
         if(direction.contains("north"))
@@ -54,4 +56,5 @@ public class GUIController
             if(Map.areaMap[])
         }
     }
+    */
 }

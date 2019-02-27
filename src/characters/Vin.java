@@ -14,7 +14,9 @@ public class Vin extends Character
 
     public void useAbility()
     {
+        /*
         if(!Map.areaMap[xPos][yPos].hasPlants)
-
+        */
     }
+
 }
