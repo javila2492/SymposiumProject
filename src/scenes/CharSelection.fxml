@@ -8,16 +8,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="810.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.CharSelectionController">
    <children>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="696.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="696.0" layoutY="114.0" onMouseClicked="#charInfoChangerFred" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../ultra-white.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="355.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="355.0" layoutY="114.0" onMouseClicked="#charInfoChangerMikey" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../ultra-white.png" />
          </image></ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" onMouseClicked="#charInfoChangerJoey" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../ultra-white.png" />
          </image>
@@ -27,7 +27,7 @@
             <Image url="@../ultra-white.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" onMouseClicked="#charInfoChangerVin" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../ultra-white.png" />
          </image>

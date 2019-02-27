@@ -4,15 +4,15 @@ import javafx.scene.image.Image;
 
 public abstract class Character
 {
-    private static int hp = 100;
-    private static int atk;
-    private static int def;
-    private static int spd;
-    private static int vis;
-    private static String characterDesc;
-    private static String abilityDesc;
-    private static Image[] healthIndicator = new Image[5];
-    private static Image mainImg;
+    static int hp = 100;
+    static int atk;
+    static int def;
+    static int spd;
+    static int vis;
+    static String characterDesc;
+    static String abilityDesc;
+    static Image[] healthIndicator = new Image[5];
+    static Image mainImg;
     public int xPos;
     public int yPos;
 
