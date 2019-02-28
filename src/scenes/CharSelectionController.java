@@ -1,8 +1,13 @@
 package scenes;
 
+import characters.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class CharSelectionController
 {
@@ -15,36 +20,41 @@ public class CharSelectionController
 
     public void charInfoChangerSabrina(MouseEvent mouseEvent)
     {
-        statshower.setText("STATS: " + "\n" + characters.Sabrina.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + characters.Sabrina.getCharacterDesc());
-        abilityshower.setText(characters.Sabrina.getAbilityDesc());
+        Sabrina sabrina = new Sabrina();
+        statshower.setText("STATS: " + "\n" + sabrina.statBuilderShower());
+        descshower.setText("DESCRIPTION: " + sabrina.getCharacterDesc());
+        abilityshower.setText(sabrina.getAbilityDesc());
     }
 
     public void charInfoChangerVin(MouseEvent mouseEvent)
     {
-        statshower.setText("STATS: " + "\n" + characters.Vin.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + characters.Vin.getCharacterDesc());
-        abilityshower.setText(characters.Vin.getAbilityDesc());
+        Vin vin = new Vin();
+        statshower.setText("STATS: " + "\n" + vin.statBuilderShower());
+        descshower.setText("DESCRIPTION: " + vin.getCharacterDesc());
+        abilityshower.setText(vin.getAbilityDesc());
     }
 
     public void charInfoChangerMikey(MouseEvent mouseEvent)
     {
-        statshower.setText("STATS: " + "\n" + characters.Mikey.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + characters.Mikey.getCharacterDesc());
-        abilityshower.setText(characters.Mikey.getAbilityDesc());
+        Mikey mikey = new Mikey();
+        statshower.setText("STATS: " + "\n" + mikey.statBuilderShower());
+        descshower.setText("DESCRIPTION: " + mikey.getCharacterDesc());
+        abilityshower.setText(mikey.getAbilityDesc());
     }
 
     public void charInfoChangerJoey(MouseEvent mouseEvent)
     {
-        statshower.setText("STATS: " + "\n" + characters.Joey.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + characters.Joey.getCharacterDesc());
-        abilityshower.setText(characters.Joey.getAbilityDesc());
+        Joey joey = new Joey();
+        statshower.setText("STATS: " + "\n" + joey.statBuilderShower());
+        descshower.setText("DESCRIPTION: " + joey.getCharacterDesc());
+        abilityshower.setText(joey.getAbilityDesc());
     }
 
     public void charInfoChangerFred(MouseEvent mouseEvent)
     {
-        statshower.setText("STATS: " + "\n" + characters.Fred.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + characters.Fred.getCharacterDesc());
-        abilityshower.setText(characters.Fred.getAbilityDesc());
+        Fred fred = new Fred();
+        statshower.setText("STATS: " + "\n" + fred.statBuilderShower());
+        descshower.setText("DESCRIPTION: " + fred.getCharacterDesc());
+        abilityshower.setText(fred.getAbilityDesc());
     }
 }

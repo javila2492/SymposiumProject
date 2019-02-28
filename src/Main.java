@@ -10,6 +10,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("scenes/CharSelection.fxml"));
         primaryStage.setTitle("The Return of The Flayer");
+
+
+
         primaryStage.setScene(new Scene(root, 800, 550));
         primaryStage.show();
     }
