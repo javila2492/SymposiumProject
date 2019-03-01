@@ -27,7 +27,6 @@ public class CharSelectionController
         statshower.setText("STATS: " + "\n" + sabrina.statBuilderShower());
         descshower.setText("DESCRIPTION: " + sabrina.getCharacterDesc());
         abilityshower.setText(sabrina.getAbilityDesc());
-        contbutton.setStyle("visibility: visible");
     }
 
     public void charInfoChangerVin(MouseEvent mouseEvent)
@@ -36,7 +35,6 @@ public class CharSelectionController
         statshower.setText("STATS: " + "\n" + vin.statBuilderShower());
         descshower.setText("DESCRIPTION: " + vin.getCharacterDesc());
         abilityshower.setText(vin.getAbilityDesc());
-        contbutton.setVisible(true);
     }
 
     public void charInfoChangerMikey(MouseEvent mouseEvent)
@@ -45,7 +43,6 @@ public class CharSelectionController
         statshower.setText("STATS: " + "\n" + mikey.statBuilderShower());
         descshower.setText("DESCRIPTION: " + mikey.getCharacterDesc());
         abilityshower.setText(mikey.getAbilityDesc());
-        contbutton.setVisible(true);
     }
 
     public void charInfoChangerJoey(MouseEvent mouseEvent)
@@ -54,7 +51,6 @@ public class CharSelectionController
         statshower.setText("STATS: " + "\n" + joey.statBuilderShower());
         descshower.setText("DESCRIPTION: " + joey.getCharacterDesc());
         abilityshower.setText(joey.getAbilityDesc());
-        contbutton.setVisible(true);
     }
 
     public void charInfoChangerFred(MouseEvent mouseEvent)
@@ -63,6 +59,5 @@ public class CharSelectionController
         statshower.setText("STATS: " + "\n" + fred.statBuilderShower());
         descshower.setText("DESCRIPTION: " + fred.getCharacterDesc());
         abilityshower.setText(fred.getAbilityDesc());
-        contbutton.setVisible(true);
     }
 }
