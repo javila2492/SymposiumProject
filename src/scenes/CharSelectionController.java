@@ -1,16 +1,18 @@
 package scenes;
 
 import characters.*;
+import characters.Character;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.lang.Character;
 
 public class CharSelectionController
 {
@@ -22,59 +24,60 @@ public class CharSelectionController
     private Label abilityshower;
     @FXML
     Button contbutton;
-
     boolean selected = false;
-    Character chosen;
+    public Character chosen;
 
     public void charInfoChangerSabrina(MouseEvent mouseEvent)
     {
-        Sabrina sabrina = new Sabrina();
-        statshower.setText("STATS: " + "\n" + sabrina.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + sabrina.getCharacterDesc());
-        abilityshower.setText(sabrina.getAbilityDesc());
+        chosen = new Sabrina();
+        infoBuilder(chosen);
         selected = true;
     }
 
     public void charInfoChangerVin(MouseEvent mouseEvent)
     {
-        Vin vin = new Vin();
-        statshower.setText("STATS: " + "\n" + vin.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + vin.getCharacterDesc());
-        abilityshower.setText(vin.getAbilityDesc());
+        chosen = new Vin();
+        infoBuilder(chosen);
         selected = true;
     }
 
     public void charInfoChangerMikey(MouseEvent mouseEvent)
     {
-        Mikey mikey = new Mikey();
-        statshower.setText("STATS: " + "\n" + mikey.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + mikey.getCharacterDesc());
-        abilityshower.setText(mikey.getAbilityDesc());
+        chosen = new Mikey();
+        infoBuilder(chosen);
         selected = true;
     }
 
     public void charInfoChangerJoey(MouseEvent mouseEvent)
     {
-        Joey joey = new Joey();
-        statshower.setText("STATS: " + "\n" + joey.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + joey.getCharacterDesc());
-        abilityshower.setText(joey.getAbilityDesc());
+        chosen = new Joey();
+        infoBuilder(chosen);
         selected = true;
     }
 
     public void charInfoChangerFred(MouseEvent mouseEvent)
     {
-        Fred fred = new Fred();
-        statshower.setText("STATS: " + "\n" + fred.statBuilderShower());
-        descshower.setText("DESCRIPTION: " + fred.getCharacterDesc());
-        abilityshower.setText(fred.getAbilityDesc());
+        chosen = new Fred();
+        infoBuilder(chosen);
         selected = true;
     }
 
-    public void selectionChosen()
+    private void infoBuilder(Character a)
+    {
+        statshower.setText("STATS: " + "\n" + a.statBuilderShower());
+        descshower.setText("DESCRIPTION: " + a.getCharacterDesc());
+        abilityshower.setText(a.getAbilityDesc());
+    }
+
+    public void selectionChosen(ActionEvent event) throws Exception
     {
         if(!selected)
             return;
 
+        Parent root = FXMLLoader.load(getClass().getResource("/scenes/GUI.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 }
