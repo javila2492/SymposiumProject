@@ -11,13 +11,13 @@
    <children>
       <Pane layoutY="350.0" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: black;">
          <children>
-            <ImageView id="icon" fitHeight="100.0" fitWidth="100.0" layoutX="359.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField id="type" layoutX="14.0" layoutY="154.0" prefHeight="31.0" prefWidth="400.0" promptText="_" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 2;">
+            <ImageView id="icon" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField id="type" layoutX="14.0" layoutY="154.0" prefHeight="30.0" prefWidth="400.0" promptText="_" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 2;">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>
             </TextField>
-            <Button layoutX="414.0" layoutY="156.0" mnemonicParsing="false" onAction="#doAction" style="-fx-background-color: black;" text="Enter" textFill="GREEN">
+            <Button layoutX="414.0" layoutY="156.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: black;" text="Enter" textFill="GREEN">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>
@@ -25,7 +25,7 @@
          </children>
       </Pane>
       <ImageView id="bgimg" fitHeight="350.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutY="250.0" prefHeight="100.0" prefWidth="800.0" text="Nothing yet." textFill="#00c900" wrapText="true">
+      <Label fx:id="showtext" layoutY="250.0" prefHeight="100.0" prefWidth="800.0" text="Nothing yet." textFill="#00c900" wrapText="true">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>

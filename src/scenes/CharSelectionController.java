@@ -22,8 +22,7 @@ public class CharSelectionController
     private Label descshower;
     @FXML
     private Label abilityshower;
-    @FXML
-    Button contbutton;
+
     boolean selected = false;
     public Character chosen;
 
@@ -74,7 +73,7 @@ public class CharSelectionController
         if(!selected)
             return;
 
-        Parent root = FXMLLoader.load(getClass().getResource("/scenes/GUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
