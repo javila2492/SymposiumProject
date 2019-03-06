@@ -6,6 +6,7 @@ public class Map
 
     public Map()
     {
+
         Room entrance = new Room("Entrance", true, false, true, false, false, "entrance.png", null, true, 1, 3);
         areaMap[1][3] = entrance;
 

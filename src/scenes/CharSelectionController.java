@@ -24,7 +24,7 @@ public class CharSelectionController
     private Label abilityshower;
 
     boolean selected = false;
-    public Character chosen;
+    public static Character chosen;
 
     public void charInfoChangerSabrina(MouseEvent mouseEvent)
     {

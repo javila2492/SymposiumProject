@@ -25,6 +25,8 @@ public abstract class Character
     public String getCharacterDesc() { return characterDesc; }
     public String getAbilityDesc() { return abilityDesc; }
     public String statBuilderShower() { return "ATK: " + getAtk() + "\n" + "DEF: " + getDef() + "\n" + "SPD: " + getSpd() + "\n" + "VIS: " + getVis(); }
+    public void changeX(int newx) { xPos = newx; }
+    public void changeY(int newy) { yPos = newy; }
 
     public static Image getCurrentHealthIndicator()
     {
