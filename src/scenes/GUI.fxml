@@ -12,12 +12,12 @@
       <Pane layoutY="350.0" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: black;">
          <children>
             <ImageView id="icon" fx:id="icon" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField id="type" fx:id="type" layoutX="14.0" layoutY="154.0" prefHeight="30.0" prefWidth="400.0" promptText="_" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 2;">
+            <TextField id="type" fx:id="type" layoutX="14.0" layoutY="154.0" prefHeight="30.0" prefWidth="400.0" promptText="_" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 2; -fx-font-style-color: green;">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>
             </TextField>
-            <Button layoutX="414.0" layoutY="156.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: black;" text="Enter" textFill="GREEN">
+            <Button layoutX="414.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#doAction" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: black;" text="Enter" textFill="GREEN">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>

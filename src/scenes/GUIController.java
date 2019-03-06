@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 
 public class GUIController
@@ -48,11 +49,23 @@ public class GUIController
         }
     }
 
+    public void invalidCommand()
+    {
+        type.setText("Please type in a valid command.");
+        try { TimeUnit.SECONDS.sleep(2); } catch (InterruptedException e) { e.printStackTrace(); }
+        type.setText("");
+    }
+
 
     public void doAction()
     {
         String command = type.getText();
         String[] commandSplit = command.split(" ");
+        if(commandSplit.length < 2)
+        {
+            invalidCommand();
+            return;
+        }
         String currCmd = commandSplit[0];
         String sec = commandSplit[1];
 
@@ -82,6 +95,27 @@ public class GUIController
         {
             if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoNorth)
                 mainCharacter.changeY(mainCharacter.yPos - 1);
+            else
+                textFlow("A wall blocks your path.");
+        }
+        if(direction.contains("east"))
+        {
+            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoEast)
+                mainCharacter.changeX(mainCharacter.yPos + 1);
+            else
+                textFlow("A wall blocks your path.");
+        }
+        if(direction.contains("south"))
+        {
+            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoSouth)
+                mainCharacter.changeY(mainCharacter.yPos + 1);
+            else
+                textFlow("A wall blocks your path.");
+        }
+        if(direction.contains("west"))
+        {
+            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoWest)
+                mainCharacter.changeX(mainCharacter.yPos - 1);
             else
                 textFlow("A wall blocks your path.");
         }
