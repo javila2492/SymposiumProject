@@ -17,10 +17,12 @@ public class Vin extends Character
      }
     public void useAbility()
     {
+        /*
         if(!GUIController.aMap[xPos][yPos].hasPlants)
         {
 
         }
+        */
     }
 
 }

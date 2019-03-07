@@ -30,7 +30,7 @@ public class GUIController
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
     static Character mainCharacter;
     Map temp = new Map();
-    public static Room[][] aMap = temp.areaMap;
+    public Room[][] aMap = temp.areaMap;
 
     public void initialize()
     {
@@ -39,6 +39,7 @@ public class GUIController
         showtext.setText("Hello world. This is a test to see if things work properly. If not, I will CRY.");
         Image img = new Image("images/entrance.png");
         mapimg.setImage(img);
+        roomname.setText("Entrance");
     }
 
     public void updateIcon()
@@ -151,8 +152,10 @@ public class GUIController
 
     public void moveRoom(int x, int y)
     {
+        /*
         Image tempimg = new Image(aMap[x][y].image);
         mapimg.setImage(tempimg);
+        */
         roomname.setText(aMap[x][y].roomName);
     }
 
