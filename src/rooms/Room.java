@@ -1,4 +1,4 @@
-package Rooms;
+package rooms;
 
 import java.util.ArrayList;
 

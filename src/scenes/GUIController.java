@@ -1,15 +1,17 @@
 package scenes;
 
-import Rooms.Map;
+import rooms.Map;
+import rooms.Room;
 import characters.Character;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
+
 
 
 public class GUIController
@@ -20,15 +22,23 @@ public class GUIController
     private TextField type;
     @FXML
     private Label showtext;
+    @FXML
+    ImageView mapimg;
+    @FXML
+    Label roomname;
 
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
     static Character mainCharacter;
+    Map temp = new Map();
+    public static Room[][] aMap = temp.areaMap;
 
     public void initialize()
     {
         mainCharacter = CharSelectionController.chosen;
         mainCharacter.changePos(1, 3);
         showtext.setText("Hello world. This is a test to see if things work properly. If not, I will CRY.");
+        Image img = new Image("images/entrance.png");
+        mapimg.setImage(img);
     }
 
     public void updateIcon()
@@ -52,8 +62,7 @@ public class GUIController
     public void invalidCommand()
     {
         type.setText("Please type in a valid command.");
-        try { TimeUnit.SECONDS.sleep(2); } catch (InterruptedException e) { e.printStackTrace(); }
-        type.setText("");
+
     }
 
 
@@ -91,34 +100,60 @@ public class GUIController
 
     public void moveTo(String direction)
     {
+        int currX = mainCharacter.xPos;
+        int currY = mainCharacter.yPos;
+
         if(direction.contains("north"))
         {
-            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoNorth)
-                mainCharacter.changeY(mainCharacter.yPos - 1);
+            if(aMap[currX][currY].canGoNorth)
+            {
+                mainCharacter.changeY(currY - 1);
+                moveRoom(currX, currY - 1);
+                type.setText("");
+            }
             else
                 textFlow("A wall blocks your path.");
         }
         if(direction.contains("east"))
         {
-            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoEast)
-                mainCharacter.changeX(mainCharacter.yPos + 1);
+            if(aMap[currX][currY].canGoEast)
+            {
+                mainCharacter.changeX(currX + 1);
+                moveRoom(currX + 1, currY);
+                type.setText("");
+            }
             else
                 textFlow("A wall blocks your path.");
         }
         if(direction.contains("south"))
         {
-            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoSouth)
-                mainCharacter.changeY(mainCharacter.yPos + 1);
+            if(aMap[currX][currY].canGoSouth)
+            {
+                mainCharacter.changeY(currY + 1);
+                moveRoom(currX, currY + 1);
+                type.setText("");
+            }
             else
                 textFlow("A wall blocks your path.");
         }
         if(direction.contains("west"))
         {
-            if(Map.areaMap[mainCharacter.xPos][mainCharacter.yPos].canGoWest)
-                mainCharacter.changeX(mainCharacter.yPos - 1);
+            if(aMap[currX][currY].canGoWest)
+            {
+                mainCharacter.changeX(currX - 1);
+                moveRoom(currX - 1, currY);
+                type.setText("");
+            }
             else
                 textFlow("A wall blocks your path.");
         }
+    }
+
+    public void moveRoom(int x, int y)
+    {
+        Image tempimg = new Image(aMap[x][y].image);
+        mapimg.setImage(tempimg);
+        roomname.setText(aMap[x][y].roomName);
     }
 
 }

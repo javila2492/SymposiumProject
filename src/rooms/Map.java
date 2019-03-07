@@ -1,11 +1,13 @@
-package Rooms;
+package rooms;
 
 public class Map
 {
-    public static Room[][] areaMap = new Room[4][4];
+
+    public Room[][] areaMap;
 
     public Map()
     {
+        areaMap = new Room[4][4];
 
         Room entrance = new Room("Entrance", true, false, true, false, false, "entrance.png", null, true, 1, 3);
         areaMap[1][3] = entrance;
