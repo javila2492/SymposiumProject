@@ -69,12 +69,12 @@
       </Label>
       <Label fx:id="descshower" layoutX="160.0" layoutY="262.0" prefHeight="120.0" prefWidth="630.0" style="-fx-wrap-text: true;" textFill="#2dd033">
          <font>
-            <Font name="Courier New Bold Italic" size="14.0" />
+            <Font name="Courier New Bold" size="18.0" />
          </font>
       </Label>
       <Label fx:id="abilityshower" layoutX="160.0" layoutY="416.0" prefHeight="120.0" prefWidth="630.0" style="-fx-wrap-text: true;" textFill="#2dd033">
          <font>
-            <Font name="Courier New Bold Italic" size="14.0" />
+            <Font name="Courier New Bold" size="18.0" />
          </font>
       </Label>
       <Button layoutX="717.0" layoutY="510.0" mnemonicParsing="false" onAction="#selectionChosen" style="-fx-background-color: black;" text="CONFIRM" textFill="#2dd033">

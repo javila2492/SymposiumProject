@@ -11,9 +11,9 @@ public abstract class Character
     int vis;
     String characterDesc;
     String abilityDesc;
-    static Image[] healthIndicator = new Image[5];
+    Image[] healthIndicator = new Image[5];
     Image mainImg;
-    String[][] specialDialog = new String[13][4];
+    String[][] specialDialog;
     public int xPos;
     public int yPos;
 
@@ -28,7 +28,7 @@ public abstract class Character
     public void changeX(int newx) { xPos = newx; }
     public void changeY(int newy) { yPos = newy; }
 
-    public static Image getCurrentHealthIndicator()
+    public Image getCurrentHealthIndicator()
     {
         if(hp < 20)
             return healthIndicator[4];
@@ -41,10 +41,10 @@ public abstract class Character
         return healthIndicator[0];
     }
 
-    public static void takeDamage(int dmg)
+    public void takeDamage(int dmg)
     {
         int a = dmg;
-
+        hp -= a - ((Math.random() * getDef()) + (getDef() / (Math.random() * 3)));
     }
 
     public void changePos(int x, int y)

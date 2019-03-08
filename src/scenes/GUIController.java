@@ -158,6 +158,12 @@ public class GUIController
         mapimg.setImage(tempimg);
         */
         roomname.setText(aMap[x][y].roomName);
+        showtext.setText(getRoomText(x, y));
+    }
+
+    public String getRoomText(int x, int y)
+    {
+        for(int i : )
     }
 
 }
