@@ -1,5 +1,7 @@
 package characters;
 
+import javafx.scene.image.Image;
+
 public class Mikey extends Character
 {
     public Mikey()
@@ -8,6 +10,7 @@ public class Mikey extends Character
         def = 16;
         spd = 9;
         vis = 10;
+        mainImg = new Image("images/mikey.png", 100, 100, true, true);
         characterDesc = "Mikey, drummer and best friend of Vin. Gruff and tough, this guy has quite a bit \n of bulk to him." +
                 " Unfortunately, his rage can be quite dangerous if left unchecked. Careful!\n Though he’s angry, he’s got a soft heart.";
         abilityDesc = "Roid Rage: A meter will stay near the hotbar, increasing for every failed action. \n Once full, it can be used to demolish heavy objects in return for half the meter. \n" +

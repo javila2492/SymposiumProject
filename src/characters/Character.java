@@ -12,7 +12,7 @@ public abstract class Character
     String characterDesc;
     String abilityDesc;
     static Image[] healthIndicator = new Image[5];
-    static Image mainImg;
+    Image mainImg;
     String[][] specialDialog = new String[13][4];
     public int xPos;
     public int yPos;

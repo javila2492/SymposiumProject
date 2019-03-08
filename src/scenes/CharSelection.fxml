@@ -11,26 +11,26 @@
    <children>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="696.0" layoutY="114.0" onMouseClicked="#charInfoChangerFred" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/ultra-white.png" />
+            <Image url="@../images/fred.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="355.0" layoutY="114.0" onMouseClicked="#charInfoChangerMikey" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/ultra-white.png" />
+            <Image url="@../images/mikey.png" />
          </image></ImageView>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" onMouseClicked="#charInfoChangerJoey" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/ultra-white.png" />
+            <Image url="@../images/joey.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="114.0" onMouseClicked="#charInfoChangerSabrina" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/ultra-white.png" />
+            <Image url="@../images/sabrina.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" onMouseClicked="#charInfoChangerVin" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/ultra-white.png" />
+            <Image url="@../images/vin.png" />
          </image>
       </ImageView>
       <Label layoutX="103.0" layoutY="14.0" text="CHOOSE YOUR CHARACTER" textFill="#2dd033">
