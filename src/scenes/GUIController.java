@@ -57,7 +57,6 @@ public class GUIController
         {
             showtext.setText(splitext);
             splitext += textArr[i];
-            try{ Thread.sleep(500); } catch(InterruptedException ex){ Thread.currentThread().interrupt();}
         }
     }
 

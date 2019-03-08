@@ -37,7 +37,7 @@ public class Map
         areaMap[0][0] = backStairwell;
 
         Room westWing = new Room("West Wing", true, false, false, true, false, "stage.png", null, true, 0, 1);
-        areaMap[1][0] = westWing;
+        areaMap[0][1] = westWing;
     }
 
 }
