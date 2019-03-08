@@ -9,7 +9,7 @@ public class Map
     {
         areaMap = new Room[4][4];
 
-        Room entrance = new Room("Entrance", true, false, true, false, false, "entrance.png", null, true, 1, 3);
+        Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true, 1, 3);
         areaMap[1][3] = entrance;
 
         Room mainArea = new Room("Main Area", true, true, true, true, false, "mainarea.png", null, true, 1, 2);

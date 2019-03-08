@@ -149,6 +149,7 @@ public class GUIController
             else
                 textFlow("A wall blocks your path.");
         }
+        System.out.println(mainCharacter.xPos + ", " + mainCharacter.yPos);
     }
 
     public void moveRoom(int x, int y)
