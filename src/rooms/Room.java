@@ -14,7 +14,7 @@ public class Room
     public ArrayList<String> items;
     public boolean hasPlants;
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, String[] newItems, boolean hasPlants, int x, int y)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;

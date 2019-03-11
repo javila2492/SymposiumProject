@@ -37,15 +37,12 @@ public class GUIController
         mainCharacter = CharSelectionController.chosen;
         mainCharacter.changePos(1, 3);
         icon.setImage(mainCharacter.getMainImg());
-        showtext.setText("Hello world. This is a test to see if things work properly. If not, I will CRY.");
-        Image img = new Image("images/entrance.png");
-        mapimg.setImage(img);
-        roomname.setText("Entrance");
+        moveRoom(1, 3);
     }
 
     public void updateIcon()
     {
-        icon.setImage(characters.Character.getCurrentHealthIndicator());
+        icon.setImage(mainCharacter.getCurrentHealthIndicator());
     }
 
 
@@ -70,6 +67,7 @@ public class GUIController
     public void doAction()
     {
         String command = type.getText();
+        command = command.toLowerCase();
         String[] commandSplit = command.split(" ");
         if(commandSplit.length < 2)
         {
@@ -149,21 +147,26 @@ public class GUIController
                 textFlow("A wall blocks your path.");
         }
         System.out.println(mainCharacter.xPos + ", " + mainCharacter.yPos);
+        textFlow("A wall blocks your path.");
     }
 
     public void moveRoom(int x, int y)
     {
-        /*
-        Image tempimg = new Image(aMap[x][y].image);
+        Image tempimg = new Image("images/" + aMap[x][y].image);
         mapimg.setImage(tempimg);
-        */
+
         roomname.setText(aMap[x][y].roomName);
         showtext.setText(getRoomText(x, y));
     }
 
     public String getRoomText(int x, int y)
     {
-        for(int i : )
+        for(String[] i : mainCharacter.specialDialog)
+        {
+            if(i[0].contains(aMap[x][y].roomName.toLowerCase()))
+                return i[1];
+        }
+        return "";
     }
 
 }

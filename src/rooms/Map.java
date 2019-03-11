@@ -15,10 +15,10 @@ public class Map
         Room mainArea = new Room("Main Area", true, true, true, true, false, "mainarea.png", null, true, 1, 2);
         areaMap[1][2] = mainArea;
 
-        Room stage = new Room("Stage", true, false, true, true, false, "stage.png", null, false, 1, 1);
+        Room stage = new Room("Stage", true, false, true, true, false, "stage.png", new String[]{"Glass Shard", "Broken Bottle"}, false, 1, 1);
         areaMap[1][1] = stage;
 
-        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", null, true, 1, 0);
+        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", new String[]{"Guitar String"}, true, 1, 0);
         areaMap[1][0] = backstage;
 
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false, 2, 2);
@@ -33,10 +33,10 @@ public class Map
         Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", null, false, 3, 2);
         areaMap[3][2] = supplyCloset;
 
-        Room backStairwell = new Room("Back Stairwell", true, false, true, true, false, "backstairwell.png", null, true, 0, 0);
-        areaMap[0][0] = backStairwell;
+        Room stairwell = new Room("Stairwell", true, false, true, true, false, "backstairwell.png", null, true, 0, 0);
+        areaMap[0][0] = stairwell;
 
-        Room westWing = new Room("West Wing", true, false, false, true, false, "stage.png", null, true, 0, 1);
+        Room westWing = new Room("West Wing", true, false, false, true, false, "westwing.png", null, true, 0, 1);
         areaMap[0][1] = westWing;
     }
 
