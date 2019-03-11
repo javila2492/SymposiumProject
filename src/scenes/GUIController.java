@@ -30,6 +30,7 @@ public class GUIController
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
     static Character mainCharacter;
     Map temp = new Map();
+    boolean rage = false;
     public Room[][] aMap = temp.areaMap;
 
     public void initialize()
@@ -37,6 +38,10 @@ public class GUIController
         mainCharacter = CharSelectionController.chosen;
         mainCharacter.changePos(1, 3);
         icon.setImage(mainCharacter.getMainImg());
+        if(mainCharacter.name.contains("Mikey"))
+        {
+            rageActive();
+        }
         moveRoom(1, 3);
     }
 
@@ -82,6 +87,10 @@ public class GUIController
 
     }
 
+    public void rageActive()
+    {
+
+    }
 
     public void stringToMethod(String func, String param)
     {

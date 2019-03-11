@@ -7,6 +7,7 @@ public class Vin extends Character
 {
     public Vin()
     {
+        name = "Vin";
         atk = 10;
         def = 12;
         spd = 17;

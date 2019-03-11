@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 public abstract class Character
 {
     static int hp = 100;
+    public String name;
     int atk;
     int def;
     int spd;

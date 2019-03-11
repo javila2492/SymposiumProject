@@ -6,6 +6,7 @@ public class Joey extends Character
 {
     public Joey()
     {
+        name = "Joey";
         atk = 12;
         def = 14;
         spd = 10;
