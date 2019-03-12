@@ -1,5 +1,7 @@
 package rooms;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 
 public class Room
@@ -11,10 +13,10 @@ public class Room
     public boolean canGoWest;
     public boolean lit;
     public String image;
-    public ArrayList<String> items;
+    public ArrayList<String> items = new ArrayList<String>();
     public boolean hasPlants;
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, String[] newItems, boolean hasPlants, int x, int y)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;
@@ -24,7 +26,10 @@ public class Room
         this.lit = lit;
         this.image = image;
         if(newItems != null)
+        {
+            System.out.println(newItems);
             items.addAll(newItems);
+        }
         this.hasPlants = hasPlants;
     }
 

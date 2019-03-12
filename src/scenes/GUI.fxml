@@ -28,13 +28,13 @@
                   <Font name="Courier New Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="showtext" prefHeight="50.0" prefWidth="200.0" text="INVENTORY" textFill="#00c900" wrapText="true">
+            <Label prefHeight="50.0" prefWidth="200.0" text="INVENTORY" textFill="#00c900" wrapText="true">
                <font>
                   <Font name="Courier New Bold" size="18.0" />
                </font>
             </Label>
-            <ProgressBar layoutX="586.0" layoutY="55.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: black; -fx-border-color: black; -fx-accent: red;" visible="false" />
-            <Label fx:id="showtext" layoutX="636.0" layoutY="-25.0" prefHeight="100.0" prefWidth="100.0" text="RAGE" textFill="#c70000" visible="false" wrapText="true">
+            <ProgressBar fx:id="ragemeter" layoutX="586.0" layoutY="55.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: black; -fx-border-color: black; -fx-accent: red;" visible="false" />
+            <Label fx:id="ragetext" layoutX="636.0" layoutY="-25.0" prefHeight="100.0" prefWidth="100.0" text="RAGE" textFill="#c70000" visible="false" wrapText="true">
                <font>
                   <Font name="Courier New Bold" size="36.0" />
                </font>

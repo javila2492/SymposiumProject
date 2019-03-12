@@ -1,5 +1,6 @@
 package scenes;
 
+import javafx.scene.control.ProgressBar;
 import rooms.Map;
 import rooms.Room;
 import characters.Character;
@@ -26,6 +27,10 @@ public class GUIController
     ImageView mapimg;
     @FXML
     Label roomname;
+    @FXML
+    Label ragetext;
+    @FXML
+    ProgressBar ragemeter;
 
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
     static Character mainCharacter;
@@ -89,22 +94,11 @@ public class GUIController
 
     public void rageActive()
     {
-
+        rage = true;
+        ragetext.setVisible(true);
+        ragemeter.setVisible(true);
     }
 
-    public void stringToMethod(String func, String param)
-    {
-        Method m = null;
-        try
-        {
-            m = GUIController.class.getMethod(func, String.class);
-            Object returnValue = m.invoke(null, param);
-        }
-        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     public void moveTo(String direction)
     {
@@ -118,9 +112,13 @@ public class GUIController
                 mainCharacter.changeY(currY - 1);
                 moveRoom(currX, currY - 1);
                 type.setText("");
+                return;
             }
             else
+            {
                 textFlow("A wall blocks your path.");
+                return;
+            }
         }
         if(direction.contains("east"))
         {
@@ -129,9 +127,13 @@ public class GUIController
                 mainCharacter.changeX(currX + 1);
                 moveRoom(currX + 1, currY);
                 type.setText("");
+                return;
             }
             else
+            {
                 textFlow("A wall blocks your path.");
+                return;
+            }
         }
         if(direction.contains("south"))
         {
@@ -140,9 +142,13 @@ public class GUIController
                 mainCharacter.changeY(currY + 1);
                 moveRoom(currX, currY + 1);
                 type.setText("");
+                return;
             }
             else
+            {
                 textFlow("A wall blocks your path.");
+                return;
+            }
         }
         if(direction.contains("west"))
         {
@@ -151,19 +157,20 @@ public class GUIController
                 mainCharacter.changeX(currX - 1);
                 moveRoom(currX - 1, currY);
                 type.setText("");
+                return;
             }
             else
+            {
                 textFlow("A wall blocks your path.");
+                return;
+            }
         }
-        System.out.println(mainCharacter.xPos + ", " + mainCharacter.yPos);
-        textFlow("A wall blocks your path.");
     }
 
     public void moveRoom(int x, int y)
     {
         Image tempimg = new Image("images/" + aMap[x][y].image);
         mapimg.setImage(tempimg);
-
         roomname.setText(aMap[x][y].roomName);
         showtext.setText(getRoomText(x, y));
     }

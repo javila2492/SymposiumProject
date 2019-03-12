@@ -1,5 +1,8 @@
 package rooms;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Map
 {
 
@@ -8,17 +11,23 @@ public class Map
     public Map()
     {
         areaMap = new Room[4][4];
+        ArrayList<String> mainAreaItems = new ArrayList<String>();
+        mainAreaItems.add("Glass Shard");
+        mainAreaItems.add("Broken Bottle");
+
+        ArrayList<String> backstageItems = new ArrayList<String>();
+        backstageItems.add("Guitar String");
 
         Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true, 1, 3);
         areaMap[1][3] = entrance;
 
-        Room mainArea = new Room("Main Area", true, true, true, true, false, "mainarea.png", null, true, 1, 2);
+        Room mainArea = new Room("Main Area", true, true, true, true, false, "mainarea.png", mainAreaItems, true, 1, 2);
         areaMap[1][2] = mainArea;
 
-        Room stage = new Room("Stage", true, false, true, true, false, "stage.png", new String[]{"Glass Shard", "Broken Bottle"}, false, 1, 1);
+        Room stage = new Room("Stage", true, false, true, true, false, "stage.png", null, false, 1, 1);
         areaMap[1][1] = stage;
 
-        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", new String[]{"Guitar String"}, true, 1, 0);
+        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", backstageItems, true, 1, 0);
         areaMap[1][0] = backstage;
 
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false, 2, 2);
