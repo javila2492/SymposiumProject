@@ -34,9 +34,9 @@ public class GUIController
 
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
     static Character mainCharacter;
-    Map temp = new Map();
+    public static Map temp = new Map();
     boolean rage = false;
-    public Room[][] aMap = temp.areaMap;
+    public static Room[][] aMap = temp.areaMap;
 
     public void initialize()
     {

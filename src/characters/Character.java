@@ -2,6 +2,8 @@ package characters;
 
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+
 public abstract class Character
 {
     static int hp = 100;
@@ -13,6 +15,7 @@ public abstract class Character
     String characterDesc;
     String abilityDesc;
     Image[] healthIndicator = new Image[5];
+    ArrayList<String> inventory = new ArrayList<String>();
     Image mainImg;
     public String[][] specialDialog;
     public int xPos;

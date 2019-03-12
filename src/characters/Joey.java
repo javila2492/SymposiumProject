@@ -1,6 +1,7 @@
 package characters;
 
 import javafx.scene.image.Image;
+import scenes.GUIController;
 
 public class Joey extends Character
 {
@@ -26,6 +27,7 @@ public class Joey extends Character
 
     public void useAbility()
     {
-
+        GUIController.aMap[xPos][yPos].items.addAll(inventory);
+        inventory.clear();
     }
 }
