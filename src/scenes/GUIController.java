@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
+import java.util.ArrayList;
 
 
 public class GUIController
@@ -89,7 +89,8 @@ public class GUIController
 
         if(currCmd.contains("move"))
             moveTo(sec);
-
+        if(currCmd.contains("search"))
+            searchThing(sec);
     }
 
     public void rageActive()
@@ -185,4 +186,49 @@ public class GUIController
         return "";
     }
 
+    public void searchThing(String a)
+    {
+        if(a.contains("room"))
+        {
+            showtext.setText(visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos));
+
+        }
+    }
+
+    public String visSearch(int vision, int x, int y)
+    {
+        int tem;
+        String it = "";
+        ArrayList potential = aMap[x][y].items;
+        if(vision > 11)
+        {
+            if(potential.isEmpty())
+                return "There isn't anything useful here.";
+            tem = (int) (Math.random() * 7);
+            if(vision > (20 - tem))
+                return "I can't see anything useful for now.";
+            for(int i = 0; i < potential.size(); i++)
+            {
+                it += potential.get(i);
+                it += ", ";
+            }
+            return "I see a " + it + "and nothing else.";
+        }
+
+        if(vision <= 11)
+        {
+            if(potential.isEmpty())
+                return "I can't see anything useful for now.";
+            tem = (int) (Math.random() * 7);
+            if(vision > (12 - tem))
+                return "I can't see anything useful for now.";
+            for(int i = 0; i < potential.size(); i++)
+            {
+                it += potential.get(i);
+                it += ", ";
+            }
+            return "I see a " + it + "and nothing else.";
+        }
+        return "";
+    }
 }

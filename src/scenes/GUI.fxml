@@ -23,7 +23,7 @@
                   <Font name="Courier New Bold" size="14.0" />
                </font>
             </Button>
-            <Label fx:id="showtext" layoutY="50.0" prefHeight="100.0" prefWidth="300.0" textFill="#00c900" wrapText="true">
+            <Label fx:id="invtext" layoutY="50.0" prefHeight="100.0" prefWidth="300.0" textFill="#00c900" wrapText="true">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>

@@ -26,10 +26,7 @@ public class Room
         this.lit = lit;
         this.image = image;
         if(newItems != null)
-        {
-            System.out.println(newItems);
             items.addAll(newItems);
-        }
         this.hasPlants = hasPlants;
     }
 
