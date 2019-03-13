@@ -91,6 +91,8 @@ public class GUIController
             moveTo(sec);
         if(currCmd.contains("search"))
             searchThing(sec);
+        if(currCmd.contains("take"))
+            takeThing(sec);
     }
 
     public void rageActive()
@@ -160,11 +162,7 @@ public class GUIController
                 type.setText("");
                 return;
             }
-            else
-            {
-                textFlow("A wall blocks your path.");
-                return;
-            }
+            textFlow("A wall blocks your path.");
         }
     }
 
@@ -191,7 +189,6 @@ public class GUIController
         if(a.contains("room"))
         {
             showtext.setText(visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos));
-
         }
     }
 
@@ -230,5 +227,15 @@ public class GUIController
             return "I see a " + it + "and nothing else.";
         }
         return "";
+    }
+
+    public void takeThing(String item)
+    {
+        ArrayList tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
+        for(int i = 0; i < tem.size(); i++)
+        {
+            if(item.contains(tem.get(i))
+
+        }
     }
 }
