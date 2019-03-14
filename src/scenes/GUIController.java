@@ -31,12 +31,15 @@ public class GUIController
     Label ragetext;
     @FXML
     ProgressBar ragemeter;
+    @FXML
+    Label invtext;
 
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
     static Character mainCharacter;
     public static Map temp = new Map();
     boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
+    String invTextOut = "";
 
     public void initialize()
     {
@@ -69,13 +72,14 @@ public class GUIController
 
     public void invalidCommand()
     {
-        type.setText("Please type in a valid command.");
-
+        type.setText("");
+        type.setPromptText("Please type in a valid command.");
     }
 
 
     public void doAction()
     {
+        type.setPromptText("_");
         String command = type.getText();
         command = command.toLowerCase();
         String[] commandSplit = command.split(" ");
@@ -86,13 +90,29 @@ public class GUIController
         }
         String currCmd = commandSplit[0];
         String sec = commandSplit[1];
+        String tre = "";
+        if(commandSplit.length > 2)
+            tre = commandSplit[2];
 
         if(currCmd.contains("move"))
+        {
             moveTo(sec);
+            type.setText("");
+            return;
+        }
         if(currCmd.contains("search"))
+        {
             searchThing(sec);
+            type.setText("");
+            return;
+        }
         if(currCmd.contains("take"))
-            takeThing(sec);
+        {
+            takeThing(sec + " " + tre);
+            type.setText("");
+            return;
+        }
+        invalidCommand();
     }
 
     public void rageActive()
@@ -217,8 +237,8 @@ public class GUIController
             if(potential.isEmpty())
                 return "I can't see anything useful for now.";
             tem = (int) (Math.random() * 7);
-            if(vision > (12 - tem))
-                return "I can't see anything useful for now.";
+            if(vision < (12 - tem))
+                return "I can barely see anything.";
             for(int i = 0; i < potential.size(); i++)
             {
                 it += potential.get(i);
@@ -231,11 +251,17 @@ public class GUIController
 
     public void takeThing(String item)
     {
-        ArrayList tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
+        System.out.println(item);
+        ArrayList<String> tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
         for(int i = 0; i < tem.size(); i++)
         {
-            if(item.contains(tem.get(i))
-
+            if(item.contains(tem.get(i).toLowerCase()))
+            {
+                mainCharacter.inventory.add(tem.remove(i));
+                invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
+                invtext.setText(invTextOut);
+                return;
+            }
         }
     }
 }

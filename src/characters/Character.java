@@ -15,7 +15,7 @@ public abstract class Character
     String characterDesc;
     String abilityDesc;
     Image[] healthIndicator = new Image[5];
-    ArrayList<String> inventory = new ArrayList<String>();
+    public ArrayList<String> inventory = new ArrayList<String>();
     Image mainImg;
     public String[][] specialDialog;
     public int xPos;
