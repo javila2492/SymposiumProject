@@ -11,7 +11,9 @@ public class Sabrina extends Character
         def = 11;
         spd = 14;
         vis = 14;
+        imgName = "images/sabrina";
         mainImg = new Image("images/sabrina.png", 100, 100, true, true);
+
         specialDialog = new String[][]{{"entrance", "What a dump! Not even the cafeteria's attempt at tacos smell this bad!"}, {"main area", "I played here once! Granted it " +
                 "wasn't my body...but I still had fun!"}, {"stage", "Scuffs, huh? I think I stood on the right? The trauma kinda clouds that memory out."},
                 {"backstage", "Oh man...this place. I don't like this place."}, {"east wing", "Oh god! I can smell the bathrooms from here! Gross!"},

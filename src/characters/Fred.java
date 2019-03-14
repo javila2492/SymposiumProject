@@ -11,9 +11,11 @@ public class Fred extends Character
         def = 20;
         spd = 5;
         vis = 5;
+        imgName = "images/fred";
         mainImg = new Image("images/fred.png", 100, 100, true, true);
+
         specialDialog = new String[][]{{"entrance", "Yeah! This place again!"}, {"main area", "So big! Like me!"}, {"stage", "The place I played has the deepest marks!"},
-                {"backstage", "I stabbed someone here once! I also almost died here twice!"}, {"east wing", "Smells like Kentucky!"},
+                {"backstage", "I stabbed someone here once! I also almost died here twice!"}, {"east wing", "Smells like Ohio!"},
                 {"men's bathroom", "Garbage...truly a reminder to the futility of our existence!"}, {"women's bathroom", "Ma, if you're watching from above, please don't judge!"},
                 {"supply closet", "Can barely fit in here!"}, {"stairwell", "Don't like that..."}, {"west wing", "This place could use company!"}};
 

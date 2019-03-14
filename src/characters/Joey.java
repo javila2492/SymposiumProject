@@ -12,7 +12,9 @@ public class Joey extends Character
         def = 14;
         spd = 10;
         vis = 14;
+        imgName = "images/joey";
         mainImg = new Image("images/joey.png", 100, 100, true, true);
+
         specialDialog = new String[][]{{"entrance", "God I hope I survive. Why did I say that?"}, {"main area", "Being part of the crowd in the wrong body was..." +
                 "something..."}, {"stage", "I'm so sad I wasn't here for our last show in this area."}, {"backstage", "This is where it all went down..."},
                 {"east wing", "Why didn't Vin choose a more sanitary place to play in?"}, {"men's bathroom", "I want to get out of here as soon as possible."},

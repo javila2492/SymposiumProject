@@ -12,7 +12,9 @@ public class Vin extends Character
         def = 12;
         spd = 17;
         vis = 11;
+        imgName = "images/vin";
         mainImg = new Image("images/vin.png", 100, 100, true, true);
+
         specialDialog = new String[][]{{"entrance", "Jeez. Sweet sweet nostalgia huh. This was the place I did my first show. Now, it's nothing but ruin."},
                 {"main area", "These halls used to echo with the sound of our music. It feels so...hopeless...looking at it now."}, {"stage", "There's still marks here from when we used to play here." +
                 "I can still remember exactly where each of us stood."}, {"backstage", "This is where it happened. This is where I became a prisoner of that...thing..."}, {"east wing", "This place" +

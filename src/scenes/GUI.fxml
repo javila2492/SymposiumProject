@@ -39,6 +39,7 @@
                   <Font name="Courier New Bold" size="36.0" />
                </font>
             </Label>
+            <Button layoutX="560.0" layoutY="63.0" mnemonicParsing="false" onAction="#updateIcon" text="DAMAGE" />
          </children>
       </Pane>
       <ImageView id="bgimg" fx:id="mapimg" fitHeight="350.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />

@@ -55,6 +55,7 @@ public class GUIController
 
     public void updateIcon()
     {
+        mainCharacter.takeDamage(20);
         icon.setImage(mainCharacter.getCurrentHealthIndicator());
     }
 
