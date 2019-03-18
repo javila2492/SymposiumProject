@@ -1,6 +1,7 @@
 package characters;
 
 import javafx.scene.image.Image;
+import scenes.GUIController;
 
 public class Mikey extends Character
 {

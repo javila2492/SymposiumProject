@@ -1,6 +1,7 @@
 package scenes;
 
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 import rooms.Map;
 import rooms.Room;
 import characters.Character;
@@ -13,6 +14,7 @@ import javafx.scene.image.ImageView;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 public class GUIController
@@ -30,12 +32,14 @@ public class GUIController
     @FXML
     Label ragetext;
     @FXML
-    ProgressBar ragemeter;
+    public ProgressBar ragemeter;
     @FXML
     Label invtext;
+    @FXML
+    Pane damage;
 
     private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
-    static Character mainCharacter;
+    public static Character mainCharacter;
     public static Map temp = new Map();
     boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
@@ -53,10 +57,28 @@ public class GUIController
         moveRoom(1, 3);
     }
 
-    public void updateIcon()
+    public void dealDamage()
     {
+        // damage.setVisible(true);
         mainCharacter.takeDamage(20);
+        /*
+        double a = 0.0;
+        for(int i = 0; i < 100; i++)
+        {
+            damage.setStyle("-fx-opacity: " + a + ";");
+            a+= .01;
+            try { TimeUnit.MILLISECONDS.wait(500); } catch (InterruptedException e) { e.printStackTrace(); }
+        }
+        */
         icon.setImage(mainCharacter.getCurrentHealthIndicator());
+        /*
+        for(int i = 0; i < 100; i++)
+        {
+            damage.setStyle("-fx-opacity: " + a + ";");
+            a-= .01;
+        }
+        damage.setVisible(false);
+        */
     }
 
 
@@ -73,6 +95,8 @@ public class GUIController
 
     public void invalidCommand()
     {
+        if(rage)
+            ragemeter.setProgress(ragemeter.getProgress() + .1);
         type.setText("");
         type.setPromptText("Please type in a valid command.");
     }
@@ -110,6 +134,12 @@ public class GUIController
         if(currCmd.contains("take"))
         {
             takeThing(sec + " " + tre);
+            type.setText("");
+            return;
+        }
+        if(currCmd.contains("use"))
+        {
+            useThing(sec + " " + tre);
             type.setText("");
             return;
         }
@@ -189,6 +219,7 @@ public class GUIController
 
     public void moveRoom(int x, int y)
     {
+        System.out.println(aMap[x][y].image);
         Image tempimg = new Image("images/" + aMap[x][y].image);
         mapimg.setImage(tempimg);
         roomname.setText(aMap[x][y].roomName);
@@ -252,8 +283,22 @@ public class GUIController
 
     public void takeThing(String item)
     {
-        System.out.println(item);
         ArrayList<String> tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
+        for(int i = 0; i < tem.size(); i++)
+        {
+            if(item.contains(tem.get(i).toLowerCase()))
+            {
+                mainCharacter.inventory.add(tem.remove(i));
+                invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
+                invtext.setText(invTextOut);
+                return;
+            }
+        }
+    }
+
+    public void useThing(String item)
+    {
+        ArrayList<String> tem = mainCharacter.inventory;
         for(int i = 0; i < tem.size(); i++)
         {
             if(item.contains(tem.get(i).toLowerCase()))

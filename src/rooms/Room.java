@@ -4,7 +4,7 @@ import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayList;
 
-public class Room
+public abstract class Room
 {
     public String roomName;
     public boolean canGoNorth;
@@ -28,10 +28,5 @@ public class Room
         if(newItems != null)
             items.addAll(newItems);
         this.hasPlants = hasPlants;
-    }
-
-    public String itemTaken(int idx)
-    {
-        return items.remove(idx);
     }
 }
