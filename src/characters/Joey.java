@@ -3,6 +3,8 @@ package characters;
 import javafx.scene.image.Image;
 import scenes.GUIController;
 
+import static scenes.GUIController.aMap;
+
 public class Joey extends Character
 {
     public Joey()
@@ -29,7 +31,13 @@ public class Joey extends Character
 
     public void useAbility()
     {
-        GUIController.aMap[xPos][yPos].items.addAll(inventory);
+        if(GUIController.hazy)
+        {
+            GUIController.hazy = false;
+            return;
+        }
+        aMap[xPos][yPos].items.addAll(inventory);
         inventory.clear();
+        GUIController.hazy = true;
     }
 }

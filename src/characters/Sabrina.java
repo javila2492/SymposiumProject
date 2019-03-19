@@ -1,6 +1,7 @@
 package characters;
 
 import javafx.scene.image.Image;
+import static scenes.GUIController.aMap;
 
 public class Sabrina extends Character
 {
@@ -29,6 +30,8 @@ public class Sabrina extends Character
 
     public void useAbility()
     {
-
+        if(aMap[xPos][yPos].lit)
+            vis += 5;
+        aMap[xPos][yPos].lit = true;
     }
 }

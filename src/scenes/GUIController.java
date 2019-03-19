@@ -4,17 +4,14 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 import rooms.Map;
 import rooms.Room;
+import characters.Fiend;
 import characters.Character;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 
 public class GUIController
@@ -38,12 +35,13 @@ public class GUIController
     @FXML
     Pane damage;
 
-    private String[] commandList = {"move", "search", "inspect", "use", "ability", "take"};
-    public static Character mainCharacter;
-    public static Map temp = new Map();
-    boolean rage = false;
+    private Character mainCharacter;
+    private static Map temp = new Map();
+    public Fiend enemy = new Fiend(2, 2);
+    private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
-    String invTextOut = "";
+    public static boolean hazy = false;
+    private String invTextOut = "";
 
     public void initialize()
     {
@@ -59,6 +57,11 @@ public class GUIController
 
     public void dealDamage()
     {
+        if(hazy)
+        {
+            textFlow("I am impervious to all damage while Hazy is active!");
+            return;
+        }
         // damage.setVisible(true);
         mainCharacter.takeDamage(20);
         /*
@@ -108,13 +111,11 @@ public class GUIController
         String command = type.getText();
         command = command.toLowerCase();
         String[] commandSplit = command.split(" ");
-        if(commandSplit.length < 2)
-        {
-            invalidCommand();
-            return;
-        }
+
         String currCmd = commandSplit[0];
-        String sec = commandSplit[1];
+        String sec = "";
+        if(commandSplit.length != 1)
+            sec = commandSplit[1];
         String tre = "";
         if(commandSplit.length > 2)
             tre = commandSplit[2];
@@ -143,6 +144,12 @@ public class GUIController
             type.setText("");
             return;
         }
+        if(currCmd.contains("ability"))
+        {
+            mainCharacter.useAbility();
+            type.setText("");
+            return;
+        }
         invalidCommand();
     }
 
@@ -163,6 +170,11 @@ public class GUIController
         {
             if(aMap[currX][currY].canGoNorth)
             {
+                if(aMap[currX][currY - 1].locked)
+                {
+                    textFlow(aMap[currX][currY - 1].lockedDesc);
+                    return;
+                }
                 mainCharacter.changeY(currY - 1);
                 moveRoom(currX, currY - 1);
                 type.setText("");
@@ -178,6 +190,11 @@ public class GUIController
         {
             if(aMap[currX][currY].canGoEast)
             {
+                if(aMap[currX + 1][currY].locked)
+                {
+                    textFlow(aMap[currX - 1][currY].lockedDesc);
+                    return;
+                }
                 mainCharacter.changeX(currX + 1);
                 moveRoom(currX + 1, currY);
                 type.setText("");
@@ -193,6 +210,11 @@ public class GUIController
         {
             if(aMap[currX][currY].canGoSouth)
             {
+                if(aMap[currX][currY + 1].locked)
+                {
+                    textFlow(aMap[currX][currY + 1].lockedDesc);
+                    return;
+                }
                 mainCharacter.changeY(currY + 1);
                 moveRoom(currX, currY + 1);
                 type.setText("");
@@ -208,6 +230,11 @@ public class GUIController
         {
             if(aMap[currX][currY].canGoWest)
             {
+                if(aMap[currX - 1][currY].locked)
+                {
+                    textFlow(aMap[currX - 1][currY].lockedDesc);
+                    return;
+                }
                 mainCharacter.changeX(currX - 1);
                 moveRoom(currX - 1, currY);
                 type.setText("");
@@ -219,6 +246,7 @@ public class GUIController
 
     public void moveRoom(int x, int y)
     {
+        System.out.println(x + ", " + y);
         System.out.println(aMap[x][y].image);
         Image tempimg = new Image("images/" + aMap[x][y].image);
         mapimg.setImage(tempimg);
@@ -256,9 +284,9 @@ public class GUIController
             tem = (int) (Math.random() * 7);
             if(vision > (20 - tem))
                 return "I can't see anything useful for now.";
-            for(int i = 0; i < potential.size(); i++)
+            for (Object aPotential : potential)
             {
-                it += potential.get(i);
+                it += aPotential;
                 it += ", ";
             }
             return "I see a " + it + "and nothing else.";
@@ -271,9 +299,9 @@ public class GUIController
             tem = (int) (Math.random() * 7);
             if(vision < (12 - tem))
                 return "I can barely see anything.";
-            for(int i = 0; i < potential.size(); i++)
+            for (Object aPotential : potential)
             {
-                it += potential.get(i);
+                it += aPotential;
                 it += ", ";
             }
             return "I see a " + it + "and nothing else.";
@@ -283,6 +311,11 @@ public class GUIController
 
     public void takeThing(String item)
     {
+        if(hazy)
+        {
+            textFlow("I can't pick up items while Hazy is active.");
+            return;
+        }
         ArrayList<String> tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
         for(int i = 0; i < tem.size(); i++)
         {

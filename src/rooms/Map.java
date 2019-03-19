@@ -27,7 +27,7 @@ public class Map
         Room stage = new Room("Stage", true, false, true, true, false, "stage.png", null, false, 1, 1);
         areaMap[1][1] = stage;
 
-        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", backstageItems, true, 1, 0);
+        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", backstageItems, true, 1, 0, "key", "Looks like I need a key to get in here.", true);
         areaMap[1][0] = backstage;
 
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false, 2, 2);
@@ -39,13 +39,14 @@ public class Map
         Room womensRoom = new Room("Women's Bathroom", true, false, true, true, false, "womensroom.png", null, false, 2, 3);
         areaMap[2][3] = womensRoom;
 
-        Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", null, false, 3, 2);
+        Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", null, false, 3, 2, "crowbar", "The door's jammed shut. I'll need something to pry it open.", true);
         areaMap[3][2] = supplyCloset;
 
         Room stairwell = new Room("Stairwell", true, false, true, true, false, "backstairwell.png", null, true, 0, 0);
         areaMap[0][0] = stairwell;
 
         Room westWing = new Room("West Wing", true, false, false, true, false, "westwing.png", null, true, 0, 1);
+        areaMap[0][2] = westWing;
         areaMap[0][1] = westWing;
     }
 

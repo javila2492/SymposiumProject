@@ -25,7 +25,6 @@ public class Mikey extends Character
                 " Unfortunately, his rage can be quite dangerous if left unchecked. Careful! Though he’s angry, he’s got a soft heart.";
         abilityDesc = "Roid Rage: A meter will display, increasing for every failed action. Once full, it can be used to demolish heavy objects or damage the enemy in return for half the meter." +
                 "If the meter isn’t used when full by three actions, a random object will be broken.";
-        int rage = 0;
      }
 
     public void useAbility()
