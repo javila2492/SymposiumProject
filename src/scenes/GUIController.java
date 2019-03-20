@@ -1,5 +1,6 @@
 package scenes;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 import rooms.Map;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GUIController
@@ -42,6 +45,7 @@ public class GUIController
     public static Room[][] aMap = temp.areaMap;
     public static boolean hazy = false;
     private String invTextOut = "";
+    boolean firstTime = true;
 
     public void initialize()
     {
@@ -53,6 +57,8 @@ public class GUIController
             rageActive();
         }
         moveRoom(1, 3);
+        Timer fiendCheck = new Timer();
+        fiendCheck.schedule(new fiendChecker(), 0, 500);
     }
 
     public void dealDamage()
@@ -147,6 +153,11 @@ public class GUIController
         if(currCmd.contains("ability"))
         {
             mainCharacter.useAbility();
+            if(hazy)
+            {
+                invTextOut = "";
+                invtext.setText(invTextOut);
+            }
             type.setText("");
             return;
         }
@@ -182,7 +193,7 @@ public class GUIController
             }
             else
             {
-                textFlow("A wall blocks your path.");
+                textFlow(getReactionText("wall"));
                 return;
             }
         }
@@ -202,7 +213,7 @@ public class GUIController
             }
             else
             {
-                textFlow("A wall blocks your path.");
+                textFlow(getReactionText("wall"));
                 return;
             }
         }
@@ -222,7 +233,7 @@ public class GUIController
             }
             else
             {
-                textFlow("A wall blocks your path.");
+                textFlow(getReactionText("wall"));
                 return;
             }
         }
@@ -240,7 +251,7 @@ public class GUIController
                 type.setText("");
                 return;
             }
-            textFlow("A wall blocks your path.");
+            textFlow(getReactionText("wall"));
         }
     }
 
@@ -259,6 +270,16 @@ public class GUIController
         for(String[] i : mainCharacter.specialDialog)
         {
             if(i[0].contains(aMap[x][y].roomName.toLowerCase()))
+                return i[1];
+        }
+        return "";
+    }
+
+    public String getReactionText(String text)
+    {
+        for(String[] i : mainCharacter.specialDialog)
+        {
+            if(i[0].contains(text))
                 return i[1];
         }
         return "";
@@ -340,6 +361,19 @@ public class GUIController
                 invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
                 invtext.setText(invTextOut);
                 return;
+            }
+        }
+    }
+
+    class fiendChecker extends TimerTask
+    {
+        public void run()
+        {
+            if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
+            {
+                aMap[mainCharacter.xPos][mainCharacter.yPos].image = "images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].roomName + "_fiend.png";
+                if(!firstTime)
+                    dealDamage();
             }
         }
     }

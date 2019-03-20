@@ -9,8 +9,8 @@ public class Fiend
 {
     int atk;
     int hp = 100;
-    int x;
-    int y;
+    public int x;
+    public int y;
     Image sprite;
 
     public Fiend(int x, int y)
@@ -20,6 +20,5 @@ public class Fiend
         this.y = y;
         Image sprite = new Image("images/fiendsprite.png");
     }
-
 
 }

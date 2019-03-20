@@ -20,7 +20,7 @@ public class Vin extends Character
                 "I can still remember exactly where each of us stood."}, {"backstage", "This is where it happened. This is where I became a prisoner of that...thing..."}, {"east wing", "This place" +
                 " reeks! Like if something died in here...something probably did."}, {"men's bathroom", "The sticky floor is a telltale sign that men in fact can not aim."}, {"women's bathroom", "I" +
                 " don't feel comfortable being here..."}, {"supply closet", "They used to call this place the love shack. At least until the rats invaded."}, {"stairwell", "I...I...oh god " +
-                "I...I don't like being here..."}, {"west wing", "This is the worst part for me. Something about the stairwell in the distance...scares me..."}};
+                "I...I don't like being here..."}, {"west wing", "This is the worst part for me. Something about the stairwell in the distance...scares me..."}, {"wall", "Can't go that way."}};
 
         characterDesc = "Vin, the lead singer of the band, with a silent yet strong nature. He’s been through the most, from being possessed and hurting his friends to messy breakups. " +
                 "This poor man has been through a lot, but his experience with life comes in handy.";
