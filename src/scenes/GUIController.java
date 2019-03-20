@@ -57,8 +57,8 @@ public class GUIController
             rageActive();
         }
         moveRoom(1, 3);
-        Timer fiendCheck = new Timer();
-        fiendCheck.schedule(new fiendChecker(), 0, 500);
+        Timer fiendCheck = new Timer(false);
+        fiendCheck.schedule(new fiendChecker(), 0, 4000);
     }
 
     public void dealDamage()
@@ -93,6 +93,7 @@ public class GUIController
 
     public void textFlow(String text)
     {
+        /*
         String splitext = "";
         String[] textArr = text.split("");
         for(int i = 0; i < textArr.length; i++)
@@ -100,6 +101,8 @@ public class GUIController
             showtext.setText(splitext);
             splitext += textArr[i];
         }
+        */
+        showtext.setText(text);
     }
 
     public void invalidCommand()
@@ -369,11 +372,13 @@ public class GUIController
     {
         public void run()
         {
+            System.out.println("A");
             if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
             {
                 aMap[mainCharacter.xPos][mainCharacter.yPos].image = "images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].roomName + "_fiend.png";
                 if(!firstTime)
                     dealDamage();
+                firstTime = false;
             }
         }
     }
