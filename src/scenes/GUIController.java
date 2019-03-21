@@ -46,6 +46,7 @@ public class GUIController
     public static boolean hazy = false;
     private String invTextOut = "";
     boolean firstTime = true;
+    boolean alive = true;
 
     public void initialize()
     {
@@ -70,6 +71,10 @@ public class GUIController
         }
         // damage.setVisible(true);
         mainCharacter.takeDamage(20);
+        if (mainCharacter.hp == 0)
+        {
+            death();
+        }
         /*
         double a = 0.0;
         for(int i = 0; i < 100; i++)
@@ -116,6 +121,8 @@ public class GUIController
 
     public void doAction()
     {
+        if(!alive)
+            return;
         type.setPromptText("_");
         String command = type.getText();
         command = command.toLowerCase();
@@ -206,7 +213,7 @@ public class GUIController
             {
                 if(aMap[currX + 1][currY].locked)
                 {
-                    textFlow(aMap[currX - 1][currY].lockedDesc);
+                    textFlow(aMap[currX + 1][currY].lockedDesc);
                     return;
                 }
                 mainCharacter.changeX(currX + 1);
@@ -272,7 +279,7 @@ public class GUIController
     {
         for(String[] i : mainCharacter.specialDialog)
         {
-            if(i[0].contains(aMap[x][y].roomName.toLowerCase()))
+            if(aMap[x][y].roomName.toLowerCase().contains(i[0]))
                 return i[1];
         }
         return "";
@@ -366,6 +373,12 @@ public class GUIController
                 return;
             }
         }
+    }
+
+    public void death()
+    {
+        damage.setVisible(true);
+        damage.setStyle("-fx-background-color: black");
     }
 
     class fiendChecker extends TimerTask

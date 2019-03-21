@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Character
 {
-    static int hp = 100;
+    public static int hp = 100;
     public String name;
     int atk;
     int def;
@@ -51,6 +51,8 @@ public abstract class Character
         if(randDam < 0 || randDam > dmg)
             randDam = (int) (Math.random() * 5);
         hp -= dmg - randDam;
+        if(hp < 0)
+            hp = 0;
         System.out.println(hp);
     }
 

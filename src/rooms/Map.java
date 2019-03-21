@@ -45,9 +45,11 @@ public class Map
         Room stairwell = new Room("Stairwell", true, false, true, true, false, "backstairwell.png", null, true, 0, 0);
         areaMap[0][0] = stairwell;
 
-        Room westWing = new Room("West Wing", true, false, false, true, false, "westwing.png", null, true, 0, 1);
-        areaMap[0][2] = westWing;
-        areaMap[0][1] = westWing;
+        Room westWingA = new Room("West Wing A", true, true, false, false, false, "westwing.png", null, true, 0, 1);
+        areaMap[0][2] = westWingA;
+
+        Room westWingB = new Room("West Wing B", true, false, true, false, false, "westwing.png", null, true, 0, 1);
+        areaMap[0][1] = westWingB;
     }
 
 }
