@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Room
 {
     public String roomName;
+    public String truName;
     public boolean canGoNorth;
     public boolean canGoEast;
     public boolean canGoSouth;
@@ -31,6 +32,7 @@ public class Room
         if(newItems != null)
             items.addAll(newItems);
         this.hasPlants = hasPlants;
+        truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 
     public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y, String neededThing, String lockedDesc, boolean locked)
@@ -48,5 +50,6 @@ public class Room
         this.neededThing = neededThing;
         this.lockedDesc = lockedDesc;
         this.locked = locked;
+        truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 }

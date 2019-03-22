@@ -378,7 +378,7 @@ public class GUIController
     public void death()
     {
         damage.setVisible(true);
-        damage.setStyle("-fx-background-color: black");
+        damage.setStyle("-fx-background-color: black;");
     }
 
     class fiendChecker extends TimerTask
@@ -388,7 +388,10 @@ public class GUIController
             System.out.println("A");
             if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
             {
-                aMap[mainCharacter.xPos][mainCharacter.yPos].image = "images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].roomName + "_fiend.png";
+                aMap[mainCharacter.xPos][mainCharacter.yPos].image = aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png";
+                Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].image);
+                mapimg.setImage(tempimg);
+                //showtext.setText(getReactionText("fiend"));
                 if(!firstTime)
                     dealDamage();
                 firstTime = false;
