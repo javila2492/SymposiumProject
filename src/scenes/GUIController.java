@@ -1,8 +1,11 @@
 package scenes;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import rooms.Map;
 import rooms.Room;
 import characters.Fiend;
@@ -13,8 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class GUIController
@@ -58,8 +63,8 @@ public class GUIController
             rageActive();
         }
         moveRoom(1, 3);
-        Timer fiendCheck = new Timer(false);
-        fiendCheck.schedule(new fiendChecker(), 0, 4000);
+        fiendChecker fiendCheck = new fiendChecker();
+        fiendCheck.main();
     }
 
     public void dealDamage()
@@ -381,21 +386,65 @@ public class GUIController
         damage.setStyle("-fx-background-color: black;");
     }
 
-    class fiendChecker extends TimerTask
+    public class fiendChecker
     {
-        public void run()
+
+        public void main()
         {
-            System.out.println("A");
-            if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
+
+            MyBackgroudMethod thread = new MyBackgroudMethod();
+            thread.setDaemon(true);
+            thread.start();
+
+            java.awt.EventQueue.invokeLater(new Runnable()
             {
-                aMap[mainCharacter.xPos][mainCharacter.yPos].image = aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png";
-                Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].image);
-                mapimg.setImage(tempimg);
-                //showtext.setText(getReactionText("fiend"));
-                if(!firstTime)
-                    dealDamage();
-                firstTime = false;
-            }
+                public void run()
+                {
+
+                }
+            });
         }
+
+        public class MyBackgroudMethod extends Thread
+        {
+
+            @Override
+            public void run()
+            {
+                while (true)
+                {
+                    if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
+                    {
+                        aMap[mainCharacter.xPos][mainCharacter.yPos].image = aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png";
+                        Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].image);
+                        mapimg.setImage(tempimg);
+                        if(firstTime)
+                        {
+                            mapimg.setImage(tempimg);
+                            Platform.runLater(new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    showtext.setText(getReactionText("fiend"));
+                                }
+                            });
+                        }
+                        else
+                            dealDamage();
+                        firstTime = false;
+                    }
+                    try
+                    {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+
     }
 }
