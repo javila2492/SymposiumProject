@@ -48,6 +48,7 @@ public class GUIController
     public Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
+    public static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}};
     public static boolean hazy = false;
     private String invTextOut = "";
     boolean firstTime = true;
@@ -115,11 +116,19 @@ public class GUIController
         showtext.setText(text);
     }
 
-    public void invalidCommand()
+    public void invalidCommand(String cmd)
     {
         if(rage)
             ragemeter.setProgress(ragemeter.getProgress() + .1);
         type.setText("");
+        for(String[] i : cmdSyntax)
+        {
+            if(cmd.contains(i[0]))
+            {
+                type.setPromptText(i[1]);
+                return;
+            }
+        }
         type.setPromptText("Please type in a valid command.");
     }
 
@@ -176,7 +185,7 @@ public class GUIController
             type.setText("");
             return;
         }
-        invalidCommand();
+        invalidCommand("");
     }
 
     public void rageActive()
@@ -268,6 +277,7 @@ public class GUIController
             }
             textFlow(getReactionText("wall"));
         }
+        invalidCommand("move");
     }
 
     public void moveRoom(int x, int y)
@@ -305,7 +315,9 @@ public class GUIController
         if(a.contains("room"))
         {
             showtext.setText(visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos));
+            return;
         }
+        invalidCommand("search");
     }
 
     public String visSearch(int vision, int x, int y)
@@ -363,6 +375,7 @@ public class GUIController
                 return;
             }
         }
+        invalidCommand("take");
     }
 
     public void useThing(String item)
@@ -378,6 +391,7 @@ public class GUIController
                 return;
             }
         }
+        invalidCommand("use");
     }
 
     public void death()
