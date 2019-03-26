@@ -41,7 +41,9 @@ public class GUIController
     @FXML
     Label invtext;
     @FXML
-    Pane damage;
+    Label damage;
+    @FXML
+    ImageView dmgfx;
 
     private Character mainCharacter;
     private static Map temp = new Map();
@@ -75,30 +77,17 @@ public class GUIController
             textFlow("I am impervious to all damage while Hazy is active!");
             return;
         }
-        // damage.setVisible(true);
+        dmgfx.setVisible(true);
         mainCharacter.takeDamage(20);
         if (mainCharacter.hp == 0)
         {
             death();
+            return;
         }
-        /*
-        double a = 0.0;
-        for(int i = 0; i < 100; i++)
-        {
-            damage.setStyle("-fx-opacity: " + a + ";");
-            a+= .01;
-            try { TimeUnit.MILLISECONDS.wait(500); } catch (InterruptedException e) { e.printStackTrace(); }
-        }
-        */
+
         icon.setImage(mainCharacter.getCurrentHealthIndicator());
-        /*
-        for(int i = 0; i < 100; i++)
-        {
-            damage.setStyle("-fx-opacity: " + a + ";");
-            a-= .01;
-        }
-        damage.setVisible(false);
-        */
+
+        dmgfx.setVisible(false);
     }
 
 
@@ -397,7 +386,10 @@ public class GUIController
     public void death()
     {
         damage.setVisible(true);
+        dmgfx.setVisible(true);
         damage.setStyle("-fx-background-color: black;");
+        damage.setStyle("-fx-opacity: 1.0;");
+        damage.setText("GAME OVER");
     }
 
     public class fiendChecker
@@ -406,7 +398,7 @@ public class GUIController
         public void main()
         {
 
-            MyBackgroudMethod thread = new MyBackgroudMethod();
+            bgFiend thread = new bgFiend();
             thread.setDaemon(true);
             thread.start();
 
@@ -418,8 +410,68 @@ public class GUIController
                 }
             });
         }
+        public class bgFiend extends Thread
+        {
 
-        public class MyBackgroudMethod extends Thread
+            @Override
+            public void run()
+            {
+                while (true)
+                {
+                    if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
+                    {
+                        aMap[mainCharacter.xPos][mainCharacter.yPos].image = aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png";
+                        Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].image);
+                        mapimg.setImage(tempimg);
+                        if(firstTime)
+                        {
+                            mapimg.setImage(tempimg);
+                            Platform.runLater(new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    showtext.setText(getReactionText("fiend"));
+                                }
+                            });
+                        }
+                        else
+                            dealDamage();
+                        firstTime = false;
+                    }
+                    try
+                    {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    public class fiendMover
+    {
+
+        public void main()
+        {
+
+            bgFiendM thread = new bgFiendM();
+            thread.setDaemon(true);
+            thread.start();
+
+            java.awt.EventQueue.invokeLater(new Runnable()
+            {
+                public void run()
+                {
+
+                }
+            });
+        }
+        public class bgFiendM extends Thread
         {
 
             @Override

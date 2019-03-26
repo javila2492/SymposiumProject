@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -53,6 +54,14 @@
             <Font name="Courier New Italic" size="16.0" />
          </font>
       </Label>
-      <Pane fx:id="damage" opacity="0.0" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: red;" visible="false" />
+      <Label fx:id="damage" alignment="CENTER" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: red;" textFill="#00ff11" visible="false">
+         <font>
+            <Font name="Courier New Bold" size="72.0" />
+         </font></Label>
+      <ImageView fx:id="dmgfx" fitHeight="550.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/damagefx.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
