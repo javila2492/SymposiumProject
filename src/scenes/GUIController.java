@@ -1,11 +1,7 @@
 package scenes;
 
-import javafx.animation.AnimationTimer;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 import rooms.Map;
 import rooms.Room;
 import characters.Fiend;
@@ -16,10 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 
 public class GUIController
@@ -50,7 +42,7 @@ public class GUIController
     public Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
-    public static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}};
+    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}};
     public static boolean hazy = false;
     private String invTextOut = "";
     boolean firstTime = true;
@@ -68,6 +60,8 @@ public class GUIController
         moveRoom(1, 3);
         fiendChecker fiendCheck = new fiendChecker();
         fiendCheck.main();
+        fiendMover fiendMove = new fiendMover();
+        fiendMove.main();
     }
 
     public void dealDamage()
@@ -271,6 +265,7 @@ public class GUIController
 
     public void moveRoom(int x, int y)
     {
+        firstTime = true;
         System.out.println(x + ", " + y);
         System.out.println(aMap[x][y].image);
         Image tempimg = new Image("images/" + aMap[x][y].image);
@@ -329,21 +324,17 @@ public class GUIController
             return "I see a " + it + "and nothing else.";
         }
 
-        if(vision <= 11)
+        if(potential.isEmpty())
+            return "I can't see anything useful for now.";
+        tem = (int) (Math.random() * 7);
+        if(vision < (12 - tem))
+            return "I can barely see anything.";
+        for (Object aPotential : potential)
         {
-            if(potential.isEmpty())
-                return "I can't see anything useful for now.";
-            tem = (int) (Math.random() * 7);
-            if(vision < (12 - tem))
-                return "I can barely see anything.";
-            for (Object aPotential : potential)
-            {
-                it += aPotential;
-                it += ", ";
-            }
-            return "I see a " + it + "and nothing else.";
+            it += aPotential;
+            it += ", ";
         }
-        return "";
+        return "I see a " + it + "and nothing else.";
     }
 
     public void takeThing(String item)
@@ -385,11 +376,11 @@ public class GUIController
 
     public void death()
     {
+        alive = false;
         damage.setVisible(true);
         dmgfx.setVisible(true);
         damage.setStyle("-fx-background-color: black;");
         damage.setStyle("-fx-opacity: 1.0;");
-        damage.setText("GAME OVER");
     }
 
     public class fiendChecker
@@ -416,7 +407,7 @@ public class GUIController
             @Override
             public void run()
             {
-                while (true)
+                while(alive)
                 {
                     if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
                     {
@@ -441,7 +432,7 @@ public class GUIController
                     }
                     try
                     {
-                        Thread.sleep(1000);
+                        Thread.sleep(4000);
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();
@@ -471,46 +462,31 @@ public class GUIController
                 }
             });
         }
-        public class bgFiendM extends Thread
+    }
+    public class bgFiendM extends Thread
+    {
+        @Override
+        public void run()
         {
-
-            @Override
-            public void run()
+            while (alive)
             {
-                while (true)
+                if(mainCharacter.xPos == enemy.x && mainCharacter.yPos > enemy.y)
+                    enemy.y++;
+                if(mainCharacter.xPos == enemy.x && mainCharacter.yPos < enemy.y)
+                    enemy.y--;
+                if(mainCharacter.xPos > enemy.x && mainCharacter.yPos == enemy.y)
+                    enemy.x++;
+                if(mainCharacter.xPos < enemy.x && mainCharacter.yPos == enemy.y)
+                    enemy.x--;
+                try
                 {
-                    if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
-                    {
-                        aMap[mainCharacter.xPos][mainCharacter.yPos].image = aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png";
-                        Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].image);
-                        mapimg.setImage(tempimg);
-                        if(firstTime)
-                        {
-                            mapimg.setImage(tempimg);
-                            Platform.runLater(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    showtext.setText(getReactionText("fiend"));
-                                }
-                            });
-                        }
-                        else
-                            dealDamage();
-                        firstTime = false;
-                    }
-                    try
-                    {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    Thread.sleep(5000);
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
                 }
             }
-
         }
-
     }
 }
+
