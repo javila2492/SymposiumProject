@@ -268,7 +268,7 @@ public class GUIController
         firstTime = true;
         System.out.println(x + ", " + y);
         System.out.println(aMap[x][y].image);
-        Image tempimg = new Image("images/" + aMap[x][y].image);
+        Image tempimg = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
         mapimg.setImage(tempimg);
         roomname.setText(aMap[x][y].roomName);
         showtext.setText(getRoomText(x, y));
@@ -304,7 +304,7 @@ public class GUIController
         invalidCommand("search");
     }
 
-    public String visSearch(int vision, int x, int y)
+    public static String visSearch(int vision, int x, int y)
     {
         int tem;
         String it = "";
