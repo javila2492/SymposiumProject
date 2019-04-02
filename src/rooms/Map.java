@@ -48,7 +48,7 @@ public class Map
         Room westWingA = new Room("West Wing A", true, true, false, false, false, "westwing.png", null, true, 0, 1);
         areaMap[0][2] = westWingA;
 
-        Room westWingB = new Room("West Wing B", true, false, true, false, false, "westwing.png", null, true, 0, 1);
+        Room westWingB = new Room("West Wing B", true, false, true, false, false, "westwing_b.png", null, true, 0, 1);
         areaMap[0][1] = westWingB;
     }
 
