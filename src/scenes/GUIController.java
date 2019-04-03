@@ -374,13 +374,13 @@ public class GUIController
             {
                 if(perpRoomNeedsItem(x, y))
                 {
-                    if(aMap[x][y - 1].neededThing.equals(item))
+                    if(aMap[x][y - 1] != null && aMap[x][y - 1].neededThing.equals(item))
                         unlock(x, y - 1, item);
-                    if(aMap[x][y + 1].neededThing.equals(item))
+                    if(aMap[x][y + 1] != null && aMap[x][y + 1].neededThing.equals(item))
                         unlock(x, y + 1, item);
-                    if(aMap[x - 1][y].neededThing.equals(item))
+                    if(aMap[x - 1][y] != null && aMap[x - 1][y].neededThing.equals(item))
                         unlock(x - 1, y, item);
-                    if(aMap[x + 1][y].neededThing.equals(item))
+                    if(aMap[x + 1][y] != null && aMap[x + 1][y].neededThing.equals(item))
                         unlock(x + 1, y, item);
                 }
 
@@ -400,13 +400,13 @@ public class GUIController
 
     public boolean perpRoomNeedsItem(int x, int y)
     {
-        if(aMap[x][y - 1].neededThing != null)
+        if(aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null)
             return true;
-        if(aMap[x][y + 1].neededThing != null)
+        if(aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null)
             return true;
-        if(aMap[x - 1][y].neededThing != null)
+        if(aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null)
             return true;
-        if(aMap[x + 1][y].neededThing != null)
+        if(aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null)
             return true;
         return false;
     }
