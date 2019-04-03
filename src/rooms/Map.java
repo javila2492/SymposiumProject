@@ -33,16 +33,16 @@ public class Map
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false, 2, 2);
         areaMap[2][2] = eastWing;
 
-        Room mensRoom = new Room("Men's Bathroom", false, false, true, false, false, "mensroom.png", null, false, 2, 1);
+        Room mensRoom = new Room("Men's Bathroom", false, false, true, false, false, "men'sbathroom.png", null, false, 2, 1);
         areaMap[2][1] = mensRoom;
 
-        Room womensRoom = new Room("Women's Bathroom", true, false, true, true, false, "womensroom.png", null, false, 2, 3);
+        Room womensRoom = new Room("Women's Bathroom", true, false, true, true, false, "women'sbathroom.png", null, false, 2, 3);
         areaMap[2][3] = womensRoom;
 
         Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", null, false, 3, 2, "crowbar", "The door's jammed shut. I'll need something to pry it open.", true);
         areaMap[3][2] = supplyCloset;
 
-        Room stairwell = new Room("Stairwell", true, false, true, true, false, "backstairwell.png", null, true, 0, 0);
+        Room stairwell = new Room("Stairwell", false, false, true, false, false, "stairwell.png", null, true, 0, 0);
         areaMap[0][0] = stairwell;
 
         Room westWingA = new Room("West Wing A", true, true, false, false, false, "westwinga.png", null, true, 0, 1);

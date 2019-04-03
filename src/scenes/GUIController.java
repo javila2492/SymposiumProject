@@ -1,6 +1,7 @@
 package scenes;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.control.ProgressBar;
 import rooms.Map;
 import rooms.Room;
@@ -115,6 +116,12 @@ public class GUIController
         type.setPromptText("Please type in a valid command.");
     }
 
+
+    @FXML
+    public void onEnter(ActionEvent ae)
+    {
+        doAction();
+    }
 
     public void doAction()
     {
@@ -411,8 +418,7 @@ public class GUIController
                 {
                     if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
                     {
-                        aMap[mainCharacter.xPos][mainCharacter.yPos].image = aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png";
-                        Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].image);
+                        Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png");
                         mapimg.setImage(tempimg);
                         if(firstTime)
                         {
