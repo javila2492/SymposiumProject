@@ -12,11 +12,14 @@ public class Map
     {
         areaMap = new Room[4][4];
         ArrayList<String> mainAreaItems = new ArrayList<String>();
-        mainAreaItems.add("Glass Shard");
+        mainAreaItems.add("Crowbar");
         mainAreaItems.add("Broken Bottle");
 
         ArrayList<String> backstageItems = new ArrayList<String>();
-        backstageItems.add("Guitar String");
+        backstageItems.add("Glass Shard");
+
+        ArrayList<String> supplyClosetItems = new ArrayList<String>();
+        backstageItems.add("Key");
 
         Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true, 1, 3);
         areaMap[1][3] = entrance;
@@ -39,7 +42,7 @@ public class Map
         Room womensRoom = new Room("Women's Bathroom", true, false, true, true, false, "women'sbathroom.png", null, false, 2, 3);
         areaMap[2][3] = womensRoom;
 
-        Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", null, false, 3, 2, "crowbar", "The door's jammed shut. I'll need something to pry it open.", true);
+        Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", supplyClosetItems, false, 3, 2, "crowbar", "The door's jammed shut. I'll need something to pry it open.", true);
         areaMap[3][2] = supplyCloset;
 
         Room stairwell = new Room("Stairwell", false, false, true, false, false, "stairwell.png", null, true, 0, 0);
@@ -50,6 +53,16 @@ public class Map
 
         Room westWingB = new Room("West Wing B", true, false, true, false, false, "westwingb.png", null, true, 0, 1);
         areaMap[0][1] = westWingB;
+
+        Room blank = new Room ("", false, false, false, false, false, "", null, false, -1, -1);
+        for(int i = 0; i < areaMap.length; i++)
+        {
+            for(int j = 0; j < areaMap[i].length; j++)
+            {
+                if(areaMap[i][j] == null)
+                    areaMap[i][j] = blank;
+            }
+        }
     }
 
 }

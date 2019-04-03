@@ -273,8 +273,6 @@ public class GUIController
     public void moveRoom(int x, int y)
     {
         firstTime = true;
-        System.out.println(x + ", " + y);
-        System.out.println(aMap[x][y].image);
         Image tempimg = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
         mapimg.setImage(tempimg);
         roomname.setText(aMap[x][y].roomName);
@@ -285,7 +283,7 @@ public class GUIController
     {
         for(String[] i : mainCharacter.specialDialog)
         {
-            if(aMap[x][y].roomName.toLowerCase().contains(i[0]))
+            if(aMap[x][y].roomName.toLowerCase().equals(i[0]))
                 return i[1];
         }
         return "";
@@ -367,18 +365,50 @@ public class GUIController
 
     public void useThing(String item)
     {
+        int x = mainCharacter.xPos;
+        int y = mainCharacter.yPos;
         ArrayList<String> tem = mainCharacter.inventory;
         for(int i = 0; i < tem.size(); i++)
         {
             if(item.contains(tem.get(i).toLowerCase()))
             {
-                mainCharacter.inventory.add(tem.remove(i));
-                invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
-                invtext.setText(invTextOut);
-                return;
+                if(perpRoomNeedsItem(x, y))
+                {
+                    if(aMap[x][y - 1].neededThing.equals(item))
+                        unlock(x, y - 1, item);
+                    if(aMap[x][y + 1].neededThing.equals(item))
+                        unlock(x, y + 1, item);
+                    if(aMap[x - 1][y].neededThing.equals(item))
+                        unlock(x - 1, y, item);
+                    if(aMap[x + 1][y].neededThing.equals(item))
+                        unlock(x + 1, y, item);
+                }
+
             }
         }
         invalidCommand("use");
+    }
+
+    public void unlock(int x, int y, String item)
+    {
+        aMap[x][y].neededThing = null;
+        aMap[x][y].locked = false;
+        mainCharacter.inventory.remove(item);
+        invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
+        invtext.setText(invTextOut);
+    }
+
+    public boolean perpRoomNeedsItem(int x, int y)
+    {
+        if(aMap[x][y - 1].neededThing != null)
+            return true;
+        if(aMap[x][y + 1].neededThing != null)
+            return true;
+        if(aMap[x - 1][y].neededThing != null)
+            return true;
+        if(aMap[x + 1][y].neededThing != null)
+            return true;
+        return false;
     }
 
     public void death()
