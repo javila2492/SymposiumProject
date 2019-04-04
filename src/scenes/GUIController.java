@@ -374,13 +374,14 @@ public class GUIController
             {
                 if(perpRoomNeedsItem(x, y))
                 {
-                    if(aMap[x][y - 1] != null && aMap[x][y - 1].neededThing.equals(item))
+                    if((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.equals(item))
                         unlock(x, y - 1, item);
-                    if(aMap[x][y + 1] != null && aMap[x][y + 1].neededThing.equals(item))
+                    if((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.equals(item))
                         unlock(x, y + 1, item);
-                    if(aMap[x - 1][y] != null && aMap[x - 1][y].neededThing.equals(item))
+                    if((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
                         unlock(x - 1, y, item);
-                    if(aMap[x + 1][y] != null && aMap[x + 1][y].neededThing.equals(item))
+                    System.out.println(aMap[x + 1][y].neededThing);
+                    if((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
                         unlock(x + 1, y, item);
                 }
 
@@ -393,6 +394,8 @@ public class GUIController
     {
         aMap[x][y].neededThing = null;
         aMap[x][y].locked = false;
+        System.out.println(aMap[x][y].neededThing);
+        System.out.println(aMap[x][y].locked);
         mainCharacter.inventory.remove(item);
         invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
         invtext.setText(invTextOut);
