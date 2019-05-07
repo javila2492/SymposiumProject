@@ -365,6 +365,7 @@ public class GUIController
 
     public void useThing(String item)
     {
+        item = item.trim();
         int x = mainCharacter.xPos;
         int y = mainCharacter.yPos;
         ArrayList<String> tem = mainCharacter.inventory;
@@ -380,7 +381,6 @@ public class GUIController
                         unlock(x, y + 1, item);
                     if((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
                         unlock(x - 1, y, item);
-                    System.out.println(aMap[x + 1][y].neededThing);
                     if((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
                         unlock(x + 1, y, item);
                 }
@@ -394,10 +394,8 @@ public class GUIController
     {
         aMap[x][y].neededThing = null;
         aMap[x][y].locked = false;
-        System.out.println(aMap[x][y].neededThing);
-        System.out.println(aMap[x][y].locked);
         mainCharacter.inventory.remove(item);
-        invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
+        invTextOut = mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
         invtext.setText(invTextOut);
     }
 

@@ -19,7 +19,7 @@ public class Map
         backstageItems.add("Glass Shard");
 
         ArrayList<String> supplyClosetItems = new ArrayList<String>();
-        backstageItems.add("Key");
+        supplyClosetItems.add("Key");
 
         Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true, 1, 3);
         areaMap[1][3] = entrance;
