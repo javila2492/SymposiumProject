@@ -49,6 +49,9 @@ public class GUIController
     boolean firstTime = true;
     boolean alive = true;
 
+    /**
+     * Initializes the program by setting the characters position and activating the fiend. If the character is Mikey, the rage meter activates.
+     */
     public void initialize()
     {
         mainCharacter = CharSelectionController.chosen;
@@ -65,6 +68,9 @@ public class GUIController
         fiendMove.main();
     }
 
+    /**
+     * Deals damage to the player and checks to see if they died. If the character is Joey and Hazy is active, no damage is dealt.
+     */
     public void dealDamage()
     {
         if(hazy)
@@ -85,7 +91,10 @@ public class GUIController
         dmgfx.setVisible(false);
     }
 
-
+    /**
+     * Method originally meant to create text in a typewriter style. For now it's just an easy call.
+     * @param text Text to be displayed.
+     */
     public void textFlow(String text)
     {
         /*
@@ -100,6 +109,10 @@ public class GUIController
         showtext.setText(text);
     }
 
+    /**
+     * Tells the player the correct syntax for a command. Called whenever a command fails via code word and displays error message based on that.
+     * @param cmd Code word sent by invalid command.
+     */
     public void invalidCommand(String cmd)
     {
         if(rage)
@@ -116,13 +129,19 @@ public class GUIController
         type.setPromptText("Please type in a valid command.");
     }
 
-
+    /**
+     * Takes in player input upon the enter key being hit.
+     * @param ae Enter key being hit.
+     */
     @FXML
     public void onEnter(ActionEvent ae)
     {
         doAction();
     }
 
+    /**
+     * Takes in input from player terminal and executes command if one is found.
+     */
     public void doAction()
     {
         if(!alive)
@@ -178,6 +197,9 @@ public class GUIController
         invalidCommand("");
     }
 
+    /**
+     * Activates rage meter. Invalid actions cause the meter to rise.
+     */
     public void rageActive()
     {
         rage = true;
@@ -185,7 +207,10 @@ public class GUIController
         ragemeter.setVisible(true);
     }
 
-
+    /**
+     *
+     * @param direction
+     */
     public void moveTo(String direction)
     {
         int currX = mainCharacter.xPos;
