@@ -1,7 +1,5 @@
 package rooms;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 
 public class Room
@@ -19,8 +17,9 @@ public class Room
     public String neededThing;
     public String lockedDesc;
     public boolean locked;
+    public ArrayList<String> operatable = new ArrayList<String>();
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;
@@ -35,7 +34,7 @@ public class Room
         truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, int x, int y, String neededThing, String lockedDesc, boolean locked)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;
@@ -51,5 +50,24 @@ public class Room
         this.lockedDesc = lockedDesc;
         this.locked = locked;
         truName = roomName.toLowerCase().replaceAll("\\s", "");
+    }
+
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked, ArrayList<String> operatable)
+    {
+        this.roomName = roomName;
+        this.canGoNorth = canGoNorth;
+        this.canGoEast = canGoEast;
+        this.canGoSouth = canGoSouth;
+        this.canGoWest = canGoWest;
+        this.lit = lit;
+        this.image = image;
+        if(newItems != null)
+            items.addAll(newItems);
+        this.hasPlants = hasPlants;
+        this.neededThing = neededThing;
+        this.lockedDesc = lockedDesc;
+        this.locked = locked;
+        truName = roomName.toLowerCase().replaceAll("\\s", "");
+        this.operatable = operatable;
     }
 }

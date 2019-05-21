@@ -1,7 +1,6 @@
 package scenes;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.scene.control.ProgressBar;
 import rooms.Map;
 import rooms.Room;
@@ -43,11 +42,11 @@ public class GUIController
     public Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
-    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}};
+    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}, {"operate", "Synatax: operate [non takeable object in room]"}};
     public static boolean hazy = false;
     private String invTextOut = "";
-    boolean firstTime = true;
-    boolean alive = true;
+    private boolean firstTime = true;
+    private boolean alive = true;
 
     /**
      * Initializes the program by setting the characters position and activating the fiend. If the character is Mikey, the rage meter activates.
@@ -95,7 +94,7 @@ public class GUIController
      * Method originally meant to create text in a typewriter style. For now it's just an easy call.
      * @param text Text to be displayed.
      */
-    public void textFlow(String text)
+    private void textFlow(String text)
     {
         /*
         String splitext = "";
@@ -113,7 +112,7 @@ public class GUIController
      * Tells the player the correct syntax for a command. Called whenever a command fails via code word and displays error message based on that.
      * @param cmd Code word sent by invalid command.
      */
-    public void invalidCommand(String cmd)
+    private void invalidCommand(String cmd)
     {
         if(rage)
             ragemeter.setProgress(ragemeter.getProgress() + .1);
@@ -131,10 +130,9 @@ public class GUIController
 
     /**
      * Takes in player input upon the enter key being hit.
-     * @param ae Enter key being hit.
      */
     @FXML
-    public void onEnter(ActionEvent ae)
+    public void onEnter()
     {
         doAction();
     }
@@ -200,7 +198,7 @@ public class GUIController
     /**
      * Activates rage meter. Invalid actions cause the meter to rise.
      */
-    public void rageActive()
+    private void rageActive()
     {
         rage = true;
         ragetext.setVisible(true);
@@ -211,7 +209,7 @@ public class GUIController
      * Moves character in the direction they enter
      * @param direction Direction in the form of north, east, south, or west. If the player can't move that direction, they state that a wall block their way.
      */
-    public void moveTo(String direction)
+    private void moveTo(String direction)
     {
         int currX = mainCharacter.xPos;
         int currY = mainCharacter.yPos;
@@ -295,7 +293,7 @@ public class GUIController
         invalidCommand("move");
     }
 
-    public void invDisplay()
+    private void invDisplay()
     {
         invTextOut = "";
         for(String a : mainCharacter.inventory)
@@ -304,7 +302,7 @@ public class GUIController
         System.out.println(invTextOut);
     }
 
-    public void moveRoom(int x, int y)
+    private void moveRoom(int x, int y)
     {
         firstTime = true;
         Image tempimg = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
@@ -313,7 +311,7 @@ public class GUIController
         showtext.setText(getRoomText(x, y));
     }
 
-    public String getRoomText(int x, int y)
+    private String getRoomText(int x, int y)
     {
         for(String[] i : mainCharacter.specialDialog)
         {
@@ -323,7 +321,7 @@ public class GUIController
         return "";
     }
 
-    public String getReactionText(String text)
+    private String getReactionText(String text)
     {
         for(String[] i : mainCharacter.specialDialog)
         {
@@ -333,11 +331,15 @@ public class GUIController
         return "";
     }
 
-    public void searchThing(String a)
+    private void searchThing(String a)
     {
+        String b = "";
         if(a.contains("room"))
         {
-            showtext.setText(visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos));
+            b += visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos);
+            if(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable != null)
+                b += " There also seems to be a " + aMap[mainCharacter.xPos][mainCharacter.yPos].operatable + " that I can use.";
+            textFlow(b);
             return;
         }
         invalidCommand("search");
@@ -353,7 +355,7 @@ public class GUIController
         if(potential.isEmpty())
             return "There isn't anything useful here.";
         tem += (int) (Math.random() * 7);
-        int a = 0;
+        int a;
         for (Object aPotential : potential)
         {
             a = (int) (Math.random() * 7);
@@ -371,7 +373,7 @@ public class GUIController
         return "I see a " + it + ".";
     }
 
-    public void takeThing(String item)
+    private void takeThing(String item)
     {
         if(hazy)
         {
@@ -391,25 +393,25 @@ public class GUIController
         invalidCommand("take");
     }
 
-    public void useThing(String item)
+    private void useThing(String item)
     {
         item = item.trim();
         int x = mainCharacter.xPos;
         int y = mainCharacter.yPos;
         ArrayList<String> tem = mainCharacter.inventory;
-        for(int i = 0; i < tem.size(); i++)
+        for (String aTem : tem)
         {
-            if(item.contains(tem.get(i).toLowerCase()))
+            if (item.contains(aTem.toLowerCase()))
             {
-                if(perpRoomNeedsItem(x, y))
+                if (perpRoomNeedsItem(x, y))
                 {
-                    if((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.equals(item))
+                    if ((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.equals(item))
                         unlock(x, y - 1, item);
-                    if((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.equals(item))
+                    if ((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.equals(item))
                         unlock(x, y + 1, item);
-                    if((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
+                    if ((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
                         unlock(x - 1, y, item);
-                    if((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
+                    if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
                         unlock(x + 1, y, item);
                 }
 
@@ -418,7 +420,7 @@ public class GUIController
         invalidCommand("use");
     }
 
-    public void unlock(int x, int y, String item)
+    private void unlock(int x, int y, String item)
     {
         aMap[x][y].neededThing = null;
         aMap[x][y].locked = false;
@@ -426,7 +428,7 @@ public class GUIController
         invDisplay();
     }
 
-    public boolean perpRoomNeedsItem(int x, int y)
+    private boolean perpRoomNeedsItem(int x, int y)
     {
         if(aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null)
             return true;
@@ -434,12 +436,10 @@ public class GUIController
             return true;
         if(aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null)
             return true;
-        if(aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null)
-            return true;
-        return false;
+        return aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null;
     }
 
-    public void death()
+    private void death()
     {
         alive = false;
         damage.setVisible(true);
@@ -451,19 +451,15 @@ public class GUIController
     public class fiendChecker
     {
 
-        public void main()
+        private void main()
         {
 
             bgFiend thread = new bgFiend();
             thread.setDaemon(true);
             thread.start();
 
-            java.awt.EventQueue.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            java.awt.EventQueue.invokeLater(() -> {
 
-                }
             });
         }
         public class bgFiend extends Thread
@@ -481,14 +477,7 @@ public class GUIController
                         if(firstTime)
                         {
                             mapimg.setImage(tempimg);
-                            Platform.runLater(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    showtext.setText(getReactionText("fiend"));
-                                }
-                            });
+                            Platform.runLater(() -> showtext.setText(getReactionText("fiend")));
                         }
                         else
                             dealDamage();
@@ -508,22 +497,18 @@ public class GUIController
 
     }
 
-    public class fiendMover
+    private class fiendMover
     {
 
-        public void main()
+        private void main()
         {
 
             bgFiendM thread = new bgFiendM();
             thread.setDaemon(true);
             thread.start();
 
-            java.awt.EventQueue.invokeLater(new Runnable()
-            {
-                public void run()
-                {
+            java.awt.EventQueue.invokeLater(() -> {
 
-                }
             });
         }
     }
