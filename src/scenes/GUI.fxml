@@ -14,7 +14,7 @@
       <Pane layoutY="350.0" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: black;">
          <children>
             <ImageView id="icon" fx:id="icon" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField id="type" fx:id="type" layoutX="14.0" layoutY="154.0" prefHeight="30.0" prefWidth="400.0" promptText="_" onAction="#onEnter" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 2; -fx-text-fill: green;">
+            <TextField id="type" fx:id="type" layoutX="14.0" layoutY="154.0" onAction="#onEnter" prefHeight="30.0" prefWidth="400.0" promptText="_" style="-fx-background-color: black; -fx-border-color: green; -fx-border-width: 2; -fx-text-fill: green;">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>
@@ -44,14 +44,15 @@
          </children>
       </Pane>
       <ImageView id="bgimg" fx:id="mapimg" fitHeight="350.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane fx:id="lights" prefHeight="350.0" prefWidth="800.0" style="-fx-background-color: black; -fx-opacity: .5;" />
+      <Label fx:id="roomname" prefHeight="50.0" prefWidth="300.0" style="-fx-alignment: center; -fx-border-color: #72e855; -fx-border-width: 1;" textFill="#72e855">
+         <font>
+            <Font name="Courier New Italic" size="16.0" />
+         </font>
+      </Label>
       <Label fx:id="showtext" layoutY="250.0" prefHeight="100.0" prefWidth="800.0" text="Nothing yet." textFill="#00c900" wrapText="true">
          <font>
             <Font name="Courier New Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="roomname" layoutX="250.0" prefHeight="50.0" prefWidth="300.0" style="-fx-alignment: center;" textFill="#72e855">
-         <font>
-            <Font name="Courier New Italic" size="16.0" />
          </font>
       </Label>
       <Label fx:id="damage" alignment="CENTER" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: red;" textFill="#00ff11" visible="false">

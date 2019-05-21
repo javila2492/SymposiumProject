@@ -17,6 +17,7 @@ public class Map
 
         ArrayList<String> backstageItems = new ArrayList<String>();
         backstageItems.add("Glass Shard");
+        backstageItems.add("Fuse Box");
 
         ArrayList<String> supplyClosetItems = new ArrayList<String>();
         supplyClosetItems.add("Key");

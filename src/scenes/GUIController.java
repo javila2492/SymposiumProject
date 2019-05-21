@@ -208,8 +208,8 @@ public class GUIController
     }
 
     /**
-     *
-     * @param direction
+     * Moves character in the direction they enter
+     * @param direction Direction in the form of north, east, south, or west. If the player can't move that direction, they state that a wall block their way.
      */
     public void moveTo(String direction)
     {
@@ -295,6 +295,15 @@ public class GUIController
         invalidCommand("move");
     }
 
+    public void invDisplay()
+    {
+        invTextOut = "";
+        for(String a : mainCharacter.inventory)
+            invTextOut += a + "\n";
+        invtext.setText(invTextOut);
+        System.out.println(invTextOut);
+    }
+
     public void moveRoom(int x, int y)
     {
         firstTime = true;
@@ -336,35 +345,30 @@ public class GUIController
 
     public static String visSearch(int vision, int x, int y)
     {
-        int tem;
+        int tem = 0;
+        if(aMap[x][y].lit)
+            tem = -5;
         String it = "";
         ArrayList potential = aMap[x][y].items;
-        if(vision > 11)
+        if(potential.isEmpty())
+            return "There isn't anything useful here.";
+        tem += (int) (Math.random() * 7);
+        int a = 0;
+        for (Object aPotential : potential)
         {
-            if(potential.isEmpty())
-                return "There isn't anything useful here.";
-            tem = (int) (Math.random() * 7);
-            if(vision > (20 - tem))
-                return "I can't see anything useful for now.";
-            for (Object aPotential : potential)
+            a = (int) (Math.random() * 7);
+            tem += a;
+            if(tem > (vision / 2))
             {
                 it += aPotential;
                 it += ", ";
             }
-            return "I see a " + it + "and nothing else.";
+            tem -= a;
         }
-
-        if(potential.isEmpty())
-            return "I can't see anything useful for now.";
-        tem = (int) (Math.random() * 7);
-        if(vision < (12 - tem))
-            return "I can barely see anything.";
-        for (Object aPotential : potential)
-        {
-            it += aPotential;
-            it += ", ";
-        }
-        return "I see a " + it + "and nothing else.";
+        if(it.equals(""))
+            return "I can barely see anything...";
+        it = it.substring(0, it.length() - 2);
+        return "I see a " + it + ".";
     }
 
     public void takeThing(String item)
@@ -380,8 +384,7 @@ public class GUIController
             if(item.contains(tem.get(i).toLowerCase()))
             {
                 mainCharacter.inventory.add(tem.remove(i));
-                invTextOut += mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
-                invtext.setText(invTextOut);
+                invDisplay();
                 return;
             }
         }
@@ -420,8 +423,7 @@ public class GUIController
         aMap[x][y].neededThing = null;
         aMap[x][y].locked = false;
         mainCharacter.inventory.remove(item);
-        invTextOut = mainCharacter.inventory.get(mainCharacter.inventory.size() - 1) + "\n";
-        invtext.setText(invTextOut);
+        invDisplay();
     }
 
     public boolean perpRoomNeedsItem(int x, int y)
@@ -542,7 +544,7 @@ public class GUIController
                     enemy.x--;
                 try
                 {
-                    Thread.sleep(5000);
+                    Thread.sleep(70000);
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();
