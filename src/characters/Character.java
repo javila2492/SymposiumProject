@@ -1,6 +1,7 @@
 package characters;
 
 import javafx.scene.image.Image;
+import rooms.UsableObject;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public abstract class Character
     int vis;
     String characterDesc;
     String abilityDesc;
-    public ArrayList<String> inventory = new ArrayList<String>();
+    public ArrayList<UsableObject> inventory = new ArrayList<UsableObject>();
     Image mainImg;
     public String[][] specialDialog;
     public int xPos;

@@ -12,14 +12,14 @@ public class Room
     public boolean canGoWest;
     public boolean lit;
     public String image;
-    public ArrayList<String> items = new ArrayList<String>();
+    public ArrayList<UsableObject> items = new ArrayList<>();
     public boolean hasPlants;
     public String neededThing;
     public String lockedDesc;
     public boolean locked;
     public OperatableObject operatable;
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<UsableObject> newItems, boolean hasPlants)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;
@@ -34,7 +34,7 @@ public class Room
         truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<UsableObject> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;
@@ -52,7 +52,7 @@ public class Room
         truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked, OperatableObject operatable)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<UsableObject> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked, OperatableObject operatable)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;

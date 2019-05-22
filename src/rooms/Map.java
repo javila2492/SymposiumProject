@@ -13,15 +13,13 @@ public class Map
     public Map()
     {
         areaMap = new Room[4][4];
-        ArrayList<String> mainAreaItems = new ArrayList<String>();
-        mainAreaItems.add("Crowbar");
-        mainAreaItems.add("Broken Bottle");
+        ArrayList<UsableObject> mainAreaItems = new ArrayList<>();
+        mainAreaItems.add(new Crowbar());
 
-        ArrayList<String> backstageItems = new ArrayList<String>();
-        backstageItems.add("Glass Shard");
+        ArrayList<UsableObject> backstageItems = new ArrayList<>();
 
-        ArrayList<String> supplyClosetItems = new ArrayList<String>();
-        supplyClosetItems.add("Key");
+        ArrayList<UsableObject> supplyClosetItems = new ArrayList<>();
+        supplyClosetItems.add(new Key());
 
         Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true);
         areaMap[1][3] = entrance;

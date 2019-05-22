@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import rooms.UsableObject;
+
 import java.util.ArrayList;
 
 
@@ -200,12 +202,7 @@ public class GUIController
         }
         if(currCmd.contains("operate"))
         {
-            mainCharacter.useAbility();
-            if(hazy)
-            {
-                invTextOut = "";
-                invtext.setText(invTextOut);
-            }
+            operate(sec + " " + tre);
             type.setText("");
             return;
         }
@@ -324,8 +321,8 @@ public class GUIController
     private void invDisplay()
     {
         invTextOut = "";
-        for(String a : mainCharacter.inventory)
-            invTextOut += a + "\n";
+        for(UsableObject a : mainCharacter.inventory)
+            invTextOut += a.objName + "\n";
         invtext.setText(invTextOut);
         System.out.println(invTextOut);
     }
@@ -379,18 +376,18 @@ public class GUIController
         if(aMap[x][y].lit)
             tem = -5;
         String it = "";
-        ArrayList potential = aMap[x][y].items;
+        ArrayList<UsableObject> potential = aMap[x][y].items;
         if(potential.isEmpty())
             return "There isn't anything useful here.";
         tem += (int) (Math.random() * 7);
         int a;
-        for (Object aPotential : potential)
+        for (UsableObject aPotential : potential)
         {
             a = (int) (Math.random() * 7);
             tem += a;
             if(tem > (vision / 2))
             {
-                it += aPotential;
+                it += aPotential.objName;
                 it += ", ";
             }
             tem -= a;
@@ -408,10 +405,10 @@ public class GUIController
             textFlow("I can't pick up items while Hazy is active.");
             return;
         }
-        ArrayList<String> tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
+        ArrayList<UsableObject> tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
         for(int i = 0; i < tem.size(); i++)
         {
-            if(item.contains(tem.get(i).toLowerCase()))
+            if(item.contains(tem.get(i).objName.toLowerCase()))
             {
                 mainCharacter.inventory.add(tem.remove(i));
                 invDisplay();
@@ -425,7 +422,7 @@ public class GUIController
     private void operate(String op)
     {
         OperatableObject a = aMap[mainCharacter.xPos][mainCharacter.yPos].operatable;
-        if(op.contains(a.objName.toLowerCase()))
+        if(a != null && op.contains(a.objName.toLowerCase()))
         {
             textFlow(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.operate());
             return;
@@ -438,34 +435,44 @@ public class GUIController
         item = item.trim();
         int x = mainCharacter.xPos;
         int y = mainCharacter.yPos;
-        ArrayList<String> tem = mainCharacter.inventory;
-        for (String aTem : tem)
+        ArrayList<UsableObject> tem = mainCharacter.inventory;
+        for (UsableObject aTem : tem)
         {
-            if (item.contains(aTem.toLowerCase()))
+            if (item.contains(aTem.objName.toLowerCase()))
             {
-                if (perpRoomNeedsItem(x, y))
+                if(aTem.unlocker)
                 {
-                    if ((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.equals(item))
-                        unlock(x, y - 1, item);
-                    if ((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.equals(item))
-                        unlock(x, y + 1, item);
-                    if ((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
-                        unlock(x - 1, y, item);
-                    if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
-                        unlock(x + 1, y, item);
+                    unlockThing(aTem);
+                    return;
                 }
-
             }
         }
         invalidCommand("use");
     }
 
-    private void unlock(int x, int y, String item)
+    public void unlockThing(UsableObject a)
+    {
+        String item = a.objName.trim();
+        int x = mainCharacter.xPos;
+        int y = mainCharacter.yPos;
+        if (perpRoomNeedsItem(x, y))
+        {
+            if ((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.equals(item))
+                unlock(x, y - 1);
+            if ((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.equals(item))
+                unlock(x, y + 1);
+            if ((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
+                unlock(x - 1, y);
+            if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
+                unlock(x + 1, y);
+        }
+        invalidCommand("use");
+    }
+
+    private void unlock(int x, int y)
     {
         aMap[x][y].neededThing = null;
         aMap[x][y].locked = false;
-        mainCharacter.inventory.remove(item);
-        invDisplay();
     }
 
     private boolean perpRoomNeedsItem(int x, int y)

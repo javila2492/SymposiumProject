@@ -36,7 +36,6 @@ public class Vin extends Character
         }
         GUIController.visSearch(20, xPos, yPos);
         GUIController.aMap[xPos][yPos].hasPlants = false;
-        GUIController.aMap[xPos][yPos].image = GUIController.aMap[xPos][yPos].truName + "_plantless.png";
     }
 
 }
