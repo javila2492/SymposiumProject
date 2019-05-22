@@ -17,7 +17,7 @@ public class Room
     public String neededThing;
     public String lockedDesc;
     public boolean locked;
-    public ArrayList<String> operatable = new ArrayList<String>();
+    public OperatableObject operatable;
 
     public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants)
     {
@@ -52,7 +52,7 @@ public class Room
         truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 
-    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked, ArrayList<String> operatable)
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<String> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked, OperatableObject operatable)
     {
         this.roomName = roomName;
         this.canGoNorth = canGoNorth;

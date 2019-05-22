@@ -19,8 +19,6 @@ public class Map
 
         ArrayList<String> backstageItems = new ArrayList<String>();
         backstageItems.add("Glass Shard");
-        ArrayList<String> backstageOps = new ArrayList<String>();
-        backstageOps.add("Fuse Box");
 
         ArrayList<String> supplyClosetItems = new ArrayList<String>();
         supplyClosetItems.add("Key");
@@ -34,7 +32,7 @@ public class Map
         Room stage = new Room("Stage", true, false, true, true, false, "stage.png", null, false);
         areaMap[1][1] = stage;
 
-        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", backstageItems, true, "key", "Looks like I need a key to get in here.", true, backstageOps);
+        Room backstage = new Room("Backstage", false, false, true, false, false, "backstage.png", backstageItems, true, "key", "Looks like I need a key to get in here.", true, new FuseBox());
         areaMap[1][0] = backstage;
 
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false);
@@ -59,12 +57,5 @@ public class Map
         areaMap[0][1] = westWingB;
     }
 
-    public void fuseUse()
-    {
-        for(Room[] a : areaMap)
-            for(Room b : a)
-                if(b != null)
-                    b.lit = true;
-    }
 
 }

@@ -2,7 +2,9 @@ package scenes;
 
 import javafx.application.Platform;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 import rooms.Map;
+import rooms.OperatableObject;
 import rooms.Room;
 import characters.Fiend;
 import characters.Character;
@@ -36,13 +38,15 @@ public class GUIController
     Label damage;
     @FXML
     ImageView dmgfx;
+    @FXML
+    Pane lights;
 
     private Character mainCharacter;
     private static Map temp = new Map();
     public Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
-    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}, {"operate", "Synatax: operate [non takeable object in room]"}};
+    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}, {"operate", "Syntax: operate [non takeable object in room]"}};
     public static boolean hazy = false;
     private String invTextOut = "";
     private boolean firstTime = true;
@@ -149,6 +153,8 @@ public class GUIController
         command = command.toLowerCase();
         String[] commandSplit = command.split(" ");
 
+        lightUpdate();
+
         String currCmd = commandSplit[0];
         String sec = "";
         if(commandSplit.length != 1)
@@ -192,6 +198,17 @@ public class GUIController
             type.setText("");
             return;
         }
+        if(currCmd.contains("operate"))
+        {
+            mainCharacter.useAbility();
+            if(hazy)
+            {
+                invTextOut = "";
+                invtext.setText(invTextOut);
+            }
+            type.setText("");
+            return;
+        }
         invalidCommand("");
     }
 
@@ -203,6 +220,17 @@ public class GUIController
         rage = true;
         ragetext.setVisible(true);
         ragemeter.setVisible(true);
+    }
+
+    /**
+     * Updates lighting via room boolean
+     */
+    private void lightUpdate()
+    {
+        if(!aMap[mainCharacter.xPos][mainCharacter.yPos].lit)
+            lights.setVisible(true);
+        else
+            lights.setVisible(false);
     }
 
     /**
@@ -338,7 +366,7 @@ public class GUIController
         {
             b += visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos);
             if(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable != null)
-                b += " There also seems to be a " + aMap[mainCharacter.xPos][mainCharacter.yPos].operatable + " that I can use.";
+                b += " There also seems to be a " + aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.objName + " that I can use.";
             textFlow(b);
             return;
         }
@@ -387,10 +415,22 @@ public class GUIController
             {
                 mainCharacter.inventory.add(tem.remove(i));
                 invDisplay();
+                textFlow("I now have a " + item + "in my inventory.");
                 return;
             }
         }
         invalidCommand("take");
+    }
+
+    private void operate(String op)
+    {
+        OperatableObject a = aMap[mainCharacter.xPos][mainCharacter.yPos].operatable;
+        if(op.contains(a.objName.toLowerCase()))
+        {
+            textFlow(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.operate());
+            return;
+        }
+        textFlow("I can't operate what doesn't exist.");
     }
 
     private void useThing(String item)
