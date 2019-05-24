@@ -1,30 +1,28 @@
 package scenes;
 
-import characters.*;
 import characters.Character;
+import characters.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
 public class CharSelectionController
 {
+    public static Character chosen;
+    boolean selected = false;
     @FXML
     private Label statshower;
     @FXML
     private Label descshower;
     @FXML
     private Label abilityshower;
-
-    boolean selected = false;
-    public static Character chosen;
 
     public void charInfoChangerSabrina(MouseEvent mouseEvent)
     {
