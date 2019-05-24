@@ -4,6 +4,7 @@ public abstract class UsableObject
 {
     public String objName;
     public boolean unlocker = false;
+    public String useMsg;
 
     public UsableObject(String a)
     {

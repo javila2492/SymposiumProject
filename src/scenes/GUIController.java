@@ -45,10 +45,10 @@ public class GUIController
 
     private Character mainCharacter;
     private static Map temp = new Map();
-    public Fiend enemy = new Fiend(2, 2);
+    public static Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
-    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory"}, {"operate", "Syntax: operate [non takeable object in room]"}};
+    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory]"}, {"operate", "Syntax: operate [non takeable object in room]"}};
     public static boolean hazy = false;
     private String invTextOut = "";
     private boolean firstTime = true;
@@ -100,7 +100,7 @@ public class GUIController
      * Method originally meant to create text in a typewriter style. For now it's just an easy call.
      * @param text Text to be displayed.
      */
-    private void textFlow(String text)
+    public void textFlow(String text)
     {
         /*
         String splitext = "";
@@ -333,7 +333,7 @@ public class GUIController
         Image tempimg = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
         mapimg.setImage(tempimg);
         roomname.setText(aMap[x][y].roomName);
-        showtext.setText(getRoomText(x, y));
+        textFlow(getRoomText(x, y));
     }
 
     private String getRoomText(int x, int y)
@@ -432,9 +432,6 @@ public class GUIController
 
     private void useThing(String item)
     {
-        item = item.trim();
-        int x = mainCharacter.xPos;
-        int y = mainCharacter.yPos;
         ArrayList<UsableObject> tem = mainCharacter.inventory;
         for (UsableObject aTem : tem)
         {
@@ -445,6 +442,12 @@ public class GUIController
                     unlockThing(aTem);
                     return;
                 }
+                else
+                {
+                    aTem.use();
+                    textFlow(aTem.useMsg);
+                    return;
+                }
             }
         }
         invalidCommand("use");
@@ -452,21 +455,21 @@ public class GUIController
 
     public void unlockThing(UsableObject a)
     {
-        String item = a.objName.trim();
+        String item = a.objName.trim().toLowerCase();
         int x = mainCharacter.xPos;
         int y = mainCharacter.yPos;
         if (perpRoomNeedsItem(x, y))
         {
-            if ((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.equals(item))
+            if ((aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null) && aMap[x][y - 1].neededThing.contains(item))
                 unlock(x, y - 1);
-            if ((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.equals(item))
+            if ((aMap[x][y + 1] != null && aMap[x][y + 1].neededThing != null) && aMap[x][y + 1].neededThing.contains(item))
                 unlock(x, y + 1);
-            if ((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.equals(item))
+            if ((aMap[x - 1][y] != null && aMap[x - 1][y].neededThing != null) && aMap[x - 1][y].neededThing.contains(item))
                 unlock(x - 1, y);
-            if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.equals(item))
+            if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.contains(item))
                 unlock(x + 1, y);
         }
-        invalidCommand("use");
+        textFlow(a.useMsg);
     }
 
     private void unlock(int x, int y)
@@ -524,7 +527,7 @@ public class GUIController
                         if(firstTime)
                         {
                             mapimg.setImage(tempimg);
-                            Platform.runLater(() -> showtext.setText(getReactionText("fiend")));
+                            Platform.runLater(() -> textFlow(getReactionText("fiend")));
                         }
                         else
                             dealDamage();
@@ -532,7 +535,7 @@ public class GUIController
                     }
                     try
                     {
-                        Thread.sleep(4000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();
@@ -576,7 +579,7 @@ public class GUIController
                     enemy.x--;
                 try
                 {
-                    Thread.sleep(70000);
+                    Thread.sleep(7000);
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();
