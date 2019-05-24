@@ -43,7 +43,7 @@ public class GUIController
     @FXML
     Pane lights;
 
-    private Character mainCharacter;
+    public static Character mainCharacter;
     private static Map temp = new Map();
     public static Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
@@ -173,7 +173,7 @@ public class GUIController
         }
         if(currCmd.contains("search"))
         {
-            searchThing(sec);
+            searchThing();
             type.setText("");
             return;
         }
@@ -318,15 +318,22 @@ public class GUIController
         invalidCommand("move");
     }
 
+    /**
+     * Changes inventory display to players current inventory.
+     */
     private void invDisplay()
     {
         invTextOut = "";
         for(UsableObject a : mainCharacter.inventory)
             invTextOut += a.objName + "\n";
         invtext.setText(invTextOut);
-        System.out.println(invTextOut);
     }
 
+    /**
+     * Moves the player to designated room and changes scene and text to match it. Resets "first time" (used for fiend)
+     * @param x x position of room player is moving to
+     * @param y y position of room player is moving to
+     */
     private void moveRoom(int x, int y)
     {
         firstTime = true;
@@ -336,6 +343,12 @@ public class GUIController
         textFlow(getRoomText(x, y));
     }
 
+    /**
+     * Returns text for players current room
+     * @param x x position of room player is moving to
+     * @param y y position of room player is moving to
+     * @return String of the characters reaction to the current room
+     */
     private String getRoomText(int x, int y)
     {
         for(String[] i : mainCharacter.specialDialog)
@@ -346,6 +359,11 @@ public class GUIController
         return "";
     }
 
+    /**
+     * Grabs appropriate reaction by using an indicator string
+     * @param text What the player is reacting too (wall, fiend, etc)
+     * @return Characters reaction text
+     */
     private String getReactionText(String text)
     {
         for(String[] i : mainCharacter.specialDialog)
@@ -356,20 +374,25 @@ public class GUIController
         return "";
     }
 
-    private void searchThing(String a)
+    /**
+     * Searches room for items.
+     */
+    private void searchThing()
     {
         String b = "";
-        if(a.contains("room"))
-        {
-            b += visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos);
-            if(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable != null)
-                b += " There also seems to be a " + aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.objName + " that I can use.";
-            textFlow(b);
-            return;
-        }
-        invalidCommand("search");
+        b += visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos);
+        if(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable != null)
+            b += " There also seems to be a " + aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.objName + " that I can use.";
+        textFlow(b);
     }
 
+    /**
+     * Search method for rooms
+     * @param vision Characters vision stat
+     * @param x x position of room player is in
+     * @param y y position of room player is in
+     * @return All items the player can see (will not always be all the items in the room)
+     */
     public static String visSearch(int vision, int x, int y)
     {
         int tem = 0;
@@ -398,6 +421,10 @@ public class GUIController
         return "I see a " + it + ".";
     }
 
+    /**
+     * Adds item from room to inventory
+     * @param item Item in room the player is taking
+     */
     private void takeThing(String item)
     {
         if(hazy)
@@ -419,6 +446,10 @@ public class GUIController
         invalidCommand("take");
     }
 
+    /**
+     * Operates a non takeable object in a room.
+     * @param op Name of object player is operating
+     */
     private void operate(String op)
     {
         OperatableObject a = aMap[mainCharacter.xPos][mainCharacter.yPos].operatable;
@@ -430,6 +461,10 @@ public class GUIController
         textFlow("I can't operate what doesn't exist.");
     }
 
+    /**
+     * Uses thing from inventory and removes it. If the item is used to unlock a door, unlockThing is called.
+     * @param item Item being used
+     */
     private void useThing(String item)
     {
         ArrayList<UsableObject> tem = mainCharacter.inventory;
@@ -440,12 +475,16 @@ public class GUIController
                 if(aTem.unlocker)
                 {
                     unlockThing(aTem);
+                    mainCharacter.inventory.remove(aTem);
+                    invDisplay();
                     return;
                 }
                 else
                 {
                     aTem.use();
                     textFlow(aTem.useMsg);
+                    mainCharacter.inventory.remove(aTem);
+                    invDisplay();
                     return;
                 }
             }
@@ -453,6 +492,10 @@ public class GUIController
         invalidCommand("use");
     }
 
+    /**
+     * Checks if a room perpendicular to the player can be unlocked by the item used and unlocks it if found.
+     * @param a Item being used to unlock.
+     */
     public void unlockThing(UsableObject a)
     {
         String item = a.objName.trim().toLowerCase();
@@ -468,16 +511,27 @@ public class GUIController
                 unlock(x - 1, y);
             if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.contains(item))
                 unlock(x + 1, y);
+            textFlow(a.useMsg);
         }
-        textFlow(a.useMsg);
     }
 
+    /**
+     * Unlocks room
+     * @param x x position of room being unlocked
+     * @param y y position of room being unlocked
+     */
     private void unlock(int x, int y)
     {
         aMap[x][y].neededThing = null;
         aMap[x][y].locked = false;
     }
 
+    /**
+     * Checks rooms around player to see if any can be unlocked
+     * @param x x position of room being unlocked
+     * @param y y position of room being unlocked
+     * @return True if any rooms around can be unlocked (function acts as pre condition to prevent errors)
+     */
     private boolean perpRoomNeedsItem(int x, int y)
     {
         if(aMap[x][y - 1] != null && aMap[x][y - 1].neededThing != null)
@@ -489,6 +543,9 @@ public class GUIController
         return aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null;
     }
 
+    /**
+     * Kills the player by immobilizing them and displaying a death screen
+     */
     private void death()
     {
         alive = false;

@@ -4,10 +4,9 @@ import scenes.GUIController;
 
 public class BrokenBottle extends UsableObject
 {
-
-    public BrokenBottle(String name)
+    public BrokenBottle()
     {
-        super(name);
+        super("Broken Bottle");
         useMsg = "I managed to ward off the fiend with the bottle!";
     }
 
@@ -15,5 +14,6 @@ public class BrokenBottle extends UsableObject
     {
         GUIController.enemy.x = (int) (Math.random() * 3);
         GUIController.enemy.y = (int) (Math.random() * 3);
+        GUIController.enemy.hp -= 15;
     }
 }

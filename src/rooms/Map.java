@@ -15,8 +15,10 @@ public class Map
         areaMap = new Room[4][4];
         ArrayList<UsableObject> mainAreaItems = new ArrayList<>();
         mainAreaItems.add(new Crowbar());
+        mainAreaItems.add(new BrokenBottle());
 
         ArrayList<UsableObject> backstageItems = new ArrayList<>();
+        mainAreaItems.add(new GlassShard());
 
         ArrayList<UsableObject> supplyClosetItems = new ArrayList<>();
         supplyClosetItems.add(new Key());

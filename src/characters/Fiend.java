@@ -3,7 +3,7 @@ package characters;
 public class Fiend
 {
     int atk;
-    int hp = 100;
+    public int hp = 100;
     public int x;
     public int y;
 
