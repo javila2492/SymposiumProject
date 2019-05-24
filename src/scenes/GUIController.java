@@ -1,18 +1,18 @@
 package scenes;
 
+import characters.Character;
+import characters.Fiend;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import rooms.Map;
 import rooms.OperatableObject;
 import rooms.Room;
-import characters.Fiend;
-import characters.Character;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import rooms.UsableObject;
 
 import java.util.ArrayList;
@@ -560,7 +560,6 @@ public class GUIController
 
         private void main()
         {
-
             bgFiend thread = new bgFiend();
             thread.setDaemon(true);
             thread.start();
