@@ -63,5 +63,5 @@ public abstract class Character
         yPos = y;
     }
 
-    public abstract void useAbility();
+    public abstract String useAbility();
 }

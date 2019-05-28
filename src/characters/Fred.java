@@ -1,6 +1,7 @@
 package characters;
 
 import javafx.scene.image.Image;
+import scenes.GUIController;
 
 public class Fred extends Character
 {
@@ -22,10 +23,21 @@ public class Fred extends Character
 
         characterDesc = "Fred is a synth player as well as the bulkiest man you'll meet. His extreme toughness makes up for his rather naive nature, " +
                 "but make sure to never say that around him!";
-        abilityDesc = "Memento Mori: Fred can fetch the memories of objects and rooms in order to create temporary duplicates and see where missing pieces might be hidden.";
+        abilityDesc = "Memento Mori: Fred can fetch the memories of objects and rooms in order to see where missing pieces might be hidden and what items may be needed.";
     }
-    public void useAbility()
+    public String useAbility()
     {
+        String needed = "";
+        if(GUIController.aMap[xPos][yPos - 1] != null && GUIController.aMap[xPos][yPos - 1].neededThing != null)
+            needed = GUIController.aMap[xPos][yPos - 1].neededThing;
+        if(GUIController.aMap[xPos][yPos + 1] != null && GUIController.aMap[xPos][yPos + 1].neededThing != null)
+            needed = GUIController.aMap[xPos][yPos + 1].neededThing;
+        if(GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos - 1][yPos].neededThing != null)
+            needed = GUIController.aMap[xPos - 1][yPos].neededThing;
+        if(GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos + 1][yPos].neededThing != null)
+            needed = GUIController.aMap[xPos + 1][yPos].neededThing;
+        if(!needed.equals(""))
+            return "I'm going to need a " + needed;
 
     }
 }

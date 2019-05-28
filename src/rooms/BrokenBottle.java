@@ -14,6 +14,7 @@ public class BrokenBottle extends UsableObject
     {
         GUIController.enemy.x = (int) (Math.random() * 3);
         GUIController.enemy.y = (int) (Math.random() * 3);
-        GUIController.enemy.hp -= 15;
+        if(GUIController.getCurrentRoom().lit)
+            GUIController.enemy.hp -= 15;
     }
 }

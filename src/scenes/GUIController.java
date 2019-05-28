@@ -601,7 +601,7 @@ public class GUIController
         return mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y;
     }
 
-    private Room getCurrentRoom()
+    public static Room getCurrentRoom()
     {
         return aMap[mainCharacter.xPos][mainCharacter.yPos];
     }

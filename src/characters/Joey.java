@@ -29,15 +29,16 @@ public class Joey extends Character
                 " He can’t attack or pick up items in this state, and drops everything in his inventory upon use, forcing him to go back and pick it up later on.";
     }
 
-    public void useAbility()
+    public String useAbility()
     {
         if(GUIController.hazy)
         {
             GUIController.hazy = false;
-            return;
+            return "And back to normal...";
         }
         aMap[xPos][yPos].items.addAll(inventory);
         inventory.clear();
         GUIController.hazy = true;
+        return "Hazy! Clouds may cry but can never die...";
     }
 }
