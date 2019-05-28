@@ -41,10 +41,20 @@
                </font>
             </Label>
             <Button layoutX="545.0" layoutY="157.0" mnemonicParsing="false" onAction="#dealDamage" text="DAMAGE" />
+            <Label fx:id="health" alignment="CENTER" layoutX="375.0" layoutY="114.0" prefHeight="30.0" prefWidth="50.0" text="100" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <ImageView id="bgimg" fx:id="mapimg" fitHeight="350.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
       <Pane fx:id="lights" prefHeight="350.0" prefWidth="800.0" style="-fx-background-color: black; -fx-opacity: .5;" />
+      <Label fx:id="objective" layoutY="46.0" prefHeight="100.0" prefWidth="300.0" style="-fx-alignment: center; -fx-border-color: #72e855; -fx-border-width: 1;" textFill="#72e855" wrapText="true">
+         <font>
+            <Font name="Courier New Italic" size="16.0" />
+         </font>
+      </Label>
       <Label fx:id="roomname" prefHeight="50.0" prefWidth="300.0" style="-fx-alignment: center; -fx-border-color: #72e855; -fx-border-width: 1;" textFill="#72e855">
          <font>
             <Font name="Courier New Italic" size="16.0" />

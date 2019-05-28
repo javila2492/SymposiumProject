@@ -42,13 +42,18 @@ public class GUIController
     ImageView dmgfx;
     @FXML
     Pane lights;
+    @FXML
+    Label objective;
+    @FXML
+    Label health;
 
     public static Character mainCharacter;
     private static Map temp = new Map();
     public static Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
-    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory]"}, {"operate", "Syntax: operate [non takeable object in room]"}};
+    private static String[] objectives = {"Get backstage and turn on the power.", "Find a key backstage.", "Find a way to open the supply closet.", "Get backstage and turn on the power.", "Kill the fiend."};
+    private static String[][] cmdSyntax = {{"move", "Syntax: move (north, east, south, west)"}, {"search", "Syntax: search room"}, {"take", "Syntax: take [object that exists in room]"}, {"use", "Syntax: use [object in inventory]"}, {"operate", "Syntax: operate [non takeable object in room]"}, {"attack", "Syntax: attack"}};
     public static boolean hazy = false;
     private String invTextOut = "";
     private boolean firstTime = true;
@@ -66,11 +71,14 @@ public class GUIController
         {
             rageActive();
         }
+        objective.setText(objectives[0]);
         moveRoom(1, 3);
         fiendChecker fiendCheck = new fiendChecker();
         fiendCheck.main();
         fiendMover fiendMove = new fiendMover();
         fiendMove.main();
+        fiendDamage fiendDam = new fiendDamage();
+        fiendDam.main();
     }
 
     /**
@@ -85,12 +93,12 @@ public class GUIController
         }
         dmgfx.setVisible(true);
         mainCharacter.takeDamage(20);
-        if (mainCharacter.hp == 0)
+        health.setText(String.valueOf(Character.hp));
+        if (Character.hp == 0)
         {
             death();
             return;
         }
-
         icon.setImage(mainCharacter.getCurrentHealthIndicator());
 
         dmgfx.setVisible(false);
@@ -206,6 +214,12 @@ public class GUIController
             type.setText("");
             return;
         }
+        if(currCmd.contains("attack"))
+        {
+            attack();
+            type.setText("");
+            return;
+        }
         invalidCommand("");
     }
 
@@ -224,7 +238,7 @@ public class GUIController
      */
     private void lightUpdate()
     {
-        if(!aMap[mainCharacter.xPos][mainCharacter.yPos].lit)
+        if(!getCurrentRoom().lit)
             lights.setVisible(true);
         else
             lights.setVisible(false);
@@ -241,6 +255,8 @@ public class GUIController
 
         if(direction.contains("north"))
         {
+            if((currX == 1 && currY == 1) && aMap[currX][currY - 1].locked)
+                objective.setText(objectives[1]);
             if(aMap[currX][currY].canGoNorth)
             {
                 if(aMap[currX][currY - 1].locked)
@@ -261,6 +277,8 @@ public class GUIController
         }
         if(direction.contains("east"))
         {
+            if((currX == 2 && currY == 2) && aMap[currX + 1][currY].locked)
+                objective.setText(objectives[2]);
             if(aMap[currX][currY].canGoEast)
             {
                 if(aMap[currX + 1][currY].locked)
@@ -381,8 +399,8 @@ public class GUIController
     {
         String b = "";
         b += visSearch(mainCharacter.getVis(), mainCharacter.xPos, mainCharacter.yPos);
-        if(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable != null)
-            b += " There also seems to be a " + aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.objName + " that I can use.";
+        if(getCurrentRoom().operatable != null)
+            b += " There also seems to be a " + getCurrentRoom().operatable.objName + " that I can operate.";
         textFlow(b);
     }
 
@@ -432,14 +450,16 @@ public class GUIController
             textFlow("I can't pick up items while Hazy is active.");
             return;
         }
-        ArrayList<UsableObject> tem = aMap[mainCharacter.xPos][mainCharacter.yPos].items;
+        if(item.contains("key"))
+            objective.setText(objectives[3]);
+        ArrayList<UsableObject> tem = getCurrentRoom().items;
         for(int i = 0; i < tem.size(); i++)
         {
             if(item.contains(tem.get(i).objName.toLowerCase()))
             {
                 mainCharacter.inventory.add(tem.remove(i));
                 invDisplay();
-                textFlow("I now have a " + item + "in my inventory.");
+                textFlow("I now have a " + item + " in my inventory.");
                 return;
             }
         }
@@ -452,10 +472,12 @@ public class GUIController
      */
     private void operate(String op)
     {
-        OperatableObject a = aMap[mainCharacter.xPos][mainCharacter.yPos].operatable;
+        OperatableObject a = getCurrentRoom().operatable;
         if(a != null && op.contains(a.objName.toLowerCase()))
         {
-            textFlow(aMap[mainCharacter.xPos][mainCharacter.yPos].operatable.operate());
+            textFlow(getCurrentRoom().operatable.operate());
+            if(op.contains("fuse box"))
+                objective.setText(objectives[4]);
             return;
         }
         textFlow("I can't operate what doesn't exist.");
@@ -555,6 +577,35 @@ public class GUIController
         damage.setStyle("-fx-opacity: 1.0;");
     }
 
+    private void attack()
+    {
+        if(!inSameRoom())
+        {
+            textFlow("There's nothing to attack here.");
+            return;
+        }
+        if(!getCurrentRoom().lit)
+        {
+            textFlow("The fiend is invincible in the dark!");
+            return;
+        }
+        int a = mainCharacter.getAtk() + (int) (Math.random() * (20 - mainCharacter.getAtk()) + 1);
+        if(a >= 20)
+            enemy.hp -= (20 - a);
+        else
+            textFlow("My attack was too weak!");
+    }
+
+    private boolean inSameRoom()
+    {
+        return mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y;
+    }
+
+    private Room getCurrentRoom()
+    {
+        return aMap[mainCharacter.xPos][mainCharacter.yPos];
+    }
+
     public class fiendChecker
     {
 
@@ -576,17 +627,54 @@ public class GUIController
             {
                 while(alive)
                 {
-                    if(mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y)
+                    if(inSameRoom())
                     {
-                        Image tempimg = new Image("images/" + aMap[mainCharacter.xPos][mainCharacter.yPos].truName + "_fiend.png");
+                        Image tempimg = new Image("images/" + getCurrentRoom().truName + "_fiend.png");
                         mapimg.setImage(tempimg);
+                        Platform.runLater(() -> textFlow(getReactionText("fiend")));
+                    }
+                    else
+                        mapimg.setImage(new Image("images/" + getCurrentRoom().image, 800, 350, true, true));
+
+                    try
+                    {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public class fiendDamage
+    {
+
+        private void main()
+        {
+            bgFiend thread = new bgFiend();
+            thread.setDaemon(true);
+            thread.start();
+
+            java.awt.EventQueue.invokeLater(() -> {
+
+            });
+        }
+        public class bgFiend extends Thread
+        {
+
+            @Override
+            public void run()
+            {
+                while(alive)
+                {
+                    if(inSameRoom())
+                    {
                         if(firstTime)
-                        {
-                            mapimg.setImage(tempimg);
                             Platform.runLater(() -> textFlow(getReactionText("fiend")));
-                        }
                         else
-                            dealDamage();
+                            Platform.runLater(() -> dealDamage());
                         firstTime = false;
                     }
                     try
@@ -623,7 +711,7 @@ public class GUIController
         @Override
         public void run()
         {
-            while (alive)
+            while(alive)
             {
                 if(mainCharacter.xPos == enemy.x && mainCharacter.yPos > enemy.y)
                     enemy.y++;

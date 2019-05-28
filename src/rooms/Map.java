@@ -20,6 +20,14 @@ public class Map
         ArrayList<UsableObject> backstageItems = new ArrayList<>();
         mainAreaItems.add(new GlassShard());
 
+        ArrayList<UsableObject> wBathroomItems = new ArrayList<>();
+        wBathroomItems.add(new GlassShard());
+        wBathroomItems.add(new GlassShard());
+
+        ArrayList<UsableObject> mBathroomItems = new ArrayList<>();
+        mBathroomItems.add(new GlassShard());
+        mBathroomItems.add(new BrokenBottle());
+
         ArrayList<UsableObject> supplyClosetItems = new ArrayList<>();
         supplyClosetItems.add(new Key());
 
@@ -38,10 +46,10 @@ public class Map
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false);
         areaMap[2][2] = eastWing;
 
-        Room mensRoom = new Room("Men's Bathroom", false, false, true, false, false, "men'sbathroom.png", null, false);
+        Room mensRoom = new Room("Men's Bathroom", false, false, true, false, false, "men'sbathroom.png", mBathroomItems, false);
         areaMap[2][1] = mensRoom;
 
-        Room womensRoom = new Room("Women's Bathroom", true, false, true, true, false, "women'sbathroom.png", null, false);
+        Room womensRoom = new Room("Women's Bathroom", true, false, true, true, false, "women'sbathroom.png", wBathroomItems, false);
         areaMap[2][3] = womensRoom;
 
         Room supplyCloset = new Room("Supply Closet", false, false, false, true, false, "supplycloset.png", supplyClosetItems, false,"crowbar", "The door's jammed shut. I'll need something to pry it open.", true);
