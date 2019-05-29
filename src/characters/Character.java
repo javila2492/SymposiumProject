@@ -48,13 +48,9 @@ public abstract class Character
 
     public void takeDamage(int dmg)
     {
-        int randDam = (int) ((Math.random() * getDef()) + (getDef() / (Math.random() * 3)));
-        if(randDam < 0 || randDam > dmg)
-            randDam = (int) (Math.random() * 5);
-        hp -= dmg - randDam;
+        hp -= dmg * (25 / (25 + getDef()));
         if(hp < 0)
             hp = 0;
-        System.out.println(hp);
     }
 
     public void changePos(int x, int y)
