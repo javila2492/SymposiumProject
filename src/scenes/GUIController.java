@@ -48,6 +48,7 @@ public class GUIController
     Label health;
 
     public static Character mainCharacter;
+    public static double rageCount = 0;
     private static Map temp = new Map();
     public static Fiend enemy = new Fiend(2, 2);
     private boolean rage = false;
@@ -129,7 +130,10 @@ public class GUIController
     private void invalidCommand(String cmd)
     {
         if(rage)
-            ragemeter.setProgress(ragemeter.getProgress() + .1);
+        {
+            rageCount += .1;
+            ragemeter.setProgress(rageCount);
+        }
         type.setText("");
         for(String[] i : cmdSyntax)
         {
@@ -199,7 +203,7 @@ public class GUIController
         }
         if(currCmd.contains("ability"))
         {
-            mainCharacter.useAbility();
+            textFlow(mainCharacter.useAbility());
             if(hazy)
             {
                 invTextOut = "";

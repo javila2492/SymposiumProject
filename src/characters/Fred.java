@@ -37,7 +37,7 @@ public class Fred extends Character
         if(GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos + 1][yPos].neededThing != null)
             needed = GUIController.aMap[xPos + 1][yPos].neededThing;
         if(!needed.equals(""))
-            return "I'm going to need a " + needed;
-
+            return "I'm going to need a " + needed + ". I know for a fact that important things are strewn about the main area and supply closet.";
+        return "Looks like nothing is needed for now.";
     }
 }

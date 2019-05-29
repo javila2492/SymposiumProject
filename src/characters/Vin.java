@@ -28,14 +28,15 @@ public class Vin extends Character
                 "This poor man has been through a lot, but his experience with life comes in handy.";
         abilityDesc = "In The Garden: Allows Vin to control plants. Rooms with plants in them can be used to scour for objects or set up traps against the fiend.";
      }
-    public void useAbility()
+    public String useAbility()
     {
         if(!GUIController.aMap[xPos][yPos].hasPlants)
         {
-            return;
+            return "No plants for me to use.";
         }
         GUIController.visSearch(20, xPos, yPos);
         GUIController.aMap[xPos][yPos].hasPlants = false;
+        return "In The Garden!";
     }
 
 }

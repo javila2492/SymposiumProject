@@ -63,6 +63,11 @@ public class Map
 
         Room westWingB = new Room("West Wing B", true, false, true, false, false, "westwingb.png", null, true);
         areaMap[0][1] = westWingB;
+
+        for(int i = 0; i < areaMap.length; i++)
+            for(int j = 0; j < areaMap[i].length; j++)
+                if(areaMap[i][j] == null)
+                    areaMap[i][j]  = new Room("Empty Space", true, true, true, true, false, "emptyspace.png", null, false);
     }
 
 
