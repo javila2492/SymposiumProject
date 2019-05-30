@@ -28,13 +28,13 @@ public class Fred extends Character
     public String useAbility()
     {
         String needed = "";
-        if(GUIController.aMap[xPos][yPos - 1] != null && GUIController.aMap[xPos][yPos - 1].neededThing != null)
+        if(yPos > 0 && (GUIController.aMap[xPos][yPos - 1] != null && GUIController.aMap[xPos][yPos - 1].neededThing != null))
             needed = GUIController.aMap[xPos][yPos - 1].neededThing;
-        if(GUIController.aMap[xPos][yPos + 1] != null && GUIController.aMap[xPos][yPos + 1].neededThing != null)
+        if(yPos < 3 && (GUIController.aMap[xPos][yPos + 1] != null && GUIController.aMap[xPos][yPos + 1].neededThing != null))
             needed = GUIController.aMap[xPos][yPos + 1].neededThing;
-        if(GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos - 1][yPos].neededThing != null)
+        if(xPos > 0 && (GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos - 1][yPos].neededThing != null))
             needed = GUIController.aMap[xPos - 1][yPos].neededThing;
-        if(GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos + 1][yPos].neededThing != null)
+        if(xPos < 3 && (GUIController.aMap[xPos - 1][yPos] != null && GUIController.aMap[xPos + 1][yPos].neededThing != null))
             needed = GUIController.aMap[xPos + 1][yPos].neededThing;
         if(!needed.equals(""))
             return "I'm going to need a " + needed + ". I know for a fact that important things are strewn about the main area and supply closet.";

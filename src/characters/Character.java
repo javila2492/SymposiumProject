@@ -48,7 +48,10 @@ public abstract class Character
 
     public void takeDamage(int dmg)
     {
-        hp -= dmg * (25 / (25 + getDef()));
+        double a = dmg * ((double) 20 / (20 + getDef()));
+        if(a <= 0)
+            a = 1;
+        hp -= a;
         if(hp < 0)
             hp = 0;
     }

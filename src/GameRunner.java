@@ -4,11 +4,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GameRunner extends Application {
+public class GameRunner extends Application
+{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("scenes/CharSelection.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/MainMenu.fxml"));
         primaryStage.setTitle("The Return of The Flayer");
         primaryStage.setScene(new Scene(root, 800, 550));
         primaryStage.show();

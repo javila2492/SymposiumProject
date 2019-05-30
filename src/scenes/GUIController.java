@@ -4,9 +4,7 @@ import characters.Character;
 import characters.Fiend;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -46,6 +44,10 @@ public class GUIController
     Label objective;
     @FXML
     Label health;
+    @FXML
+    Label syntaxshower;
+    @FXML
+    Button enterbutton;
 
     public static Character mainCharacter;
     public static double rageCount = 0;
@@ -72,6 +74,12 @@ public class GUIController
         {
             rageActive();
         }
+        Tooltip tp = new Tooltip();
+        Tooltip tp2 = new Tooltip();
+        tp.setText("Commands: move, search, take, use, ability, operate, attack");
+        tp2.setText("Click on me after typing a commands for syntax help.");
+        syntaxshower.setTooltip(tp);
+        enterbutton.setTooltip(tp2);
         objective.setText(objectives[0]);
         moveRoom(1, 3);
         fiendChecker fiendCheck = new fiendChecker();
@@ -595,7 +603,10 @@ public class GUIController
         }
         int a = mainCharacter.getAtk() + (int) (Math.random() * (20 - mainCharacter.getAtk()) + 1);
         if(a >= 20)
+        {
             enemy.hp -= (20 - a);
+            textFlow("Aha! Take that!");
+        }
         else
             textFlow("My attack was too weak!");
     }
