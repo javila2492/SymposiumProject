@@ -6,24 +6,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.MainMenu">
    <children>
       <Label layoutX="113.0" layoutY="24.0" text="RETURN OF THE FLAYER" textFill="#2dd033">
          <font>
             <Font name="Courier New Bold" size="48.0" />
          </font>
       </Label>
-      <Button fx:id="startbutton" layoutX="361.0" layoutY="191.0" mnemonicParsing="false" style="-fx-background-color: black;" text="START" textFill="#2dd033">
+      <Button fx:id="startbutton" layoutX="361.0" layoutY="191.0" mnemonicParsing="false" onAction="#start" style="-fx-background-color: black;" text="START" textFill="#2dd033">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="helpbutton" layoutX="367.0" layoutY="275.0" mnemonicParsing="false" style="-fx-background-color: black;" text="HELP" textFill="#2dd033">
+      <Button fx:id="helpbutton" layoutX="367.0" layoutY="275.0" mnemonicParsing="false" onAction="#help" style="-fx-background-color: black;" text="HELP" textFill="#2dd033">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="lorebutton" layoutX="367.0" layoutY="380.0" mnemonicParsing="false" style="-fx-background-color: black;" text="LORE" textFill="#2dd033">
+      <Button fx:id="lorebutton" layoutX="367.0" layoutY="380.0" mnemonicParsing="false" onAction="#lore" style="-fx-background-color: black;" text="LORE" textFill="#2dd033">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
