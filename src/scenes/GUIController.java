@@ -51,8 +51,9 @@ public class GUIController
 
     public static Character mainCharacter;
     public static double rageCount = 0;
+    public int breakCount = 0;
     private static Map temp = new Map();
-    public static Fiend enemy = new Fiend(2, 2);
+    public static Fiend enemy = new Fiend(2, 0);
     private boolean rage = false;
     public static Room[][] aMap = temp.areaMap;
     private static String[] objectives = {"Get backstage and turn on the power.", "Find a key backstage.", "Find a way to open the supply closet.", "Get backstage and turn on the power.", "Kill the fiend."};
@@ -188,24 +189,28 @@ public class GUIController
         if(currCmd.contains("move"))
         {
             moveTo(sec);
+            rageCheck();
             type.setText("");
             return;
         }
         if(currCmd.contains("search"))
         {
             searchThing();
+            rageCheck();
             type.setText("");
             return;
         }
         if(currCmd.contains("take"))
         {
             takeThing(sec + " " + tre);
+            rageCheck();
             type.setText("");
             return;
         }
         if(currCmd.contains("use"))
         {
             useThing(sec + " " + tre);
+            rageCheck();
             type.setText("");
             return;
         }
@@ -217,22 +222,40 @@ public class GUIController
                 invTextOut = "";
                 invtext.setText(invTextOut);
             }
+            rageCheck();
             type.setText("");
             return;
         }
         if(currCmd.contains("operate"))
         {
             operate(sec + " " + tre);
+            rageCheck();
             type.setText("");
             return;
         }
         if(currCmd.contains("attack"))
         {
             attack();
+            rageCheck();
             type.setText("");
             return;
         }
         invalidCommand("");
+    }
+
+    private void rageCheck()
+    {
+        if(rageCount >= 1)
+        {
+            if(breakCount >= 2)
+            {
+                textFlow(mainCharacter.useAbility());
+                breakCount = 0;
+            }
+            else
+                breakCount++;
+        }
+        ragemeter.setProgress(rageCount);
     }
 
     /**
