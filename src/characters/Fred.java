@@ -10,7 +10,7 @@ public class Fred extends Character
         name = "Fred";
         atk = 20;
         def = 20;
-        spd = 5;
+        spd = 6;
         vis = 5;
         imgName = "images/fred";
         mainImg = new Image("images/fred.png", 100, 100, true, true);

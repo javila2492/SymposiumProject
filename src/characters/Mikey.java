@@ -20,7 +20,7 @@ public class Mikey extends Character
         specialDialog = new String[][]{{"entrance", "God this place is a mess! Nobody could be bothered to clean around here?"}, {"main area", "This is the " +
                 "place, no mistaking it. I know since PEOPLE ALWAYS LEAVE THEIR TRASH EVERYWHERE."}, {"stage", "Owner never fixed this place so that even now you see our nasty footprints!"},
                 {"backstage", "Three stabbings happened here. I caused two of em."}, {"east wing", "Do I really gotta be here?"}, {"men's bathroom", "No monster is scarier than the mess men leave in these bathrooms."},
-                {"women's bathroom", "Now this is where it's at! Wait that doesn't sound right."}, {"supply closet", "So much dust! I'll sneeze at any moment."}, {"stairwell", "No way " +
+                {"women's bathroom", "Now this is where it's at! Wait that doesn't sound right."}, {"supply closet", "Oh dear lord!"}, {"stairwell", "No way " +
                 "in HELL am I going there."}, {"west wing a", "Finally some peace and quiet."}, {"west wing b", "Doesn't look so peaceful no more."}, {"wall", "OW! There's a stupid wall here!"},
                 {"fiend", "That telekinetic bastard has arrived..."}, {"fiend", "No! Get away!"}};
 

@@ -68,6 +68,12 @@ public class Map
             for(int j = 0; j < areaMap[i].length; j++)
                 if(areaMap[i][j] == null)
                     areaMap[i][j]  = new Room("Empty Space", true, true, true, true, false, "emptyspace.png", null, false);
+        areaMap[0][3].canGoSouth = false;
+        areaMap[0][3].canGoWest = false;
+        areaMap[3][3].canGoSouth = false;
+        areaMap[3][3].canGoEast = false;
+        areaMap[3][0].canGoNorth = false;
+        areaMap[3][0].canGoEast = false;
     }
 
 

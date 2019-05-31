@@ -19,7 +19,7 @@ public class Vin extends Character
                 {"main area", "These halls used to echo with the sound of our music. It feels so...hopeless...looking at it now."}, {"stage", "There's still marks here from when we used to play here." +
                 "I can still remember exactly where each of us stood."}, {"backstage", "This is where it happened. This is where I became a prisoner of that...thing..."}, {"east wing", "This place" +
                 " reeks! Like if something died in here...something probably did."}, {"men's bathroom", "The sticky floor is a telltale sign that men in fact can not aim."}, {"women's bathroom", "I" +
-                " don't feel comfortable being here..."}, {"supply closet", "They used to call this place the love shack. At least until the rats invaded."}, {"stairwell", "I...I...oh god " +
+                " don't feel comfortable being here..."}, {"supply closet", "Oh...I'm going to be sick..."}, {"stairwell", "I...I...oh god " +
                 "I...I don't like being here..."}, {"west wing a", "This is the worst part for me. Something about the stairwell in the distance...scares me..."}, {"west wing b", "It's getting hard to see..."},
                 {"wall", "Can't go that way."}, {"fiend", "The pain..." +
                 "it's all coming back..."}};

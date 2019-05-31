@@ -51,7 +51,9 @@ public class GUIController
 
     public static Character mainCharacter;
     public static double rageCount = 0;
-    public int breakCount = 0;
+    public boolean win = false;
+    private int breakCount = 0;
+    public int spdCount;
     private static Map temp = new Map();
     public static Fiend enemy = new Fiend(2, 0);
     private boolean rage = false;
@@ -70,6 +72,7 @@ public class GUIController
     {
         mainCharacter = CharSelectionController.chosen;
         mainCharacter.changePos(1, 3);
+        spdCount = mainCharacter.getSpd() * 1000;
         icon.setImage(mainCharacter.getMainImg());
         if(mainCharacter.name.contains("Mikey"))
         {
@@ -494,6 +497,7 @@ public class GUIController
             {
                 mainCharacter.inventory.add(tem.remove(i));
                 invDisplay();
+                item = item.trim();
                 textFlow("I now have a " + item + " in my inventory.");
                 return;
             }
@@ -531,8 +535,10 @@ public class GUIController
             {
                 if(aTem.unlocker)
                 {
-                    unlockThing(aTem);
-                    mainCharacter.inventory.remove(aTem);
+                    if(unlockThing(aTem))
+                        mainCharacter.inventory.remove(aTem);
+                    else
+                        textFlow("I think this should go somewhere else.");
                     invDisplay();
                     return;
                 }
@@ -553,7 +559,7 @@ public class GUIController
      * Checks if a room perpendicular to the player can be unlocked by the item used and unlocks it if found.
      * @param a Item being used to unlock.
      */
-    public void unlockThing(UsableObject a)
+    public boolean unlockThing(UsableObject a)
     {
         String item = a.objName.trim().toLowerCase();
         int x = mainCharacter.xPos;
@@ -569,7 +575,9 @@ public class GUIController
             if ((aMap[x + 1][y] != null && aMap[x + 1][y].neededThing != null) && aMap[x + 1][y].neededThing.contains(item))
                 unlock(x + 1, y);
             textFlow(a.useMsg);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -629,6 +637,8 @@ public class GUIController
         {
             enemy.hp -= (20 - a);
             textFlow("Aha! Take that!");
+            if(enemy.hp <= 0)
+                win();
         }
         else
             textFlow("My attack was too weak!");
@@ -643,6 +653,17 @@ public class GUIController
     {
         return aMap[mainCharacter.xPos][mainCharacter.yPos];
     }
+
+    private void win()
+    {
+        enemy.x = 0;
+        enemy.y = 0;
+        win = true;
+    }
+
+
+
+
 
     public class fiendChecker
     {
@@ -663,13 +684,12 @@ public class GUIController
             @Override
             public void run()
             {
-                while(alive)
+                while(alive && !win)
                 {
                     if(inSameRoom())
                     {
                         Image tempimg = new Image("images/" + getCurrentRoom().truName + "_fiend.png");
                         mapimg.setImage(tempimg);
-                        Platform.runLater(() -> textFlow(getReactionText("fiend")));
                     }
                     else
                         mapimg.setImage(new Image("images/" + getCurrentRoom().image, 800, 350, true, true));
@@ -705,7 +725,7 @@ public class GUIController
             @Override
             public void run()
             {
-                while(alive)
+                while(alive && !win)
                 {
                     if(inSameRoom())
                     {
@@ -749,7 +769,7 @@ public class GUIController
         @Override
         public void run()
         {
-            while(alive)
+            while(alive && !win)
             {
                 if(mainCharacter.xPos == enemy.x && mainCharacter.yPos > enemy.y)
                     enemy.y++;
@@ -761,7 +781,7 @@ public class GUIController
                     enemy.x--;
                 try
                 {
-                    Thread.sleep(7000);
+                    Thread.sleep(spdCount);
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();
