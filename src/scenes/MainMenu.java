@@ -6,11 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
-import java.awt.*;
+import javafx.scene.control.Button;
 
 public class MainMenu
 {
@@ -21,13 +21,13 @@ public class MainMenu
     @FXML
     Button lorebutton;
     @FXML
-    Label textview;
+    Label textshower;
     @FXML
     ImageView img;
 
     public void initialize()
     {
-        img.setImage(new Image("images/fiendicon.png"));
+        img.setImage(new Image("images/fiendsprite.png"));
     }
 
     private String[] help = {
@@ -53,12 +53,12 @@ public class MainMenu
             end += a;
             end += "\n";
         }
-        textview.setText(end);
+        textshower.setText(end);
     }
 
     public void lore()
     {
-        textview.setText(lore);
+        textshower.setText(lore);
     }
 
     public void start(ActionEvent event) throws Exception
