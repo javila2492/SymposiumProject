@@ -104,7 +104,6 @@ public class GUIController
             textFlow("I am impervious to all damage while Hazy is active!");
             return;
         }
-        dmgfx.setVisible(true);
         mainCharacter.takeDamage(20);
         health.setText(String.valueOf(Character.hp));
         if (Character.hp == 0)
@@ -113,8 +112,6 @@ public class GUIController
             return;
         }
         icon.setImage(mainCharacter.getCurrentHealthIndicator());
-
-        dmgfx.setVisible(false);
     }
 
     /**
@@ -638,6 +635,7 @@ public class GUIController
         if(a >= 20)
         {
             enemy.hp -= (20 - a);
+            moveRoom(mainCharacter.xPos, mainCharacter.yPos);
             textFlow("Aha! Take that!");
             if(enemy.hp <= 0)
                 win();
