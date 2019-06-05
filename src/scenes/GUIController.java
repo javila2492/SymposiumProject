@@ -35,8 +35,6 @@ public class GUIController
     @FXML
     Label invtext;
     @FXML
-    Label damage;
-    @FXML
     ImageView dmgfx;
     @FXML
     Pane lights;
@@ -48,6 +46,8 @@ public class GUIController
     Label syntaxshower;
     @FXML
     Button enterbutton;
+    @FXML
+    ImageView finalscreen;
 
     public static Character mainCharacter;
     public static double rageCount = 0;
@@ -614,14 +614,16 @@ public class GUIController
     private void death()
     {
         alive = false;
-        damage.setVisible(true);
-        dmgfx.setVisible(true);
-        damage.setStyle("-fx-background-color: black;");
-        damage.setStyle("-fx-opacity: 1.0;");
+        lose();
     }
 
     private void attack()
     {
+        if(hazy)
+        {
+            textFlow("I can't attack while Hazy is active.");
+            return;
+        }
         if(!inSameRoom())
         {
             textFlow("There's nothing to attack here.");
@@ -659,6 +661,17 @@ public class GUIController
         enemy.x = 0;
         enemy.y = 0;
         win = true;
+        finalscreen.setVisible(true);
+        finalscreen.setImage(new Image("images/win.png", 800, 550, true, true));
+    }
+
+    private void lose()
+    {
+        enemy.x = 0;
+        enemy.y = 0;
+        win = false;
+        finalscreen.setVisible(true);
+        finalscreen.setImage(new Image("images/lose.png", 800, 550, true, true));
     }
 
 

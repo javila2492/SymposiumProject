@@ -78,5 +78,6 @@
             <Image url="@../images/damagefx.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="finalscreen" blendMode="SRC_ATOP" fitHeight="550.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    </children>
 </Pane>
