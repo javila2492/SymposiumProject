@@ -644,7 +644,7 @@ public class GUIController
             textFlow("My attack was too weak!");
     }
 
-    private boolean inSameRoom()
+    public static boolean inSameRoom()
     {
         return mainCharacter.xPos == enemy.x && mainCharacter.yPos == enemy.y;
     }

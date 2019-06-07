@@ -35,11 +35,11 @@ public class Mikey extends Character
         if(GUIController.rageCount < 1)
             return "I'm not angry enough yet.";
         GUIController.rageCount = 0;
-        if(GUIController.enemy.x == xPos && GUIController.enemy.y == yPos)
+        if(GUIController.inSameRoom())
         {
             GUIController.enemy.x = (int) (Math.random() * 3);
             GUIController.enemy.y = (int) (Math.random() * 3);
-            if(GUIController.aMap[xPos][yPos].lit)
+            if(GUIController.getCurrentRoom().lit)
                 GUIController.enemy.hp -= (int) (Math.random() * 40);
             return "SPEEYEAAAAAH! Gotcha! That bastard's gonna be feeling that for a while!";
         }

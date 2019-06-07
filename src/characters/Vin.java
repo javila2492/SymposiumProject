@@ -30,12 +30,20 @@ public class Vin extends Character
      }
     public String useAbility()
     {
-        if(!GUIController.aMap[xPos][yPos].hasPlants)
+        if(!GUIController.getCurrentRoom().hasPlants)
         {
             return "No plants for me to use.";
         }
+        if(GUIController.inSameRoom())
+        {
+            GUIController.enemy.x = (int) (Math.random() * 3);
+            GUIController.enemy.y = (int) (Math.random() * 3);
+            if(GUIController.getCurrentRoom().lit)
+                GUIController.enemy.hp -= (int) (Math.random() * 40);
+            return "OSHAAAA! Blasted that creep far away from me.";
+        }
         GUIController.visSearch(20, xPos, yPos);
-        GUIController.aMap[xPos][yPos].hasPlants = false;
+        GUIController.getCurrentRoom().hasPlants = false;
         return "In The Garden!";
     }
 
