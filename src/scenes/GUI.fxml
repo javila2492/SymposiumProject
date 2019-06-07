@@ -24,7 +24,7 @@
                   <Font name="Courier New Bold" size="14.0" />
                </font>
             </Button>
-            <Label fx:id="invtext" layoutX="14.0" layoutY="50.0" prefHeight="100.0" prefWidth="300.0" textFill="#00c900" wrapText="true">
+            <Label fx:id="invtext" layoutX="14.0" layoutY="37.0" prefHeight="100.0" prefWidth="250.0" style="-fx-border-color: green;" textFill="#00c900" wrapText="true">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>
@@ -50,7 +50,7 @@
                   <Font name="Courier New Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="100.0" fitWidth="110.0" layoutX="250.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="110.0" layoutX="452.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/mapicon.png" />
                </image>
