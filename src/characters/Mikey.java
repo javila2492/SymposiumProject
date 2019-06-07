@@ -22,7 +22,7 @@ public class Mikey extends Character
                 {"backstage", "Three stabbings happened here. I caused two of em."}, {"east wing", "Do I really gotta be here?"}, {"men's bathroom", "No monster is scarier than the mess men leave in these bathrooms."},
                 {"women's bathroom", "Now this is where it's at! Wait that doesn't sound right."}, {"supply closet", "Oh dear lord!"}, {"stairwell", "No way " +
                 "in HELL am I going there."}, {"west wing a", "Finally some peace and quiet."}, {"west wing b", "Doesn't look so peaceful no more."}, {"wall", "OW! There's a stupid wall here!"},
-                {"fiend", "That telekinetic bastard has arrived..."}, {"fiend", "No! Get away!"}};
+                {"fiend", "That telekinetic bastard has arrived..."}, {"fiend", "No! Get away!"}, {"empty space", "I don't wanna be here."}};
 
         characterDesc = "Mikey, drummer and best friend of Vin. Gruff and tough, this guy has quite a bit of bulk to him." +
                 " Unfortunately, his rage can be quite dangerous if left unchecked. Careful! Though he’s angry, he’s got a soft heart.";
