@@ -74,6 +74,21 @@ public class Map
         areaMap[3][3].canGoEast = false;
         areaMap[3][0].canGoNorth = false;
         areaMap[3][0].canGoEast = false;
+        for(int i = 0; i < areaMap.length; i++)
+        {
+            for(int j = 0; j < areaMap[i].length; j++)
+            {
+                if(i == 0)
+                    areaMap[i][j].canGoNorth = false;
+                if(j == 0)
+                    areaMap[i][j].canGoWest = false;
+                if(i == 3)
+                    areaMap[i][j].canGoSouth = false;
+                if(j == 3)
+                    areaMap[i][j].canGoEast= false;
+            }
+        }
+
     }
 
 

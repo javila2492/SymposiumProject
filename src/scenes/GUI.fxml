@@ -50,6 +50,11 @@
                   <Font name="Courier New Bold" size="18.0" />
                </font>
             </Label>
+            <ImageView fitHeight="100.0" fitWidth="110.0" layoutX="250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/mapicon.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <ImageView id="bgimg" fx:id="mapimg" fitHeight="350.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />

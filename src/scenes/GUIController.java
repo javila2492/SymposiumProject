@@ -2,17 +2,21 @@ package scenes;
 
 import characters.Character;
 import characters.Fiend;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import rooms.Map;
 import rooms.OperatableObject;
 import rooms.Room;
 import rooms.UsableObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 
@@ -81,6 +85,7 @@ public class GUIController
         Tooltip tp = new Tooltip();
         Tooltip tp2 = new Tooltip();
         tp.setText("Commands: move, search, take, use, ability, operate, attack");
+        hackTooltipStartTiming(tp);
         tp2.setText("Click on me after typing a commands for syntax help.");
         syntaxshower.setTooltip(tp);
         enterbutton.setTooltip(tp2);
@@ -92,6 +97,26 @@ public class GUIController
         fiendMove.main();
         fiendDamage fiendDam = new fiendDamage();
         fiendDam.main();
+    }
+
+    public static void hackTooltipStartTiming(Tooltip tooltip)
+    {
+        try
+        {
+            Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
+            fieldBehavior.setAccessible(true);
+            Object objBehavior = fieldBehavior.get(tooltip);
+
+            Field fieldTimer = objBehavior.getClass().getDeclaredField("activationTimer");
+            fieldTimer.setAccessible(true);
+            Timeline objTimer = (Timeline) fieldTimer.get(objBehavior);
+
+            objTimer.getKeyFrames().clear();
+            objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -614,7 +639,7 @@ public class GUIController
         lose();
     }
 
-    private void attack()
+    public void attack()
     {
         if(hazy)
         {
@@ -632,7 +657,7 @@ public class GUIController
             return;
         }
         int a = mainCharacter.getAtk() + (int) (Math.random() * (20 - mainCharacter.getAtk()) + 1);
-        if(a >= 20)
+        if(a >= 15)
         {
             enemy.hp -= (20 - a);
             moveRoom(mainCharacter.xPos, mainCharacter.yPos);
