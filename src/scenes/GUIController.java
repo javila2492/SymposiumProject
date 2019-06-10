@@ -2,8 +2,10 @@ package scenes;
 
 import characters.Character;
 import characters.Fiend;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -57,9 +59,9 @@ public class GUIController
 
     public static Character mainCharacter;
     public static double rageCount = 0;
-    public boolean win = false;
+    private boolean win = false;
     private int breakCount = 0;
-    public int spdCount;
+    private int spdCount;
     private static Map temp = new Map();
     public static Fiend enemy = new Fiend(2, 0);
     private boolean rage = false;
@@ -101,7 +103,7 @@ public class GUIController
         fiendDam.main();
     }
 
-    public static void hackTooltipStartTiming(Tooltip tooltip)
+    private static void hackTooltipStartTiming(Tooltip tooltip)
     {
         try
         {
@@ -145,18 +147,22 @@ public class GUIController
      * Method originally meant to create text in a typewriter style. For now it's just an easy call.
      * @param text Text to be displayed.
      */
+
     public void textFlow(String text)
     {
-        /*
-        String splitext = "";
-        String[] textArr = text.split("");
-        for(int i = 0; i < textArr.length; i++)
+        final Animation animation = new Transition()
         {
-            showtext.setText(splitext);
-            splitext += textArr[i];
-        }
-        */
-        showtext.setText(text);
+            {
+                setCycleDuration(Duration.millis(1500));
+            }
+
+            protected void interpolate(double frac) {
+                final int length = text.length();
+                final int n = Math.round(length * (float) frac);
+                showtext.setText(text.substring(0, n));
+            }
+        };
+        animation.play();
     }
 
     /**

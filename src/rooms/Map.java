@@ -28,6 +28,9 @@ public class Map
         ArrayList<UsableObject> supplyClosetItems = new ArrayList<>();
         supplyClosetItems.add(new Key());
 
+        ArrayList<UsableObject> hiddenItems = new ArrayList<>();
+        hiddenItems.add(new GlassShard());
+
         Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true);
         areaMap[1][3] = entrance;
 
@@ -64,7 +67,7 @@ public class Map
         for(int i = 0; i < areaMap.length; i++)
             for(int j = 0; j < areaMap[i].length; j++)
                 if(areaMap[i][j] == null)
-                    areaMap[i][j]  = new Room("Empty Space", true, true, true, true, false, "emptyspace.png", null, false);
+                    areaMap[i][j]  = new Room("Empty Space", true, true, true, true, false, "emptyspace.png", hiddenItems, false);
         areaMap[0][3].canGoSouth = false;
         areaMap[0][3].canGoWest = false;
         areaMap[3][3].canGoSouth = false;

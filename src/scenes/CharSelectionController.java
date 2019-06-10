@@ -9,14 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
 public class CharSelectionController
 {
-    public static Character chosen;
-    boolean selected = false;
+    static Character chosen;
+    private boolean selected = false;
     @FXML
     private Label statshower;
     @FXML
@@ -24,35 +23,35 @@ public class CharSelectionController
     @FXML
     private Label abilityshower;
 
-    public void charInfoChangerSabrina(MouseEvent mouseEvent)
+    public void charInfoChangerSabrina()
     {
         chosen = new Sabrina();
         infoBuilder(chosen);
         selected = true;
     }
 
-    public void charInfoChangerDanny(MouseEvent mouseEvent)
+    public void charInfoChangerDanny()
     {
         chosen = new Danny();
         infoBuilder(chosen);
         selected = true;
     }
 
-    public void charInfoChangerMikey(MouseEvent mouseEvent)
+    public void charInfoChangerMikey()
     {
         chosen = new Mikey();
         infoBuilder(chosen);
         selected = true;
     }
 
-    public void charInfoChangerJoseph(MouseEvent mouseEvent)
+    public void charInfoChangerJoseph()
     {
         chosen = new Joseph();
         infoBuilder(chosen);
         selected = true;
     }
 
-    public void charInfoChangerFred(MouseEvent mouseEvent)
+    public void charInfoChangerFred()
     {
         chosen = new Fred();
         infoBuilder(chosen);
