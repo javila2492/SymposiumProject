@@ -52,6 +52,8 @@ public class GUIController
     Button enterbutton;
     @FXML
     ImageView finalscreen;
+    @FXML
+    ImageView mapicon;
 
     public static Character mainCharacter;
     public static double rageCount = 0;
@@ -120,7 +122,7 @@ public class GUIController
     }
 
     /**
-     * Deals damage to the player and checks to see if they died. If the character is Joey and Hazy is active, no damage is dealt.
+     * Deals damage to the player and checks to see if they died. If the character is Joseph and Hazy is active, no damage is dealt.
      */
     public void dealDamage()
     {
@@ -165,7 +167,7 @@ public class GUIController
     {
         if(rage)
         {
-            rageCount += .1;
+            rageCount += .2;
             ragemeter.setProgress(rageCount);
         }
         type.setText("");
@@ -417,6 +419,7 @@ public class GUIController
         firstTime = true;
         Image tempimg = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
         mapimg.setImage(tempimg);
+        mapicon.setImage(new Image("images/" + aMap[x][y].truName + "icon.png"));
         roomname.setText(aMap[x][y].roomName);
         textFlow(getRoomText(x, y));
     }
@@ -486,7 +489,7 @@ public class GUIController
         {
             a = (int) (Math.random() * 7);
             tem += a;
-            if(tem > (vision / 2))
+            if(tem < (vision / 2))
             {
                 it += aPotential.objName;
                 it += ", ";

@@ -24,7 +24,7 @@ public class Mikey extends Character
                 "in HELL am I going there."}, {"west wing a", "Finally some peace and quiet."}, {"west wing b", "Doesn't look so peaceful no more."}, {"wall", "OW! There's a stupid wall here!"},
                 {"fiend", "That telekinetic bastard has arrived..."}, {"fiend", "No! Get away!"}, {"empty space", "I don't wanna be here."}};
 
-        characterDesc = "Mikey, drummer and best friend of Vin. Gruff and tough, this guy has quite a bit of bulk to him." +
+        characterDesc = "Mikey, drummer and best friend of Danny. Gruff and tough, this guy has quite a bit of bulk to him." +
                 " Unfortunately, his rage can be quite dangerous if left unchecked. Careful! Though he’s angry, he’s got a soft heart.";
         abilityDesc = "Roid Rage: A meter will display, increasing for every failed action. Once full, it can be used to demolish walls or damage the enemy." +
                 "If the meter isn’t used when full by three actions, a random object will be broken.";

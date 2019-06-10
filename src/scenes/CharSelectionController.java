@@ -31,9 +31,9 @@ public class CharSelectionController
         selected = true;
     }
 
-    public void charInfoChangerVin(MouseEvent mouseEvent)
+    public void charInfoChangerDanny(MouseEvent mouseEvent)
     {
-        chosen = new Vin();
+        chosen = new Danny();
         infoBuilder(chosen);
         selected = true;
     }
@@ -45,9 +45,9 @@ public class CharSelectionController
         selected = true;
     }
 
-    public void charInfoChangerJoey(MouseEvent mouseEvent)
+    public void charInfoChangerJoseph(MouseEvent mouseEvent)
     {
-        chosen = new Joey();
+        chosen = new Joseph();
         infoBuilder(chosen);
         selected = true;
     }

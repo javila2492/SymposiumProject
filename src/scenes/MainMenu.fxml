@@ -28,7 +28,7 @@
             <Font name="Courier New" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="textshower" layoutX="38.0" layoutY="142.0" prefHeight="300.0" prefWidth="300.0" textFill="#2dd033" wrapText="true">
+      <Label fx:id="textshower" layoutX="14.0" layoutY="85.0" prefHeight="415.0" prefWidth="300.0" textFill="#2dd033" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>

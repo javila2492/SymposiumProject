@@ -3,11 +3,11 @@ package characters;
 import javafx.scene.image.Image;
 import scenes.GUIController;
 
-public class Vin extends Character
+public class Danny extends Character
 {
-    public Vin()
+    public Danny()
     {
-        name = "Vin";
+        name = "Danny";
         atk = 10;
         def = 12;
         spd = 17;
@@ -21,12 +21,11 @@ public class Vin extends Character
                 " reeks! Like if something died in here...something probably did."}, {"men's bathroom", "The sticky floor is a telltale sign that men in fact can not aim."}, {"women's bathroom", "I" +
                 " don't feel comfortable being here..."}, {"supply closet", "Oh...I'm going to be sick..."}, {"stairwell", "I...I...oh god " +
                 "I...I don't like being here..."}, {"west wing a", "This is the worst part for me. Something about the stairwell in the distance...scares me..."}, {"west wing b", "It's getting hard to see..."},
-                {"wall", "Can't go that way."}, {"fiend", "The pain..." +
-                "it's all coming back..."}};
+                {"wall", "Can't go that way."}, {"fiend", "The pain...it's all coming back..."}};
 
-        characterDesc = "Vin, the lead singer of the band, with a silent yet strong nature. He’s been through the most, from being possessed and hurting his friends to messy breakups. " +
+        characterDesc = "Danny, the lead singer of the band, with a silent yet strong nature. He’s been through the most, from being possessed and hurting his friends to messy breakups. " +
                 "This poor man has been through a lot, but his experience with life comes in handy.";
-        abilityDesc = "In The Garden: Allows Vin to control plants. Rooms with plants in them can be used to scour for objects or set up traps against the fiend.";
+        abilityDesc = "In The Garden: Allows Danny to control plants. Rooms with plants in them can be used to scour for objects or set up traps against the fiend.";
      }
     public String useAbility()
     {
@@ -42,9 +41,8 @@ public class Vin extends Character
                 GUIController.enemy.hp -= (int) (Math.random() * 40);
             return "OSHAAAA! Blasted that creep far away from me.";
         }
-        GUIController.visSearch(20, xPos, yPos);
         GUIController.getCurrentRoom().hasPlants = false;
-        return "In The Garden!";
+        return "In The Garden! " + GUIController.visSearch(50, xPos, yPos);
     }
 
 }

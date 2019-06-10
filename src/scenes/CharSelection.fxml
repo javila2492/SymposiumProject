@@ -18,7 +18,7 @@
          <image>
             <Image url="@../images/mikey.png" />
          </image></ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" onMouseClicked="#charInfoChangerJoey" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" onMouseClicked="#charInfoChangerJoseph" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/joey.png" />
          </image>
@@ -28,7 +28,7 @@
             <Image url="@../images/sabrina.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" onMouseClicked="#charInfoChangerVin" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" onMouseClicked="#charInfoChangerDanny" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/vin.png" />
          </image>
@@ -42,7 +42,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="215.0" layoutY="214.0" text="VIN" textFill="#0aa44a">
+      <Label layoutX="199.0" layoutY="214.0" text="DANNY" textFill="#0aa44a">
          <font>
             <Font size="18.0" />
          </font>
@@ -52,7 +52,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="560.0" layoutY="214.0" text="JOEY" textFill="#1b89ff">
+      <Label layoutX="549.0" layoutY="214.0" text="JOSEPH" textFill="#1b89ff">
          <font>
             <Font size="18.0" />
          </font>
