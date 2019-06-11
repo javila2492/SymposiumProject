@@ -34,6 +34,22 @@ public class Room
         truName = roomName.toLowerCase().replaceAll("\\s", "");
     }
 
+    public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<UsableObject> newItems, boolean hasPlants, OperatableObject operatable)
+    {
+        this.roomName = roomName;
+        this.canGoNorth = canGoNorth;
+        this.canGoEast = canGoEast;
+        this.canGoSouth = canGoSouth;
+        this.canGoWest = canGoWest;
+        this.lit = lit;
+        this.image = image;
+        if(newItems != null)
+            items.addAll(newItems);
+        this.hasPlants = hasPlants;
+        truName = roomName.toLowerCase().replaceAll("\\s", "");
+        this.operatable = operatable;
+    }
+
     public Room(String roomName, boolean canGoNorth, boolean canGoEast, boolean canGoSouth, boolean canGoWest, boolean lit, String image, ArrayList<UsableObject> newItems, boolean hasPlants, String neededThing, String lockedDesc, boolean locked)
     {
         this.roomName = roomName;

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -71,7 +72,7 @@ public class CharSelectionController
             return;
 
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, Color.BLACK);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

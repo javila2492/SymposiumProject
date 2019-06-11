@@ -2,10 +2,7 @@ package scenes;
 
 import characters.Character;
 import characters.Fiend;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.Transition;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -423,8 +420,13 @@ public class GUIController
     private void moveRoom(int x, int y)
     {
         firstTime = true;
-        Image tempimg = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
-        mapimg.setImage(tempimg);
+        double spdC = (double) (20000 - mainCharacter.getSpd() * 1000) / (10000 + mainCharacter.getSpd() * 100);
+        Image imgB = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
+        KeyFrame startFadeOut = new KeyFrame(Duration.seconds(spdC), new KeyValue(mapimg.opacityProperty(), 0.0));
+        KeyFrame keyFrameOn = new KeyFrame(Duration.seconds(spdC), new KeyValue(mapimg.imageProperty(), imgB));
+        KeyFrame endFadeIn = new KeyFrame(Duration.seconds(spdC + .6), new KeyValue(mapimg.opacityProperty(), 1.0));
+        Timeline timelineOn = new Timeline(startFadeOut, keyFrameOn, endFadeIn);
+        timelineOn.play();
         mapicon.setImage(new Image("images/" + aMap[x][y].truName + "icon.png"));
         roomname.setText(aMap[x][y].roomName);
         textFlow(getRoomText(x, y));

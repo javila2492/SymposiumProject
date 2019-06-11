@@ -31,6 +31,9 @@ public class Map
         ArrayList<UsableObject> hiddenItems = new ArrayList<>();
         hiddenItems.add(new GlassShard());
 
+        ArrayList<UsableObject> westItems = new ArrayList<>();
+        westItems.add(new GlassShard());
+
         Room entrance = new Room("Entrance", true, false, false, false, false, "entrance.png", null, true);
         areaMap[1][3] = entrance;
 
@@ -58,7 +61,7 @@ public class Map
         Room stairwell = new Room("Stairwell", false, false, true, false, false, "stairwell.png", null, true);
         areaMap[0][0] = stairwell;
 
-        Room westWingA = new Room("West Wing A", true, true, false, false, false, "westwinga.png", null, true);
+        Room westWingA = new Room("West Wing A", true, true, false, false, false, "westwinga.png", westItems, true, new Hook());
         areaMap[0][2] = westWingA;
 
         Room westWingB = new Room("West Wing B", true, false, true, false, false, "westwingb.png", null, true);
