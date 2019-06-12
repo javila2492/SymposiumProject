@@ -21,40 +21,23 @@ import java.util.ArrayList;
 
 public class GUIController
 {
-    @FXML
-    private Pane background;
-    @FXML
-    private ImageView icon;
-    @FXML
-    private TextField type;
-    @FXML
-    private Label showtext;
-    @FXML
-    ImageView mapimg;
-    @FXML
-    Label roomname;
-    @FXML
-    Label ragetext;
-    @FXML
-    public ProgressBar ragemeter;
-    @FXML
-    Label invtext;
-    @FXML
-    ImageView dmgfx;
-    @FXML
-    Pane lights;
-    @FXML
-    Label objective;
-    @FXML
-    Label health;
-    @FXML
-    Label syntaxshower;
-    @FXML
-    Button enterbutton;
-    @FXML
-    ImageView finalscreen;
-    @FXML
-    ImageView mapicon;
+    @FXML private Pane background;
+    @FXML private ImageView icon;
+    @FXML private TextField type;
+    @FXML private Label showtext;
+    @FXML ImageView mapimg;
+    @FXML Label roomname;
+    @FXML Label ragetext;
+    @FXML public ProgressBar ragemeter;
+    @FXML Label invtext;
+    @FXML ImageView dmgfx;
+    @FXML Pane lights;
+    @FXML Label objective;
+    @FXML Label health;
+    @FXML Label syntaxshower;
+    @FXML Button enterbutton;
+    @FXML ImageView finalscreen;
+    @FXML ImageView mapicon;
 
     public static Character mainCharacter;
     public static double rageCount = 0;
