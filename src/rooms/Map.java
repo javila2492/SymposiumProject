@@ -49,7 +49,7 @@ public class Map
         Room eastWing = new Room("East Wing", true, true, true, true, false, "eastwing.png", null, false);
         areaMap[2][2] = eastWing;
 
-        Room mensRoom = new Room("Men's Bathroom", false, false, true, false, false, "men'sbathroom.png", mBathroomItems, false);
+        Room mensRoom = new Room("Men's Bathroom", true, false, true, false, false, "men'sbathroom.png", mBathroomItems, false);
         areaMap[2][1] = mensRoom;
 
         Room womensRoom = new Room("Women's Bathroom", true, false, true, false, false, "women'sbathroom.png", wBathroomItems, false);

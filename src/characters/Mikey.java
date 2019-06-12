@@ -67,21 +67,25 @@ public class Mikey extends Character
                 if(a == 0)
                 {
                     GUIController.aMap[xPos][yPos].canGoNorth = true;
+                    GUIController.aMap[xPos][yPos - 1].canGoSouth = true;
                     return "WRYYYYEAHH! I broke down the north wall!";
                 }
                 if(a == 1)
                 {
                     GUIController.aMap[xPos][yPos].canGoEast = true;
+                    GUIController.aMap[xPos + 1][yPos].canGoWest = true;
                     return "WRYYYYEAHH! I broke down the east wall!";
                 }
                 if(a == 2)
                 {
                     GUIController.aMap[xPos][yPos].canGoSouth = true;
+                    GUIController.aMap[xPos][yPos + 1].canGoNorth= true;
                     return "WRYYYYEAHH! I broke down the south wall!";
                 }
                 if(a == 3)
                 {
                     GUIController.aMap[xPos][yPos].canGoWest = true;
+                    GUIController.aMap[xPos - 1][yPos].canGoEast = true;
                     return "WRYYYYEAHH! I broke down the west wall!";
                 }
             }

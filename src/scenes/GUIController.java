@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class GUIController
 {
     @FXML
+    private Pane background;
+    @FXML
     private ImageView icon;
     @FXML
     private TextField type;
@@ -68,6 +70,7 @@ public class GUIController
     public static boolean hazy = false;
     private String invTextOut = "";
     private boolean firstTime = true;
+    private boolean firstDTime = true;
     private boolean alive = true;
 
     /**
@@ -130,6 +133,12 @@ public class GUIController
             textFlow("I am impervious to all damage while Hazy is active!");
             return;
         }
+        background.setStyle("-fx-background-color: red;");
+        KeyFrame startFadeOut = new KeyFrame(Duration.seconds(.5), new KeyValue(mapimg.opacityProperty(), 0.0));
+        KeyFrame endFadeIn = new KeyFrame(Duration.seconds(.6), new KeyValue(mapimg.opacityProperty(), 1.0));
+        KeyFrame revertBlack = new KeyFrame(Duration.seconds(.7), new KeyValue(background.styleProperty(), "-fx-background-color: black;"));
+        Timeline timelineOn = new Timeline(startFadeOut, endFadeIn, revertBlack);
+        timelineOn.play();
         mainCharacter.takeDamage(20);
         health.setText(String.valueOf(Character.hp));
         if (Character.hp == 0)
@@ -138,10 +147,11 @@ public class GUIController
             return;
         }
         icon.setImage(mainCharacter.getCurrentHealthIndicator());
+        background.setStyle("-fx-background-color: black;");
     }
 
     /**
-     * Method originally meant to create text in a typewriter style. For now it's just an easy call.
+     * Method to create text in a typewriter style.
      * @param text Text to be displayed.
      */
 
@@ -152,7 +162,6 @@ public class GUIController
             {
                 setCycleDuration(Duration.millis(1500));
             }
-
             protected void interpolate(double frac) {
                 final int length = text.length();
                 final int n = Math.round(length * (float) frac);
@@ -420,6 +429,7 @@ public class GUIController
     private void moveRoom(int x, int y)
     {
         firstTime = true;
+        firstDTime = true;
         double spdC = (double) (20000 - mainCharacter.getSpd() * 1000) / (10000 + mainCharacter.getSpd() * 100);
         Image imgB = new Image("images/" + aMap[x][y].image, 800, 350, true, true);
         KeyFrame startFadeOut = new KeyFrame(Duration.seconds(spdC), new KeyValue(mapimg.opacityProperty(), 0.0));
@@ -733,14 +743,22 @@ public class GUIController
             {
                 while(alive && !win)
                 {
-                    if(inSameRoom())
+                    if(inSameRoom() && firstTime)
                     {
-                        Image tempimg = new Image("images/" + getCurrentRoom().truName + "_fiend.png");
-                        mapimg.setImage(tempimg);
+                        firstTime = false;
+                        Platform.runLater(() -> textFlow(getReactionText("fiend")));
+                        Image tempimg = new Image("images/" + getCurrentRoom().truName + "_fiend.png", 800, 350, true, true);
+                        KeyFrame startFadeOut = new KeyFrame(Duration.seconds(.5), new KeyValue(mapimg.opacityProperty(), 0.0));
+                        KeyFrame fiendImg = new KeyFrame(Duration.seconds(.6), new KeyValue(mapimg.imageProperty(), tempimg));
+                        KeyFrame endFadeIn = new KeyFrame(Duration.seconds(.7), new KeyValue(mapimg.opacityProperty(), 1.0));
+                        Timeline timelineOn = new Timeline(startFadeOut, fiendImg, endFadeIn);
+                        timelineOn.play();
                     }
                     else
-                        mapimg.setImage(new Image("images/" + getCurrentRoom().image, 800, 350, true, true));
-
+                    {
+                        if(!inSameRoom())
+                            mapimg.setImage(new Image("images/" + getCurrentRoom().image, 800, 350, true, true));
+                    }
                     try
                     {
                         Thread.sleep(1000);
@@ -776,15 +794,14 @@ public class GUIController
                 {
                     if(inSameRoom())
                     {
-                        if(firstTime)
-                            Platform.runLater(() -> textFlow(getReactionText("fiend")));
+                        if(firstDTime)
+                            firstDTime = false;
                         else
                             Platform.runLater(() -> dealDamage());
-                        firstTime = false;
                     }
                     try
                     {
-                        Thread.sleep(5000);
+                        Thread.sleep(6000);
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();
@@ -805,10 +822,6 @@ public class GUIController
             bgFiendM thread = new bgFiendM();
             thread.setDaemon(true);
             thread.start();
-
-            java.awt.EventQueue.invokeLater(() -> {
-
-            });
         }
     }
     public class bgFiendM extends Thread
@@ -829,7 +842,8 @@ public class GUIController
                 try
                 {
                     Thread.sleep(spdCount);
-                } catch (InterruptedException e)
+                }
+                catch (InterruptedException e)
                 {
                     e.printStackTrace();
                 }
