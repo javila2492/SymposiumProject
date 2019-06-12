@@ -116,7 +116,7 @@ public class GUIController
             Timeline objTimer = (Timeline) fieldTimer.get(objBehavior);
 
             objTimer.getKeyFrames().clear();
-            objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
+            objTimer.getKeyFrames().add(new KeyFrame(new Duration(1)));
         } catch (Exception e)
         {
             e.printStackTrace();
