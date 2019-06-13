@@ -667,7 +667,10 @@ public class GUIController
         int a = mainCharacter.getAtk() + (int) (Math.random() * (20 - mainCharacter.getAtk()) + 1);
         if(a >= 15)
         {
-            enemy.hp -= (a);
+            enemy.hp -= a;
+            enemy.x = (int) (Math.random() * 3);
+            enemy.y = (int) (Math.random() * 3);
+            moveRoom(mainCharacter.xPos, mainCharacter.yPos);
             textFlow("Aha! Take that!");
             if(enemy.hp <= 0)
                 win();
