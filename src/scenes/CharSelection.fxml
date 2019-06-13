@@ -9,26 +9,26 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="810.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.CharSelectionController">
    <children>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="696.0" layoutY="114.0" onMouseClicked="#charInfoChangerFred" pickOnBounds="true" preserveRatio="true" smooth="false">
+      <ImageView fx:id="f" fitHeight="100.0" fitWidth="100.0" layoutX="696.0" layoutY="114.0" onMouseClicked="#charInfoChangerFred" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../images/fred.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="355.0" layoutY="114.0" onMouseClicked="#charInfoChangerMikey" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="m" fitHeight="100.0" fitWidth="100.0" layoutX="355.0" layoutY="114.0" onMouseClicked="#charInfoChangerMikey" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/mikey.png" />
          </image></ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" onMouseClicked="#charInfoChangerJoseph" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="j" fitHeight="100.0" fitWidth="100.0" layoutX="530.0" layoutY="114.0" onMouseClicked="#charInfoChangerJoseph" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/joey.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="114.0" onMouseClicked="#charInfoChangerSabrina" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="s" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="114.0" onMouseClicked="#charInfoChangerSabrina" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sabrina.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" onMouseClicked="#charInfoChangerDanny" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d" fitHeight="100.0" fitWidth="100.0" layoutX="180.0" layoutY="114.0" onMouseClicked="#charInfoChangerDanny" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/vin.png" />
          </image>
@@ -69,12 +69,12 @@
       </Label>
       <Label fx:id="descshower" layoutX="160.0" layoutY="262.0" prefHeight="120.0" prefWidth="630.0" style="-fx-wrap-text: true;" textFill="#2dd033">
          <font>
-            <Font name="Courier New Bold" size="18.0" />
+            <Font name="Courier New" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="abilityshower" layoutX="160.0" layoutY="416.0" prefHeight="120.0" prefWidth="630.0" style="-fx-wrap-text: true;" textFill="#2dd033">
+      <Label fx:id="abilityshower" layoutX="160.0" layoutY="382.0" prefHeight="120.0" prefWidth="630.0" style="-fx-wrap-text: true;" textFill="#2dd033">
          <font>
-            <Font name="Courier New Bold" size="18.0" />
+            <Font name="Courier New" size="18.0" />
          </font>
       </Label>
       <Button layoutX="717.0" layoutY="510.0" mnemonicParsing="false" onAction="#selectionChosen" style="-fx-background-color: black;" text="CONFIRM" textFill="#2dd033">

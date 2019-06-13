@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -17,12 +19,23 @@ public class CharSelectionController
 {
     static Character chosen;
     private boolean selected = false;
-    @FXML
-    private Label statshower;
-    @FXML
-    private Label descshower;
-    @FXML
-    private Label abilityshower;
+    @FXML private Label statshower;
+    @FXML private Label descshower;
+    @FXML private Label abilityshower;
+    @FXML ImageView s;
+    @FXML ImageView d;
+    @FXML ImageView m;
+    @FXML ImageView j;
+    @FXML ImageView f;
+
+    public void initialize()
+    {
+        s.setImage(new Image("images/sabrina.png", 100, 100, true, true));
+        d.setImage(new Image("images/vin.png", 100, 100, true, true));
+        m.setImage(new Image("images/mikey.png", 100, 100, true, true));
+        j.setImage(new Image("images/joey.png", 100, 100, true, true));
+        f.setImage(new Image("images/fred.png", 100, 100, true, true));
+    }
 
     public void charInfoChangerSabrina()
     {

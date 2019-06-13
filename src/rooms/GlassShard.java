@@ -1,5 +1,4 @@
 package rooms;
-
 import scenes.GUIController;
 
 public class GlassShard extends UsableObject

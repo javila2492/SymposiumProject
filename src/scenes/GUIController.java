@@ -421,6 +421,10 @@ public class GUIController
         Timeline timelineOn = new Timeline(startFadeOut, keyFrameOn, endFadeIn);
         timelineOn.play();
         mapicon.setImage(new Image("images/" + aMap[x][y].truName + "icon.png"));
+        if(getCurrentRoom().lit)
+            lights.setVisible(false);
+        else
+            lights.setVisible(true);
         roomname.setText(aMap[x][y].roomName);
         textFlow(getRoomText(x, y));
     }

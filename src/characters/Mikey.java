@@ -2,7 +2,6 @@ package characters;
 
 import javafx.scene.image.Image;
 import scenes.GUIController;
-
 import java.util.ArrayList;
 
 public class Mikey extends Character
@@ -46,50 +45,54 @@ public class Mikey extends Character
         int a = 0;
         boolean validBreak = false;
         ArrayList<Integer> invalidWalls = new ArrayList<>();
-        if(yPos == 0)
+        if(yPos == 0 || GUIController.aMap[xPos][yPos].canGoNorth)
             invalidWalls.add(0);
-        if(xPos == 3)
+        if(xPos == 3 || GUIController.aMap[xPos][yPos].canGoEast)
             invalidWalls.add(1);
-        if(yPos == 3)
+        if(yPos == 3 || GUIController.aMap[xPos][yPos].canGoSouth)
             invalidWalls.add(2);
-        if(xPos == 0)
+        if(xPos == 0 || GUIController.aMap[xPos][yPos].canGoWest)
             invalidWalls.add(3);
-
+        int counter = 0;
         while(!validBreak)
         {
+            counter++;
             validBreak = true;
-            a = (int) (Math.random() * 3);
+            a = (int) (Math.random() * 4);
             for(Integer x : invalidWalls)
                 if(a == x)
                     validBreak = false;
-            if(validBreak)
+            if(invalidWalls.size() == 4 || counter == 20)
             {
-                if(a == 0)
-                {
-                    GUIController.aMap[xPos][yPos].canGoNorth = true;
-                    GUIController.aMap[xPos][yPos - 1].canGoSouth = true;
-                    return "WRYYYYEAHH! I broke down the north wall!";
-                }
-                if(a == 1)
-                {
-                    GUIController.aMap[xPos][yPos].canGoEast = true;
-                    GUIController.aMap[xPos + 1][yPos].canGoWest = true;
-                    return "WRYYYYEAHH! I broke down the east wall!";
-                }
-                if(a == 2)
-                {
-                    GUIController.aMap[xPos][yPos].canGoSouth = true;
-                    GUIController.aMap[xPos][yPos + 1].canGoNorth= true;
-                    return "WRYYYYEAHH! I broke down the south wall!";
-                }
-                if(a == 3)
-                {
-                    GUIController.aMap[xPos][yPos].canGoWest = true;
-                    GUIController.aMap[xPos - 1][yPos].canGoEast = true;
-                    return "WRYYYYEAHH! I broke down the west wall!";
-                }
+                validBreak = true;
+                a = 5;
             }
         }
-        return "";
+        if(a == 0)
+        {
+            GUIController.aMap[xPos][yPos].canGoNorth = true;
+            GUIController.aMap[xPos][yPos - 1].canGoSouth = true;
+            return "WRYYYYEAHH! I broke down the north wall!";
+        }
+        if(a == 1)
+        {
+            GUIController.aMap[xPos][yPos].canGoEast = true;
+            GUIController.aMap[xPos + 1][yPos].canGoWest = true;
+            return "WRYYYYEAHH! I broke down the east wall!";
+        }
+        if(a == 2)
+        {
+            GUIController.aMap[xPos][yPos].canGoSouth = true;
+            GUIController.aMap[xPos][yPos + 1].canGoNorth= true;
+            return "WRYYYYEAHH! I broke down the south wall!";
+        }
+        if(a == 3)
+        {
+            GUIController.aMap[xPos][yPos].canGoWest = true;
+            GUIController.aMap[xPos - 1][yPos].canGoEast = true;
+            return "WRYYYYEAHH! I broke down the west wall!";
+        }
+        takeDamage(10);
+        return "URYAAAA! Ah! I wounded myself in my fit of rage!";
     }
 }
